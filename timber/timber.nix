@@ -80,6 +80,10 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  # Disable unwanted services
+  services.gnome.tracker-miners.enable = false;
+  services.gnome.tracker.enable = false;
+
   ## Enable Pipewire for working audio
 
   hardware.pulseaudio.enable = false;
