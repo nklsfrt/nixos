@@ -10,12 +10,18 @@
   
     nixosConfigurations."ashes" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ ./ashes/ashes.nix ];
+      modules = [
+        ./common.nix
+        ./ashes/ashes.nix
+      ];
     };
     
     nixosConfigurations."timber" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ ./timber/timber.nix ];
+      modules = [
+        ./common.nix
+        ./timber/timber.nix
+      ];
     };
     
   };
