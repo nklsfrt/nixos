@@ -4,7 +4,7 @@
 
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs/nixos-22.11;
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "git+https://codeberg.com/nklsfrt/home-manager?ref=release-21.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
