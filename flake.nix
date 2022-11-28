@@ -8,27 +8,32 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager }:
-
-    let
-      system = "x86_64-linux";
-    in {
-
+  outputs = { self, nixpkgs, home-manager }:{
     nixosConfigurations = {
 
       ashes = nixpkgs.lib.nixosSystem {
-        inherit system;
+        system = "x86_64-linux";
         modules = [
           ./common.nix
-         ./ashes/ashes.nix
+          ./ashes/ashes.nix
+          # home-manager.nixosModules.home-manager
+          # {
+          #   home-manager.useUserPackages = true;
+          #   home-manager.users.nase = import ./ashes/home.nix;
+          # }
         ];
       };
 
       timber = nixpkgs.lib.nixosSystem {
-        inherit system;
+        system = "x86_64-linux";
         modules = [
           ./common.nix
           ./timber/timber.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useUserPackages = true;
+            home-manager.users.nase = import ./timber/home.nix;
+          }
         ];
       };
 
