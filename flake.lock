@@ -4,30 +4,31 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ]
+        ],
+        "utils": "utils"
       },
       "locked": {
-        "lastModified": 1651519540,
-        "narHash": "sha256-3k6p8VsTwwRPQjE8rrMh+o2AZACZn/eeYJ7ivdQ/Iro=",
-        "ref": "release-21.11",
-        "rev": "d93d56ab8c1c6aa575854a79b9d2f69d491db7d0",
-        "revCount": 1837,
+        "lastModified": 1669071065,
+        "narHash": "sha256-KBpgj3JkvlPsJ3duOZqFJe6tgr+wc75t8sFmgRbBSbw=",
+        "ref": "release-22.11",
+        "rev": "f7641a3ff398ccce952e19a199d775934e518c1d",
+        "revCount": 2380,
         "type": "git",
         "url": "https://codeberg.org/nklsfrt/home-manager"
       },
       "original": {
-        "ref": "release-21.11",
+        "ref": "release-22.11",
         "type": "git",
         "url": "https://codeberg.org/nklsfrt/home-manager"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1669465383,
-        "narHash": "sha256-fVbG427suESAEb8/P47O/zD/G9BSeFxLh94IUzgOchs=",
+        "lastModified": 1669558522,
+        "narHash": "sha256-yqxn+wOiPqe6cxzOo4leeJOp1bXE/fjPEi/3F/bBHv8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "899e7caf59d1954882a8e2dff45ccc0387c186f6",
+        "rev": "ce5fe99df1f15a09a91a86be9738d68fadfbad82",
         "type": "github"
       },
       "original": {
@@ -41,6 +42,21 @@
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
       }
     }
   },
