@@ -3,7 +3,7 @@
   description = "My very first centralized infrastructure configuration!";
 
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-22.11;
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     home-manager.url = "git+https://codeberg.org/nklsfrt/home-manager?ref=release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
