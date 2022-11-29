@@ -8,6 +8,16 @@
   home.homeDirectory = "/home/niklas";
   home.stateVersion = "22.05";
 
+  home.language = {
+    base = "en_US.UTF-8";
+    address = "de_DE.UTF-8";
+    time = "de_DE.UTF-8";
+    monetary = "de_DE.UTF-8";
+    paper = "de_DE.UTF-8";
+    numeric = "de_DE.UTF-8";
+    measurement = "de_DE.UTF-8";    
+  };
+
   programs.foot = {
     enable = true;
     server.enable = true;
