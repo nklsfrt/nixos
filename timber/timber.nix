@@ -115,9 +115,12 @@
      librewolf-wayland
      pavucontrol
      helvum
-     iosevka-bin
      tdesktop
      signal-desktop
+   ];
+
+   fonts.fonts = with pkgs; [
+    iosevka-bin
    ];
 
   # Misc Networking - Set hostname and hostid
