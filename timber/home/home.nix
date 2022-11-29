@@ -25,4 +25,18 @@
     userName = "Niklas Furtwängler";
   };
 
+  nixpkgs.config.allowUnfree = true;
+  home.packages = with pkgs; [
+    spotify
+    foot
+    htop
+    vscodium
+    librewolf-wayland
+    pavucontrol
+    helvum
+    tdesktop
+    signal-desktop
+    bitwarden
+    gnomeExtensions.gsconnect
+  ];
 }

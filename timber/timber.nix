@@ -106,22 +106,10 @@
   # Enable unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  ## Specify installed system packages
-
-  environment.systemPackages = with pkgs; [
-     foot
-     htop
-     vscode
-     librewolf-wayland
-     pavucontrol
-     helvum
-     tdesktop
-     signal-desktop
-   ];
-
-   fonts.fonts = with pkgs; [
+  # Specify installed system fonts
+  fonts.fonts = with pkgs; [
     iosevka-bin
-   ];
+  ];
 
   # Misc Networking - Set hostname and hostid
   networking.hostName = "timber";
