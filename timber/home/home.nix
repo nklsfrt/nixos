@@ -31,7 +31,7 @@
     foot
     htop
     vscodium
-    librewolf-wayland
+    librewolf
     pavucontrol
     helvum
     tdesktop
