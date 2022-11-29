@@ -12,6 +12,9 @@
 		configurationLimit = 16;
 	};
 
+	# Add authorized SSH key to user
+	users.users.nase.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvAJm/S7F8FJj5veaT1lqN+3+/etph6BriSxYPzzQAe nase@timber" ];
+
 	# Network configuration
 	networking = {
 		hostName = "ashes";
