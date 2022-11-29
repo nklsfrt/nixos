@@ -44,5 +44,6 @@
     signal-desktop
     bitwarden
     gnomeExtensions.gsconnect
+    nil
   ];
 }
