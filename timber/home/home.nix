@@ -25,12 +25,19 @@
     userName = "Niklas Furtwängler";
   };
 
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscodium;
+    extensions = with pkgs.vscode-extensions; [
+      jnoortheen.nix-ide
+    ];
+  };
+
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
     spotify
     foot
     htop
-    vscodium
     librewolf
     pavucontrol
     helvum
