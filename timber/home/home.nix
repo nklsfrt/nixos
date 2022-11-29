@@ -20,4 +20,9 @@
     };
   };
 
+  programs.git = {
+    userEmail = "furtwaengler@posteo.de";
+    userName = "Niklas Furtwängler";
+  };
+
 }
