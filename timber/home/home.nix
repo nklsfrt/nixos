@@ -36,7 +36,6 @@
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
     spotify
-    foot
     htop
     librewolf
     pavucontrol
