@@ -19,6 +19,7 @@
 
 	users.users.nase = {
 		name = "nase";
+		home = "/home/niklas";
 		extraGroups = [ "wheel" ];
 		isNormalUser = true;
 		shell = pkgs.fish;
