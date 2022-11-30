@@ -53,7 +53,7 @@
     signal-desktop
     bitwarden
     nil
-    nvidia-vaapi-driver
+    firefox
   ];
 
   programs.fish = {
@@ -69,7 +69,5 @@
       };
     };
   };
-  programs.firefox = {
-    enable = true;
-  };
+
 }
