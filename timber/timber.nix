@@ -73,6 +73,8 @@
   	alsa.enable = true;
   	pulse.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [ nvidia-vaapi-driver ];
   
   # Set the root password
   users.users.root.hashedPassword = "$6$GKt/5QJ1wA0.E/Zw$g5oPpo42B1KOm547s2wvEwpw8Us7bP4FvfPkZPKx3jKaAP57Sis/MzxgBXmvZ2WyTCInIEsF2cQG1SE3jiYMg0";
