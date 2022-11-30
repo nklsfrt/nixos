@@ -47,14 +47,13 @@
   home.packages = with pkgs; [
     spotify
     htop
-    librewolf
     pavucontrol
     helvum
     tdesktop
     signal-desktop
     bitwarden
-    gnomeExtensions.gsconnect
     nil
+    nvidia-vaapi-driver
   ];
 
   programs.fish = {
@@ -70,5 +69,7 @@
       };
     };
   };
-
+  programs.firefox = {
+    enable = true;
+  };
 }
