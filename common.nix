@@ -2,6 +2,8 @@
 
   system.stateVersion = "22.05";
 
+	console.keyMap = "de";
+
 	## Configure nix settings and garbage collection
 
 	nix.settings = {
