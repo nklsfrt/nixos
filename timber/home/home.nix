@@ -54,6 +54,8 @@
     bitwarden
     nil
     firefox
+    evolution
+    evolution-data-server
   ];
 
   programs.fish = {
