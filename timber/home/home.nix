@@ -34,6 +34,19 @@
     };
   };
 
+  accounts.email.accounts = {
+    posteo = {
+      primary = true;
+      address = "furtwaengler@posteo.de";
+      userName = "furtwaengler@posteo.net";
+      smtp.host = "posteo.de";
+      smtp.port = 465;
+      smtp.tls.enable = true;
+      imap.host = "posteo.de";
+      imap.port = 993;
+    };
+  };
+
   programs.git = {
     userEmail = "furtwaengler@posteo.de";
     userName = "Niklas Furtwängler";
