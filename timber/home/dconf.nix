@@ -13,6 +13,7 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
+      gtk-theme = "Adwaita-dark";
       font-antialiasing = "grayscale";
       font-hinting = "slight";
       monospace-font-name = "Iosevka Term 10";
@@ -22,10 +23,6 @@ with lib.hm.gvariant;
       disable-camera = true;
       old-files-age = mkUint32 30;
       recent-files-max-age = -1;
-    };
-
-    "org/gnome/desktop/search-providers" = {
-      sort-order = [ "org.gnome.Contacts.desktop" "org.gnome.Documents.desktop" "org.gnome.Nautilus.desktop" ];
     };
 
     "org/gnome/desktop/session" = {
@@ -56,10 +53,6 @@ with lib.hm.gvariant;
       workspaces-only-on-primary = true;
     };
 
-    "org/gnome/nautilus/preferences" = {
-      migrated-gtk-settings = true;
-    };
-
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
     };
@@ -73,6 +66,17 @@ with lib.hm.gvariant;
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "interactive";
       sleep-inactive-ac-type = "nothing";
+    };
+
+    "org/gnome/shell" = {
+      enabled-extensions = [ "places-menu@gnome-shell-extensions.gcampax.github.com" ];
+      welcome-dialog-last-shown-version = "43.1";
+    };
+
+    "org/gnome/simple-scan" = {
+      document-type = "photo";
+      paper-height = 2970;
+      paper-width = 2100;
     };
 
   };
