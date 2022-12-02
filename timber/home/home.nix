@@ -18,6 +18,8 @@
     measurement = "de_DE.UTF-8";    
   };
 
+  home.sessionVariables.NIXOS_OZONE_WL = "1"; # Launch (recent) electron-applications with wayland support.
+
   programs.foot = {
     enable = true;
     server.enable = true;
