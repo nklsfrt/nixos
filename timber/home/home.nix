@@ -71,6 +71,7 @@
       };
     };
   };
+
   programs.ssh = {
     enable = true;
     extraConfig = ''
@@ -78,4 +79,5 @@
       HostName 2a01:4f8:1c1c:4bd6::1
     '';
   };
+  
 }
