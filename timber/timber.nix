@@ -63,6 +63,9 @@
   services.gnome.tracker-miners.enable = false;
   services.gnome.tracker.enable = false;
 
+  services.gnome.gnome-online-accounts.enable = true;
+  services.accounts-daemon.enable = true;
+
   ## Enable Pipewire for working audio
 
   hardware.pulseaudio.enable = false;
