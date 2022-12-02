@@ -4,6 +4,13 @@
 
 	console.keyMap = "de";
 
+	system.autoUpgrade = {
+		enable = true;
+		dates = "daily";
+		flake = "git+https://codeberg.org/nklsfrt/nixos?ref=master";
+	};
+	
+
 	## Configure nix settings and garbage collection
 
 	nix.settings = {
