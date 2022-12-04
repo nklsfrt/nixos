@@ -66,7 +66,7 @@
 
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
-    spotify
+    spot
     htop
     pavucontrol
     helvum
