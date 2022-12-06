@@ -7,7 +7,7 @@
 	system.autoUpgrade = {
 		enable = true;
 		dates = "daily";
-		flake = "git+https://codeberg.org/nklsfrt/nixos?ref=master";
+		flake = "git+https://codeberg.org/nklsfrt/nixos";
 	};
 	
 
