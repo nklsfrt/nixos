@@ -76,6 +76,8 @@
 
   security.pam.services.login.enableGnomeKeyring = true;
 
+  programs.dconf.enable = true;
+
   ## Enable Pipewire for working audio
 
   hardware.pulseaudio.enable = false;
