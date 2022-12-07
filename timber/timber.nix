@@ -56,15 +56,25 @@
 
   ## Enable the GNOME Desktop Environment.
 
-  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm = {
+    enable = true;
+    wayland = true;
+  };
+
   services.xserver.desktopManager.gnome.enable = true;
 
   # Disable unwanted services
-  services.gnome.tracker-miners.enable = false;
-  services.gnome.tracker.enable = false;
+  services.gnome = {
+    tracker-miners.enable = false;
+    tracker.enable = false;
+    core-os-services.enable = true;
+    core-shell.enable = true;
+    evolution-data-server.enable = true;
+    gnome-keyring.enable = true;
+    gnome-online-accounts.enable = true;
+  };
 
-  services.gnome.gnome-online-accounts.enable = true;
-  services.accounts-daemon.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
 
   ## Enable Pipewire for working audio
 
