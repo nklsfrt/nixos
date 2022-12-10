@@ -24,6 +24,11 @@
 		options = "--delete-older-than 7d";
 	};
 
+	i18n = {
+		defaultLocale = "en_US.UTF-8";
+		supportedLocales = [ "en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8" ];
+	};
+
   ## User configuration
 
 	users.users.nase = {
