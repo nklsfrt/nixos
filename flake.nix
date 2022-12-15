@@ -16,11 +16,6 @@
         modules = [
           ./common.nix
           ./ashes/ashes.nix
-          # home-manager.nixosModules.home-manager
-          # {
-          #   home-manager.useUserPackages = true;
-          #   home-manager.users.nase = import ./ashes/home.nix;
-          # }
         ];
       };
 
