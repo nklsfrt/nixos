@@ -48,6 +48,7 @@
   };
 
   programs.git = {
+    enable = true;
     userEmail = "furtwaengler@posteo.de";
     userName = "Niklas Furtwängler";
     signing = {
