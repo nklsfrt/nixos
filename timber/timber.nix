@@ -31,7 +31,7 @@
     kernelParams = [ "nvidia-drm.modeset=1" ];
 
     # Use the latest kernel package compatible with zfs.
-    # kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     # Ensure system can boot form zfs.
     # supportedFilesystems = [ "zfs" ];
