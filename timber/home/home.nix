@@ -115,7 +115,7 @@
       ".config/monitors.xml"
       ".local/share/fish/fish_history"
     ];
-    # allowOther = true;
+    allowOther = true;
   };
 
 }
