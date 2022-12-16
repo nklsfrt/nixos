@@ -32,7 +32,12 @@
           home-manager.nixosModules.home-manager
           {
             home-manager.useUserPackages = true;
-            home-manager.users.nase = import ./timber/home/home.nix;
+            home-manager.users.nase = {
+              imports = [ 
+                impermanence.nixosModules.home-manager.impermanence
+                ./timber/home/home.nix
+              ];
+            };
           }
           impermanence.nixosModules.impermanence
           {

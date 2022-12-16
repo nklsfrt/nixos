@@ -53,7 +53,7 @@
     userName = "Niklas Furtwängler";
     signing = {
       key = "2FDF 6458 1DBA 9A81 366F ED34 895D 6A61 1B8A F8AB";
-      signByDefault = true;
+      signByDefault = false;
     };
   };
 
@@ -105,4 +105,17 @@
   programs.gpg.enable = true;
   services.gpg-agent.enable = true;
   
+  home.persistence."/persist/home/niklas" = {
+    directories = [
+      ".ssh"
+      ".gnupg"
+      "codeberg"
+    ];
+    files = [
+      ".config/monitors.xml"
+      ".local/share/fish/fish_history"
+    ];
+    # allowOther = true;
+  };
+
 }
