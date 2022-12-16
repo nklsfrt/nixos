@@ -65,6 +65,14 @@
     ];
   };
 
+  programs.firefox = {
+    enable = true;
+    profiles.niklas = {
+      name = "niklas";
+      path = "vlqejqkk.niklas";
+    };
+  };
+
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
     spot
@@ -110,6 +118,7 @@
       ".ssh"
       ".gnupg"
       "codeberg"
+      ".mozilla/firefox/vlqejqkk.niklas"
     ];
     files = [
       ".config/monitors.xml"
