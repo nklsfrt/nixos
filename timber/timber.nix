@@ -92,6 +92,8 @@
   	pulse.enable = true;
   };
 
+  programs.fuse.userAllowOther = true;
+
   environment.systemPackages = with pkgs; [ nvidia-vaapi-driver ];
   
   # Set the root password
