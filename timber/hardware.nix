@@ -14,13 +14,28 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "vault/nixos";
-      fsType = "zfs";
+    { device = "tmpfs";
+      fsType = "tmpfs";
     };
 
-  fileSystems."/home" =
-    { device = "vault/home";
-      fsType = "zfs";
+  # fileSystems."/home" =
+    # { device = "/dev/disk/by-uuid/96784b15-65e9-49d8-9752-9af9630fb75d";
+      # fsType = "btrfs";
+      # options = [ "subvol=home" ];
+    # };
+
+  boot.initrd.luks.devices."vault".device = "/dev/disk/by-uuid/a0513179-7999-4531-992a-fba79f1f9d1c";
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/96784b15-65e9-49d8-9752-9af9630fb75d";
+      fsType = "btrfs";
+      options = [ "subvol=nix" ];
+    };
+
+  fileSystems."/persist" =
+    { device = "/dev/disk/by-uuid/96784b15-65e9-49d8-9752-9af9630fb75d";
+      fsType = "btrfs";
+      options = [ "subvol=persist" ];
     };
 
   fileSystems."/boot" =
@@ -38,6 +53,7 @@
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
   # networking.interfaces.wls8.useDHCP = lib.mkDefault true;
 
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

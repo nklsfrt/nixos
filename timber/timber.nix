@@ -31,18 +31,19 @@
     kernelParams = [ "nvidia-drm.modeset=1" ];
 
     # Use the latest kernel package compatible with zfs.
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+    # kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
     # Ensure system can boot form zfs.
-    supportedFilesystems = [ "zfs" ];
+    # supportedFilesystems = [ "zfs" ];
 
     # Ensure the right pool is imported on boot.
-    zfs.extraPools = [ "vault" ];
+    # zfs.extraPools = [ "vault" ];
 
   };
 
   # Ensure /home being mounted early.
-  fileSystems."/home".neededForBoot = true;
+  # fileSystems."/home".neededForBoot = true;
+  fileSystems."/persist".neededForBoot = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Vienna";
@@ -78,6 +79,8 @@
 
   programs.dconf.enable = true;
 
+  programs.steam.enable = true;
+
   ## Enable Pipewire for working audio
 
   hardware.pulseaudio.enable = false;
@@ -88,6 +91,8 @@
   	alsa.enable = true;
   	pulse.enable = true;
   };
+
+  programs.fuse.userAllowOther = true;
 
   environment.systemPackages = with pkgs; [ nvidia-vaapi-driver ];
   
