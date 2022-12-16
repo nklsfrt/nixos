@@ -53,7 +53,7 @@
     userName = "Niklas Furtwängler";
     signing = {
       key = "2FDF 6458 1DBA 9A81 366F ED34 895D 6A61 1B8A F8AB";
-      signingByDefault = true;
+      signByDefault = false;
     };
   };
 
@@ -63,6 +63,14 @@
     extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
     ];
+  };
+
+  programs.firefox = {
+    enable = true;
+    profiles.niklas = {
+      name = "niklas";
+      path = "vlqejqkk.niklas";
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -105,4 +113,18 @@
   programs.gpg.enable = true;
   services.gpg-agent.enable = true;
   
+  home.persistence."/persist/home/niklas" = {
+    directories = [
+      ".ssh"
+      ".gnupg"
+      "codeberg"
+      ".mozilla/firefox/vlqejqkk.niklas"
+    ];
+    files = [
+      ".config/monitors.xml"
+      ".local/share/fish/fish_history"
+    ];
+    allowOther = true;
+  };
+
 }
