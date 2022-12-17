@@ -106,5 +106,7 @@
   networking.hostName = "timber";
   networking.hostId = "68a8af9f";
 
+  networking.wg-quick.interfaces.wg0.configFile = "/etc/wireguard/mlvd-at7-wg.conf";
+
 }
 
