@@ -18,12 +18,6 @@
       fsType = "tmpfs";
     };
 
-  # fileSystems."/home" =
-    # { device = "/dev/disk/by-uuid/96784b15-65e9-49d8-9752-9af9630fb75d";
-      # fsType = "btrfs";
-      # options = [ "subvol=home" ];
-    # };
-
   boot.initrd.luks.devices."vault".device = "/dev/disk/by-uuid/a0513179-7999-4531-992a-fba79f1f9d1c";
 
   fileSystems."/nix" =
