@@ -66,6 +66,7 @@
     };
     extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
+      matklad.rust-analyzer
     ];
   };
 
