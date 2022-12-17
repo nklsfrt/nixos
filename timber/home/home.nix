@@ -60,6 +60,10 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
+    userSettings = {
+      "nix.enableLanguageServer" = "true";
+      "nix.serverPath" = "nil";
+    };
     extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
     ];
