@@ -41,6 +41,8 @@
 
   };
 
+  zramSwap.enable = true;
+
   # Ensure /home being mounted early.
   # fileSystems."/home".neededForBoot = true;
   fileSystems."/persist".neededForBoot = true;
