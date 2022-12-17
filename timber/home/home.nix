@@ -86,6 +86,7 @@
     helvum
     tdesktop
     signal-desktop
+    onlyoffice-bin
     bitwarden
     nil
     firefox
