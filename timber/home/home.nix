@@ -125,11 +125,11 @@
       "codeberg"
       ".mozilla/firefox/vlqejqkk.niklas"
       ".local/share/keyrings"
+      ".config/evolution"
     ];
     files = [
       ".config/monitors.xml"
       ".local/share/fish/fish_history"
-      ".config/geary/account_01/geary.ini"
     ];
     allowOther = true;
   };
