@@ -33,21 +33,15 @@
     # Use the latest kernel package compatible with zfs.
     kernelPackages = pkgs.linuxPackages_latest;
 
-    # Ensure system can boot form zfs.
-    # supportedFilesystems = [ "zfs" ];
-
-    # Ensure the right pool is imported on boot.
-    # zfs.extraPools = [ "vault" ];
-
   };
 
   zramSwap.enable = true;
 
-  # Ensure /home being mounted early.
-  # fileSystems."/home".neededForBoot = true;
+  # Ensure /persist is being mounted early.
+
   fileSystems."/persist".neededForBoot = true;
 
-  # Set your time zone.
+  # Set the time zone.
   time.timeZone = "Europe/Vienna";
 
   ## Enable the X11 windowing system.
