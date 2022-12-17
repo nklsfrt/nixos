@@ -69,9 +69,7 @@
 
   # Disable unwanted services
   services.gnome = {
-    tracker-miners.enable = false;
-    tracker.enable = false;
-    core-os-services.enable = true;
+    core-os-services.enable = false;
     core-shell.enable = true;
     evolution-data-server.enable = true;
     gnome-keyring.enable = true;
