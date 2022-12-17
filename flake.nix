@@ -45,6 +45,7 @@
               hideMounts = true;
               directories = [
                 "/etc/NetworkManager/system-connections/"
+                "/etc/wireguard/"
               ];
             };
           }
