@@ -53,6 +53,7 @@
   ## Enable the X11 windowing system.
 
   services.xserver.enable = true;
+  services.xserver.layout = "de";
   services.xserver.videoDrivers =  [ "nvidia" ];
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
