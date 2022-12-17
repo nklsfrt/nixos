@@ -69,7 +69,7 @@
 
   # Disable unwanted services
   services.gnome = {
-    core-os-services.enable = false;
+    core-os-services.enable = true;
     core-shell.enable = true;
     evolution-data-server.enable = true;
     gnome-keyring.enable = true;
