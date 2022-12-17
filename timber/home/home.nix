@@ -123,10 +123,12 @@
       ".gnupg"
       "codeberg"
       ".mozilla/firefox/vlqejqkk.niklas"
+      ".local/share/keyrings"
     ];
     files = [
       ".config/monitors.xml"
       ".local/share/fish/fish_history"
+      ".config/geary/account_01/geary.ini"
     ];
     allowOther = true;
   };
