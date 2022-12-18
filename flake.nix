@@ -29,6 +29,7 @@
         modules = [
           ./common.nix
           ./timber/timber.nix
+          impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
           {
             home-manager.useUserPackages = true;
@@ -36,16 +37,6 @@
               imports = [ 
                 impermanence.nixosModules.home-manager.impermanence
                 ./timber/home/home.nix
-              ];
-            };
-          }
-          impermanence.nixosModules.impermanence
-          {
-            environment.persistence."/persist" = {
-              hideMounts = true;
-              directories = [
-                "/etc/NetworkManager/system-connections/"
-                "/etc/wireguard/"
               ];
             };
           }

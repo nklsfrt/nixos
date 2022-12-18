@@ -108,5 +108,14 @@
 
   networking.wg-quick.interfaces.wg0.configFile = "/etc/wireguard/mlvd-at7-wg.conf";
 
+  environment.persistence."/persist" = {
+    hideMounts = true;
+    directories = [
+      "/etc/NetworkManager/system-connections/"
+      "/etc/wireguard/"
+    ];
+  };
+
+
 }
 
