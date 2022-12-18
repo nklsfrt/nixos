@@ -130,6 +130,7 @@
       ".config/evolution"
     ];
     files = [
+      "./.background-image"
       ".config/monitors.xml"
       ".local/share/fish/fish_history"
     ];
