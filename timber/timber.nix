@@ -46,20 +46,20 @@
 
   ## Enable the X11 windowing system.
 
-  services.xserver.enable = true;
-  services.xserver.layout = "de";
-  services.xserver.videoDrivers =  [ "nvidia" ];
-  hardware.opengl.enable = true;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-  ## Enable the GNOME Desktop Environment.
-
-  services.xserver.displayManager.gdm = {
+  services.xserver = {
     enable = true;
-    wayland = true;
+    layout = "de";
+    videoDrivers =  [ "nvidia" ];
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+    desktopManager.gnome.enable = true;
   };
 
-  services.xserver.desktopManager.gnome.enable = true;
+  hardware.opengl.enable = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.nvidia.powerManagement.enable = true;
 
   # Disable unwanted services
   services.gnome = {
