@@ -5,6 +5,18 @@ with lib.hm.gvariant;
 
 {
   dconf.settings = {
+    "apps/seahorse" = {
+      server-publish-to = "hkps://keys.openpgp.org";
+    };
+
+    "dev/alextren/Spot" = {
+      audio-backend = "pulseaudio";
+      player-bitrate = "320";
+    };
+
+    "org/gnome/Weather" = {
+      locations = "[<(uint32 2, <('Graz', 'LOWG', true, [(0.82030474843733492, 0.269362475406694)], [(0.82146830708976193, 0.2696533694331239)])>)>]";
+    };
 
     "org/gnome/desktop/input-sources" = {
       sources = [ (mkTuple [ "xkb" "de" ]) ];
@@ -13,9 +25,9 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      gtk-theme = "Adwaita-dark";
       font-antialiasing = "grayscale";
       font-hinting = "slight";
+      gtk-theme = "Adwaita-dark";
       monospace-font-name = "Iosevka Term 10";
     };
 
@@ -26,7 +38,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/session" = {
-      idle-delay = mkUint32 300;
+      idle-delay = mkUint32 900;
     };
 
     "org/gnome/desktop/sound" = {
@@ -40,8 +52,27 @@ with lib.hm.gvariant;
       resize-with-right-button = true;
     };
 
-    "org/gnome/evolution-data-server" = {
-      migrated = true;
+    "org/gnome/evolution/calendar" = {
+      allow-direct-summary-edit = false;
+      confirm-purge = true;
+      time-divisions = 30;
+      use-24hour-format = true;
+      week-start-day-name = "monday";
+      work-day-friday = true;
+      work-day-monday = true;
+      work-day-saturday = false;
+      work-day-sunday = false;
+      work-day-thursday = true;
+      work-day-tuesday = true;
+      work-day-wednesday = true;
+    };
+
+    "org/gnome/evolution/mail" = {
+      browser-close-on-reply-policy = "ask";
+      forward-style-name = "attached";
+      image-loading-policy = "never";
+      prompt-check-if-default-mailer = false;
+      reply-style-name = "quoted";
     };
 
     "org/gnome/mutter" = {
@@ -71,6 +102,11 @@ with lib.hm.gvariant;
     "org/gnome/shell" = {
       enabled-extensions = [ "places-menu@gnome-shell-extensions.gcampax.github.com" ];
       welcome-dialog-last-shown-version = "43.1";
+    };
+
+    "org/gnome/shell/weather" = {
+      automatic-location = true;
+      locations = "[<(uint32 2, <('Graz', 'LOWG', true, [(0.82030474843733492, 0.269362475406694)], [(0.82146830708976193, 0.2696533694331239)])>)>]";
     };
 
     "org/gnome/simple-scan" = {
