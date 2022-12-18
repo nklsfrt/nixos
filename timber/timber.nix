@@ -74,7 +74,6 @@
 
   programs.dconf.enable = true;
 
-  programs.steam.enable = true;
 
   ## Enable Pipewire for working audio
 
