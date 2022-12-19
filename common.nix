@@ -5,7 +5,7 @@
 	console.keyMap = "de";
 
 	system.autoUpgrade = {
-		enable = false;
+		enable = true;
 		dates = "daily";
 		flake = "git+https://codeberg.org/nklsfrt/nixos";
 	};
