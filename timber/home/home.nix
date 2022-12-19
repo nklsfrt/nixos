@@ -83,6 +83,7 @@
     spot
     htop
     pavucontrol
+    easyeffects
     helvum
     tdesktop
     signal-desktop
