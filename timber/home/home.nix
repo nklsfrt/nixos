@@ -122,7 +122,7 @@
   services.gpg-agent.enable = true;
   
   home.persistence."/persist/home/niklas" = {
-    directories = with builtins; [
+    directories = [
       ".ssh"
       ".gnupg"
       "codeberg"
