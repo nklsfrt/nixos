@@ -122,13 +122,14 @@
   services.gpg-agent.enable = true;
   
   home.persistence."/persist/home/niklas" = {
-    directories = [
+    directories = with builtins; [
       ".ssh"
       ".gnupg"
       "codeberg"
       ".mozilla/firefox/vlqejqkk.niklas"
       ".local/share/keyrings"
       ".config/evolution"
+      ".local/share/TelegramDesktop/"
     ];
     files = [
       "./.background-image"
