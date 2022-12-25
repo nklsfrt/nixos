@@ -54,5 +54,5 @@
 	# Enable misc. services
   services.openssh.enable = true;
   programs.fish.enable = true;
-
+  programs.command-not-found.enable = false;
 }
