@@ -6,25 +6,42 @@
       ./hardware.nix
     ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-  networking.hostName = "forest"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Enable the OpenSSH daemon.
+  boot = {
+
+    loader.systemd-boot.enable = true;
+
+    loader.efi.canTouchEfiVariables = true;
+
+    supportedFilesystems = [ "zfs" ];
+
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+
+  };
+
+  virtualisation = {
+  	libvirtd.enable = true;
+  };
+
+  security.polkit.enable = true;
+ 
+  networking = {
+
+  	hostName = "forest";
+  	
+	hostId = "795ee55c";
+	
+  };
+
   services.openssh = {
     enable = true;
     permitRootLogin = "yes";
   };
 
-  networking.hostId = "795ee55c";
 
   zramSwap.enable = true;
 
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "22.05"; # Did you read the comment?
 
 }
 
