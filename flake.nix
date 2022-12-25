@@ -24,6 +24,14 @@
         ];
       };
 
+      forest = nixpkgs.lib.nixosSystem {
+      	system = "x86_62-linux";
+      	modules = [
+      	  ./common.nix
+      	  ./forest/forest.nix
+      	];
+      };
+
       timber = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
