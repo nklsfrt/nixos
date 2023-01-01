@@ -32,6 +32,21 @@
       	];
       };
 
+      driftwood = nixpkgs.lib.nixosSystem {
+      	system = "x86_64-linux";
+      	modules = [
+      	  ./common.nix
+      	  ./driftwood/driftwood.nix
+      	  home-manager.nixosModules.home-manager
+      	  {
+      	    home-manager.useUserPackages = true;
+      		home-manager.users.nase = {
+      		  imports = [ ./driftwood/home/home.nix ];
+      		};
+      	  }
+      	];
+      };
+
       timber = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
