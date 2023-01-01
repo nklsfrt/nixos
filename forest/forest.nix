@@ -13,22 +13,16 @@
 
     loader.efi.canTouchEfiVariables = true;
 
-    supportedFilesystems = [ "zfs" ];
-
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
 
   };
 
-  virtualisation = {
-  	libvirtd.enable = true;
-  };
 
   security.polkit.enable = true;
  
   networking = {
 
-  	hostName = "forest";
-  	
+  	hostName = "forest";  	
 	hostId = "795ee55c";
 	
   };
@@ -37,7 +31,6 @@
     enable = true;
     permitRootLogin = "yes";
   };
-
 
   zramSwap.enable = true;
 
