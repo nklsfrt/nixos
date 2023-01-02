@@ -23,6 +23,10 @@ with lib.hm.gvariant;
       xkb-options = [ "terminate:ctrl_alt_bksp" ];
     };
 
+    "org/gome/desktop/peripherals/touchpad" = {
+      tap-to-click = "true";
+    };
+
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       font-antialiasing = "grayscale";
@@ -48,8 +52,6 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "appmenu:close";
-      focus-mode = "sloppy";
-      resize-with-right-button = true;
     };
 
     "org/gnome/evolution/calendar" = {
