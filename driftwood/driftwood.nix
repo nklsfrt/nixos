@@ -82,20 +82,9 @@
     isNormalUser = true;
     description = "Niklas Furtwängler";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      exa
-      bat
-      foot
-      git
-      micro
-      firefox
+    packages = with pkgs; [  
       mullvad-vpn
-      vscodium
-      spot
       clapper
-      transmission-gtk
-      tdesktop
-      signal-desktop
     ];
   };
   programs.fish.enable = true;
