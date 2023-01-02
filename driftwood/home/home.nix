@@ -63,6 +63,7 @@
     userSettings = {
       "nix.enableLanguageServer" = "true";
       "nix.serverPath" = "nil";
+      "git.autofetch" = "true";
     };
     extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
