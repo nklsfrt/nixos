@@ -53,7 +53,7 @@
     userName = "Niklas Furtwängler";
     signing = {
       key = "2FDF 6458 1DBA 9A81 366F ED34 895D 6A61 1B8A F8AB";
-      signByDefault = true;
+      signByDefault = false;
     };
   };
 
@@ -67,7 +67,6 @@
     };
     extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
-      matklad.rust-analyzer
     ];
   };
 
@@ -89,7 +88,6 @@
     tdesktop
     signal-desktop
     onlyoffice-bin
-    rustc
     bitwarden
     nil
     firefox
@@ -100,6 +98,9 @@
   programs.fish = {
     enable = true;
     functions = {
+      fish_greeting = {
+        body = "";
+      };
       sshmux = {
         description = "Launches a remote tmux session or attaches to an existing one.";
         body = "ssh -t $argv systemd-run --scope --user tmux new -A -s ssh";
