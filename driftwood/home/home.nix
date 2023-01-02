@@ -28,7 +28,7 @@
     settings = {
       main = {
         term = "xterm-256color";
-        font = "Iosevka Term:size=12";
+        font = "Iosevka Term:size=11";
       };
       colors.alpha = 0.8;
     };
