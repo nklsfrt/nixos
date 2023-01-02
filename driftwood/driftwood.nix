@@ -106,6 +106,10 @@
   #  wget
   ];
 
+  fonts.fonts = with pkgs; [
+    iosevka-bin
+  ];
+
   system.stateVersion = "22.05"; # Did you read the comment?
 
 }
