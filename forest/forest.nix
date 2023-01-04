@@ -32,6 +32,8 @@
     permitRootLogin = "yes";
   };
 
+	services.qemuGuest.enable = true;
+
   zramSwap.enable = true;
 
   system.stateVersion = "22.05"; # Did you read the comment?
