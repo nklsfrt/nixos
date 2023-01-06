@@ -20,12 +20,7 @@
 
   security.polkit.enable = true;
  
-  networking = {
-
-  	hostName = "forest";  	
-	hostId = "795ee55c";
-	
-  };
+  networking.hostName = "forest";
 
   services.openssh = {
     enable = true;
