@@ -96,6 +96,7 @@
     firefox
     evolution
     evolution-data-server
+    parsec-bin
   ];
 
   programs.fish = {
