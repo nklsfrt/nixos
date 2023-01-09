@@ -33,6 +33,8 @@
     # Use the latest kernel package compatible with zfs.
     kernelPackages = pkgs.linuxPackages_latest;
 
+    supportedFilesystems = [ "ntfs" ];
+
   };
 
   zramSwap.enable = true;
