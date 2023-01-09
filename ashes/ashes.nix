@@ -35,4 +35,26 @@
 			};
 		};
 	};
+		# test configuration for Caddy
+
+	services.caddy = {
+		enable = true;
+		configFile = pkgs.writeTextDir "Caddyfile" ''
+nklsfrt.de {
+		encode zstd gzip
+		root * /var/www
+		file_server
+		
+}
+www.nklsfrt.de {
+		redir https://nklsfrt.de/
+}
+proof.nklsfrt.de {
+		root * /var/www
+		file_server {
+			index proof.asc
+		}
+}
+''; 
+	};
 }
