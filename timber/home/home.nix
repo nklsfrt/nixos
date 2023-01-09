@@ -122,6 +122,8 @@
       ".local/share/keyrings"
       ".config/evolution"
       ".local/share/TelegramDesktop/"
+      "Documents"
+      "Pictures"
     ];
     files = [
       "./.background-image"
