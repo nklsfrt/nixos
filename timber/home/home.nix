@@ -120,6 +120,7 @@
       "codeberg"
       ".mozilla/firefox/vlqejqkk.niklas"
       ".local/share/keyrings"
+      ".local/share/Steam"
       ".config/evolution"
       ".local/share/TelegramDesktop/"
       "Documents"
