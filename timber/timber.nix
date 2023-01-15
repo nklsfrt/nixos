@@ -39,6 +39,8 @@
 
   zramSwap.enable = true;
 
+  system.autoUpgrade.persistent = true;
+
   # Ensure /persist is being mounted early.
 
   fileSystems."/persist".neededForBoot = true;
