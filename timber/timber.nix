@@ -58,7 +58,10 @@
     };
     desktopManager = {
       gnome.enable = true;
-      wallpaper.mode = "fill";
+      wallpaper = {
+        mode = "fill";
+        combineScreens = false;
+      };
     };
   };
 
