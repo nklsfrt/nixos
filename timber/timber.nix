@@ -86,6 +86,9 @@
   security.rtkit.enable = true;
 
   services.pipewire = {
+    config.pipewire = {
+      context.properties.default.clock.allowed-rates = [ 41000 48000 ];
+    };
   	enable = true;
   	alsa.enable = true;
   	pulse.enable = true;
