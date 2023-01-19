@@ -8,6 +8,7 @@
 
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.isContainer = true;
 
   security.polkit.enable = true;
  
