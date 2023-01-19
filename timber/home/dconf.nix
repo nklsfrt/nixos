@@ -18,7 +18,7 @@ with lib.hm.gvariant;
       locations = "[<(uint32 2, <('Graz', 'LOWG', true, [(0.82030474843733492, 0.269362475406694)], [(0.82146830708976193, 0.2696533694331239)])>)>]";
     };
 
-    "/org/gnome/desktop/background" = {
+    "org/gnome/desktop/background" = {
       picture-uri-dark = "file:///home/niklas/.background-image";
     };
 
