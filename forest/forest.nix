@@ -8,7 +8,7 @@
 
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.isContainer = true;
+  boot.loader.systemd-boot.enable = true;
 
   security.polkit.enable = true;
  
