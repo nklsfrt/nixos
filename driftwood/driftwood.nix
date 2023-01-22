@@ -51,6 +51,16 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  hardware.opengl = {
+  	enable = true;
+  	extraPackages = with pkgs; [
+  	  intel-media-driver
+  	  vaapiIntel
+      vaapiVdpau
+      libvdpau-va-gl
+  	];
+  };
+
   # Configure keymap in X11
   services.xserver = {
     layout = "de";
@@ -73,6 +83,9 @@
     alsa.enable = true;
     pulse.enable = true;
   };
+
+  powerManagement.powertop.enable = true;
+  services.thermald.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
