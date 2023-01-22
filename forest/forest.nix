@@ -19,6 +19,8 @@
     permitRootLogin = "yes";
   };
 
+  services.qemuGuest.enable = true;
+
   zramSwap.enable = true;
 
   virtualisation.docker.enable = true;
