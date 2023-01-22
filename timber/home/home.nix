@@ -48,14 +48,15 @@
     enable = true;
     package = pkgs.vscodium;
     userSettings = {
+      "git.autofetch" = "true";
       "nix.enableLanguageServer" = "true";
       "nix.serverPath" = "nil";
-      "git.autofetch" = "true";
     };
     extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
       matklad.rust-analyzer
       ms-azuretools.vscode-docker
+      james-yu.latex-workshop
     ];
   };
 
