@@ -32,6 +32,7 @@
 			enable = true;
 			interfaces = {
 				"ens3".allowedTCPPorts = [ 80 443 ];
+				"ens3".allowedUDPPorts = [ 443 ];
 			};
 		};
 	};
