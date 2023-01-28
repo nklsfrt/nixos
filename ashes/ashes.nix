@@ -40,6 +40,24 @@
 
 	services.caddy = {
 		enable = true;
-		configFile = "/var/lib/caddy/Caddyfile";
+		configFile = builtins.toFile "Caddyfile" "
+		nklsfrt.de {
+			header Strict-Transport-Security max-age=31536000
+			encode zstd gzip
+			root * /var/www
+			file_server
+		}
+
+		www.nklsfrt.de {
+			redir https://nklsfrt.de/
+		}
+
+		proof.nklsfrt.de {
+			root * /var/www
+			file_server {
+				index proof.asc
+			}
+		}
+		"
 	};
 }
