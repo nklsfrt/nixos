@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, website, ... }:
 
 {
   imports =
@@ -38,14 +38,18 @@
   };
     # test configuration for Caddy
 
-  services.caddy = {
+  services.caddy = 
+  let
+    webroot = website.outPath;
+  in
+  {
     enable = true;
     adapter = "caddyfile";
     configFile = builtins.toFile "Caddyfile" ''
     nklsfrt.de {
       header Strict-Transport-Security max-age=31536000
       encode zstd gzip
-      root * /var/www
+      root * ${webroot}
       file_server
     }
 
@@ -54,7 +58,7 @@
     }
 
     proof.nklsfrt.de {
-      root * /var/www
+      root * ${webroot}
       file_server {
         index proof.asc
       }
