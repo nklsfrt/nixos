@@ -40,7 +40,7 @@
 
   services.caddy = {
     enable = true;
-    configFile = builtins.toFile "Caddyfile" "
+    configFile = builtins.toFile "Caddyfile" ''
     nklsfrt.de {
       header Strict-Transport-Security max-age=31536000
       encode zstd gzip
@@ -58,6 +58,6 @@
         index proof.asc
       }
     }
-    ";
+    '';
   };
 }
