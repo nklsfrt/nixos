@@ -58,6 +58,6 @@
 				index proof.asc
 			}
 		}
-		"
+		";
 	};
 }
