@@ -11,13 +11,18 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
+    website = {
+      url = "git+https://codeberg.org/nklsfrt/nklsfrt.de\?ref=main";
+      flake = false;
+    };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, impermanence }:{
+  outputs = { self, nixpkgs, home-manager, impermanence, website }:{
     nixosConfigurations = {
-
       ashes = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit website; };
         modules = [
           ./common.nix
           ./ashes/ashes.nix
