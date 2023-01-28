@@ -40,6 +40,7 @@
 
   services.caddy = {
     enable = true;
+    adapter = "caddyfile";
     configFile = builtins.toFile "Caddyfile" ''
     nklsfrt.de {
       header Strict-Transport-Security max-age=31536000
