@@ -34,7 +34,7 @@
           image = "traefik:v2.9.6";
           cmd = ["--providers.docker"];
           ports = ["80"];
-          volumes = ["/var/run/docker.sock:/var/run/docker.sock"]
+          volumes = ["/var/run/docker.sock:/var/run/docker.sock"];
         };
         firefy = {
           image = "fireflyiii/core:version-5.7.18";
