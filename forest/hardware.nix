@@ -23,6 +23,11 @@
       fsType = "vfat";
     };
 
+  fileSystems."/var/lib/docker/volumes" =
+    { device = "dev/disk/by-uuid/685719b6-6ece-4ce2-a8bd-c5d543dc1389";
+      fsType = "ext4";
+    };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
