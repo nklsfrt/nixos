@@ -32,8 +32,8 @@
       containers = {
         traefik = {
           image = "traefik:v2.9.6";
-          cmd = ["--providers.docker"];
-          ports = ["80"];
+          cmd = ["--providers.docker --api.insecure=true"];
+          ports = ["80:80" "8080:8080"];
           volumes = ["/var/run/docker.sock:/var/run/docker.sock"];
         };
         firefy = {
