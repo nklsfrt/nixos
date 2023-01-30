@@ -1,0 +1,15 @@
+keys:
+  - &admin_nase 2FDF64581DBA9A81366FED34895D6A611B8AF8AB
+  - &system_ashes 2343d015badf5ef239c59686ff8c2a675af44f0b
+  - &system_driftwood 4e8e23a296c947c902ca53f0fddba3b199e105f0
+  - &system_forest 5495084f5e472f0f259b2eb46263ebb8fbb4dd6f
+  - &system_timber 78f0356e09cbc091b41556b39234f0685cb96375
+creation_rules:
+  - path_regex: secrets.yaml$
+    key_groups:
+    - pgp:
+      - *admin_nase
+      - *system_ashes
+      - *system_driftwood
+      - *system_forest
+      - *system_timber
