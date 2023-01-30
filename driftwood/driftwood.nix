@@ -1,29 +1,17 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware.nix
-    ];
+  imports = [
+    ./hardware.nix
+  ];
 
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.plymouth.enable = true;
-  networking.hostName = "driftwood"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "driftwood";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
   networking.networkmanager.enable = true;
 
   # Set your time zone.
@@ -87,10 +75,6 @@
   powerManagement.powertop.enable = true;
   services.thermald.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.nase = {
     isNormalUser = true;
     description = "Niklas Furtwängler";
@@ -100,8 +84,9 @@
       clapper
     ];
   };
+  
   programs.fish.enable = true;
-  # Allow unfree packages
+
   nixpkgs.config.allowUnfree = true;
 
   fonts.fonts = with pkgs; [
