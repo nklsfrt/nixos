@@ -1,10 +1,9 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [
-      ./hardware.nix
-    ];
+  imports = [
+    ./hardware.nix
+  ];
 
   ## Configure the boot process
 
@@ -133,7 +132,6 @@
       "/etc/wireguard/"
     ];
   };
-
 
 }
 
