@@ -11,6 +11,8 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
+    sops-nix.url = "github:Mic92/sops-nix";
+
     website = {
       url = "git+https://codeberg.org/nklsfrt/nklsfrt.de\?ref=main";
       flake = false;
@@ -18,7 +20,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, impermanence, website }:{
+  outputs = { self, nixpkgs, home-manager, impermanence, sops-nix, website }:{
     nixosConfigurations = {
       ashes = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -57,6 +59,7 @@
         modules = [
           ./common.nix
           ./timber/timber.nix
+          sops-nix.nixosModules.sops
           impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
           {
