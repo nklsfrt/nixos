@@ -1,12 +1,11 @@
 { config, pkgs, website, ... }:
 
 {
-  imports =
-    [
-      ./hardware.nix
-    ];
+  imports = [
+    ./hardware.nix
+  ];
 
-  ## Boot configuration	
+  # Boot configuration	
   boot.loader.grub = {
     devices = [ "/dev/sda" ];
     configurationLimit = 16;
@@ -31,12 +30,15 @@
     firewall = {
       enable = true;
       interfaces = {
+        # Open ports for HTTP/HTTPS
         "ens3".allowedTCPPorts = [ 80 443 ];
+        # Open port for HTTP/3
         "ens3".allowedUDPPorts = [ 443 ];
       };
     };
   };
-    # test configuration for Caddy
+
+  # Enable Caddy webserver with its webroot in my websites repo
 
   services.caddy = 
   let
