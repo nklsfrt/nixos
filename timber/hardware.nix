@@ -23,7 +23,7 @@
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/96784b15-65e9-49d8-9752-9af9630fb75d";
       fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" ];
+      options = [ "subvol=nix" "compress=zstd" "noatime" ];
     };
 
   fileSystems."/persist" =
