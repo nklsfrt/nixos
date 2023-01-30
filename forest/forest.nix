@@ -27,23 +27,6 @@
 
   virtualisation = {
     docker.enable = true;
-    oci-containers = {
-      backend = "docker";
-      containers = {
-        traefik = {
-          image = "traefik:v2.9.6";
-          cmd = ["--providers.docker --api.insecure=true"];
-          ports = ["80:80" "8080:8080"];
-          volumes = ["/var/run/docker.sock:/var/run/docker.sock"];
-        };
-        firefy = {
-          image = "fireflyiii/core:version-5.7.18";
-        };
-        paperless = {
-          image = "paperlessngx/paperless-ngx:1.12";
-        };
-      };
-    };
   };
 
 }
