@@ -38,6 +38,16 @@
     };
   };
 
+  # Run a toogoodtoogobot for tg notifications
+
+  virtualisation.oci-containers.containers = {
+    tgtgbot = {
+      image = "derhenning/tgtg";
+      volumes = [ "tokens:/tokens" ];
+      environmentFiles = [ /home/nase/tgtgbot.env ];
+    };
+  };
+
   # Enable Caddy webserver with its webroot in my websites repo
 
   services.caddy = 
