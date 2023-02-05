@@ -28,6 +28,7 @@
         modules = [
           ./common.nix
           ./ashes/ashes.nix
+          sops-nix.nixosModules.sops
         ];
       };
 
@@ -36,6 +37,7 @@
       	modules = [
       	  ./common.nix
       	  ./forest/forest.nix
+          sops-nix.nixosModules.sops
       	];
       };
 
