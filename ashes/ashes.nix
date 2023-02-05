@@ -5,6 +5,11 @@
     ./hardware.nix
   ];
 
+  sops.defaultSopsFile = ./secrets.yaml;
+  sops.secrets."tgtg_email" = {};
+  sops.secrets."tgtgbot/tg_chat_ids" = {};
+  sops.secrets."tgtgbot/tg_bot_token" = {};
+
   # Boot configuration	
   boot.loader.grub = {
     devices = [ "/dev/sda" ];
@@ -44,7 +49,19 @@
     tgtgbot = {
       image = "derhenning/tgtg";
       volumes = [ "tokens:/tokens" ];
-      environmentFiles = [ /home/nase/tgtgbot.env ];
+      # environmentFiles = [ /home/nase/tgtgbot.env ];
+      environment = {
+        TZ = "Europe/Vienna";
+        DEBUG = false;
+        TGTG_USERNAME = "${config.sops.secrets."tgtgbot/tgtg_email"}";
+        SLEEP_TIME = 60;
+        DISABLE_TESTS = true;
+        quiet = false;
+        TELEGRAM = true;
+        TELEGRAM_TIMEOUT = 60;
+        TELEGRAM_CHAT_IDS = "${config.sops.secrets."tgtgbot/tg_chat_ids"}";
+        TELEGRAM_BOT_TOKEN = "${config.sops.secrets."tgtgbot/tg_bot_token"}";
+      };
     };
   };
 
