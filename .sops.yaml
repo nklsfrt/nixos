@@ -1,0 +1,36 @@
+keys:
+  - &admin_nase-at-timber age14gjckjvv98kv4cxzge88crzhgwu5llenrvw62yr8s527c7ch4dpqdxa6ed
+  - &admin_nase-at-driftwood age1ku90ahpfvzstfzuu4x5fagp5t25mmjt0pj9jasmvcrhu60hn4f8qkjl7ae
+  - &system_ashes age1t2ysmpkapnajmu8qspp9h3369n354cdzp69a08xjj390q7h5vgcq4d4w8s
+  - &system_driftwood age17enzqfxrydaasa0qh33vrkml6zfksww7vltln54dcczffd9g6dxqgdy6e2
+  - &system_forest age13554wqldlmt7jnjx5mjw9l246zmgmus4lc6r0vyt5sag2m2tjdeq2rsdft
+  - &system_timber age1yn4x7u5rp8hfm8pz44natt3udm6adajx2vy22af7sj9uq4sm737s0qga9s
+creation_rules:
+       
+  - path_regex: ashes/secrets.yaml$
+    key_groups:
+    - age:
+      - *admin_nase-at-timber
+      - *admin_nase-at-driftwood
+      - *system_ashes
+
+  - path_regex: driftwood/secrets.yaml$
+    key_groups:
+    - age:
+      - *admin_nase-at-timber
+      - *admin_nase-at-driftwood
+      - *system_driftwood
+
+  - path_regex: forest/secrets.yaml$
+    key_groups:
+    - age:
+      - *admin_nase-at-timber
+      - *admin_nase-at-driftwood
+      - *system_forest
+
+  - path_regex: timber/secrets.yaml$
+    key_groups:
+    - age:
+      - *admin_nase-at-timber
+      - *admin_nase-at-driftwood
+      - *system_timber
