@@ -5,6 +5,12 @@
     ./hardware.nix
   ];
 
+<<<<<<< HEAD
+=======
+  sops.defaultSopsFile = ./secrets.yaml;
+  sops.secrets.tgtgbot_env = {};
+
+>>>>>>> secrets
   # Boot configuration	
   boot.loader.grub = {
     devices = [ "/dev/sda" ];
@@ -40,11 +46,22 @@
 
   # Run a toogoodtoogobot for tg notifications
 
+<<<<<<< HEAD
   virtualisation.oci-containers.containers = {
     tgtgbot = {
       image = "derhenning/tgtg";
       volumes = [ "tokens:/tokens" ];
       environmentFiles = [ /home/nase/tgtgbot.env ];
+=======
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers = {
+      tgtgbot = {
+        image = "derhenning/tgtg";
+        volumes = [ "tokens:/tokens" ];
+        environmentFiles = [ "${config.sops.secrets.tgtgbot_env.path}" ];
+      };
+>>>>>>> secrets
     };
   };
 
