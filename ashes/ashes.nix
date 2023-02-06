@@ -43,11 +43,14 @@
 
   # Run a toogoodtoogobot for tg notifications
 
-  virtualisation.oci-containers.containers = {
-    tgtgbot = {
-      image = "derhenning/tgtg";
-      volumes = [ "tokens:/tokens" ];
-      environmentFiles = [ "${config.sops.secrets.tgtgbot_env.path}" ];
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers = {
+      tgtgbot = {
+        image = "derhenning/tgtg";
+        volumes = [ "tokens:/tokens" ];
+        environmentFiles = [ "${config.sops.secrets.tgtgbot_env.path}" ];
+      };
     };
   };
 
