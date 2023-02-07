@@ -21,62 +21,27 @@
   };
 
   outputs = { self, nixpkgs, home-manager, impermanence, sops-nix, website }:{
-    nixosConfigurations = {
-      ashes = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit website; };
-        modules = [
-          ./common.nix
-          ./ashes/ashes.nix
-          sops-nix.nixosModules.sops
-        ];
-      };
-
-      forest = nixpkgs.lib.nixosSystem {
-      	system = "x86_62-linux";
-      	modules = [
-      	  ./common.nix
-      	  ./forest/forest.nix
-          sops-nix.nixosModules.sops
-      	];
-      };
-
-      driftwood = nixpkgs.lib.nixosSystem {
-      	system = "x86_64-linux";
-      	modules = [
-      	  ./common.nix
-      	  ./driftwood/driftwood.nix
-          sops-nix.nixosModules.sops
-      	  home-manager.nixosModules.home-manager
-      	  {
-      	    home-manager.useUserPackages = true;
-      		home-manager.users.nase = {
-      		  imports = [ ./driftwood/home/home.nix ];
-      		};
-      	  }
-      	];
-      };
-
-      timber = nixpkgs.lib.nixosSystem {
+    nixosConfigurations =
+    let
+      systems = builtins.attrNames (nixpkgs.lib.filterAttrs (n: v: v == "directory" && n != ".git" ) (builtins.readDir ./.));
+    in
+    { nameValuePair name lib.nixosSystem
+      
+      
+      
+      
+      
+      
+      
+      name = lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./common.nix
-          ./timber/timber.nix
-          sops-nix.nixosModules.sops
-          impermanence.nixosModules.impermanence
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useUserPackages = true;
-            home-manager.users.nase = {
-              imports = [ 
-                impermanence.nixosModules.home-manager.impermanence
-                ./timber/home/home.nix
-              ];
-            };
-          }
+          ./${name}/${name}.nix
         ];
       };
-
     };
   };
 }
+
+
