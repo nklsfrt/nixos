@@ -20,27 +20,23 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, impermanence, sops-nix, website }:{
-    nixosConfigurations =
-    let
-      systems = builtins.attrNames (nixpkgs.lib.filterAttrs (n: v: v == "directory" && n != ".git" ) (builtins.readDir ./.));
-    in
-    { nameValuePair name lib.nixosSystem
-      
-      
-      
-      
-      
-      
-      
-      name = lib.nixosSystem {
+  outputs = inputs:
+  let
+    lib = inputs.nixpkgs.lib;
+  in
+  {
+    nixosConfigurations = lib.pipe ./. [
+      builtins.readDir
+      (lib.filterAttrs (n: v: v == "directory" && n != ".git" ))
+      (builtins.mapAttrs (name: _: lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           ./common.nix
           ./${name}/${name}.nix
         ];
-      };
-    };
+      } ))
+    ];
   };
 }
 
