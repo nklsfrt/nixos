@@ -6,8 +6,11 @@
     home-manager.nixosModules.home-manager
   ];
 
-  home-manager.users.nase = {
-    imports = [ ./home/home.nix ];
+  home-manager = {
+    useUserPackages = true;
+    users.nase = {
+      imports = [ ./home/home.nix ];
+    };
   };
 
   boot.loader.systemd-boot.enable = true;
