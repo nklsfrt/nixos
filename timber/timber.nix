@@ -1,9 +1,15 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
-  imports = [
+  imports = with inputs; [
     ./hardware.nix
+    home-manager.nixosModules.home-manager
+    impermanence.nixosModules.impermanence
   ];
+
+  home-manager.users.nase = {
+    imports = [ ./home/home.nix ];
+  };
 
   ## Configure the boot process
 
