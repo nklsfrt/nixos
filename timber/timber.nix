@@ -7,8 +7,14 @@
     impermanence.nixosModules.impermanence
   ];
 
-  home-manager.users.nase = {
-    imports = [ ./home/home.nix ];
+  home-manager = {
+    useUserPackages = true;
+    users.nase = {
+      imports = with inputs; [
+        ./home/home.nix
+        impermanence.nixosModules.home-manager.impermanence
+      ];
+    };
   };
 
   ## Configure the boot process
