@@ -1,8 +1,9 @@
-{ config, pkgs, website, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
     ./hardware.nix
+    inputs.sops-nix.nixosModules.sops
   ];
 
   sops.defaultSopsFile = ./secrets.yaml;
@@ -55,7 +56,7 @@
 
   services.caddy = 
   let
-    webroot = website.outPath;
+    webroot = inputs.website.outPath;
   in
   {
     enable = true;
