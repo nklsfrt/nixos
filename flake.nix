@@ -1,6 +1,6 @@
 {
 
-  description = "My very first centralized infrastructure configuration!";
+  description = "nklsfrt's personal flake";
 
   inputs = {
 
