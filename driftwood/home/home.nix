@@ -74,7 +74,6 @@
     tdesktop
     signal-desktop
     onlyoffice-bin
-    bitwarden
     nil
     firefox
     evolution-data-server
