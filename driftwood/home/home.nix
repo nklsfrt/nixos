@@ -70,7 +70,6 @@
     spot
     pavucontrol
     easyeffects
-    helvum
     tdesktop
     signal-desktop
     onlyoffice-bin
