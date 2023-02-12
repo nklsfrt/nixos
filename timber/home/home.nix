@@ -76,8 +76,6 @@
     tdesktop
     signal-desktop
     onlyoffice-bin
-    rustc
-    bitwarden
     nil
     firefox
     evolution
