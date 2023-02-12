@@ -122,7 +122,7 @@
       ".local/share/keyrings"
       ".local/share/Steam"
       ".config/evolution"
-      ".local/share/TelegramDesktop/"
+      ".local/share/TelegramDesktop"
       ".local/share/PrismLauncher"
       "Documents"
       "Pictures"
