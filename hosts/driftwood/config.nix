@@ -1,17 +1,9 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports = with inputs; [
-    ./hardware.nix
-    home-manager.nixosModules.home-manager
+  imports = [
+    ../../users/nase
   ];
-
-  home-manager = {
-    useUserPackages = true;
-    users.nase = {
-      imports = [ ./home/home.nix ];
-    };
-  };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

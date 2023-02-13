@@ -9,9 +9,6 @@
 		dates = "daily";
 		flake = "git+https://codeberg.org/nklsfrt/nixos";
 	};
-	
-
-	## Configure nix settings and garbage collection
 
 	nix.settings = {
 		experimental-features = [ "nix-command flakes repl-flake" ];
@@ -30,11 +27,8 @@
 		supportedLocales = [ "en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8" ];
 	};
 
-  ## User configuration
-
 	users.users.nase = {
 		name = "nase";
-		description = "Niklas Furtwängler";
 		home = "/home/niklas";
 		extraGroups = [ "wheel" ];
 		isNormalUser = true;

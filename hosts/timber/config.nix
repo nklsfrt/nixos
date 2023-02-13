@@ -2,21 +2,11 @@
 
 {
   imports = with inputs; [
-    ./hardware.nix
-    home-manager.nixosModules.home-manager
+    ../../users/nase
+    ../../users/nase/impermanence.nix
     impermanence.nixosModules.impermanence
   ];
-
-  home-manager = {
-    useUserPackages = true;
-    users.nase = {
-      imports = with inputs; [
-        ./home/home.nix
-        impermanence.nixosModules.home-manager.impermanence
-      ];
-    };
-  };
-
+  
   ## Configure the boot process
 
   boot = {

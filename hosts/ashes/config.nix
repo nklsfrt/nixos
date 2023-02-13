@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./hardware.nix
     inputs.sops-nix.nixosModules.sops
   ];
 
