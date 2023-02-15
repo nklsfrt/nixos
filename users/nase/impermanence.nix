@@ -1,8 +1,11 @@
 {inputs, ...}:{
+
   home-manager.users.nase = {
+
     imports = with inputs; [
       impermanence.nixosModules.home-manager.impermanence
     ];
+
     home.persistence."/persist/home/niklas" = {
       directories = [
         ".ssh"
@@ -24,5 +27,6 @@
       ];
       allowOther = true;
     };
+    
   };
 }
