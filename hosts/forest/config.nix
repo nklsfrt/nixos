@@ -2,38 +2,16 @@
 
 {
   
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.extraPools = [ "rpool" ];
+  networking.hostId = "10fa8e3e";
   boot.loader.systemd-boot.enable = true;
 
   security.polkit.enable = true;
- 
-  networking = {
-    hostName = "forest";
-    firewall = {
-      allowedTCPPorts = [ 53 ];
-      allowedUDPPorts = [ 53 ];
-    };
-  };
 
-  services.openssh = {
-    enable = true;
-    permitRootLogin = "yes";
-  };
-
-  services.qemuGuest.enable = true;
-
-  zramSwap.enable = true;
 
   system.stateVersion = "22.05"; # Did you read the comment?
-
-  services.adguardhome = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      bind_port = 3000;
-      bind_host = "0.0.0.0";
-    };
-  };
 
 }
 
