@@ -15,6 +15,7 @@
   {
     nixosConfigurations = import ./hosts { inherit inputs; };
   };
+  
 }
 
 
