@@ -15,7 +15,6 @@ pipe ./. [
       ./common.nix
       ./${name}/config.nix
       ./${name}/hardware.nix
-      home-manager.nixosModules.home-manager
     ];
   }))
 ]
