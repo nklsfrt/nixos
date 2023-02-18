@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../users/nase
+    ../../users/nase/home.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
