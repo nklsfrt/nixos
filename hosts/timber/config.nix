@@ -79,12 +79,14 @@
     evolution-data-server.enable = true;
     gnome-keyring.enable = true;
     gnome-online-accounts.enable = true;
+    core-utilities.enable = false;
+    core-developer-tools.enable = false;
+    games.enable = false;
   };
 
   security.pam.services.login.enableGnomeKeyring = true;
 
   programs.dconf.enable = true;
-
 
   ## Enable Pipewire for working audio
 
@@ -102,12 +104,6 @@
 
   programs.fuse.userAllowOther = true;
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
-
   environment.systemPackages = with pkgs; [ nvidia-vaapi-driver ];
   
   # Set the root password
@@ -120,12 +116,6 @@
   fonts.fonts = with pkgs; [
     iosevka-bin
   ];
-
-  # Misc Networking - Set hostname and hostid
-  networking.hostName = "timber";
-  networking.hostId = "68a8af9f";
-
-  # networking.wg-quick.interfaces.Mullvad.configFile = "/etc/wireguard/mlvd-at7-wg.conf";
 
   environment.persistence."/persist" = {
     hideMounts = true;
