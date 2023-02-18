@@ -17,9 +17,6 @@
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "de_DE.UTF-8";
     LC_IDENTIFICATION = "de_DE.UTF-8";
@@ -39,11 +36,14 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  
   services.gnome = {
+    evolution-data-server.enable = true;
+    gnome-keyring.enable = true;
+    gnome-online-accounts.enable = true;
     core-utilities.enable = false;
     core-developer-tools.enable = false;
     games.enable = false;
+    sushi.enable = true;
   };
 
   hardware.opengl = {
@@ -62,9 +62,6 @@
     xkbVariant = "";
   };
 
-  # Configure console keymap
-  console.keyMap = "de";
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -81,18 +78,6 @@
 
   powerManagement.powertop.enable = true;
   services.thermald.enable = true;
-
-  users.users.nase = {
-    isNormalUser = true;
-    description = "Niklas Furtwängler";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [  
-      mullvad-vpn
-      clapper
-    ];
-  };
-  
-  programs.fish.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
