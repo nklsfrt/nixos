@@ -2,7 +2,7 @@
 
 {
   imports = with inputs; [
-    ../../users/nase
+    ../../users/nase/home.nix
     ../../users/nase/impermanence.nix
     impermanence.nixosModules.impermanence
   ];

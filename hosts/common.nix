@@ -1,5 +1,7 @@
 { pkgs, ... }:{
 
+	imports = [ ../users/nase ];
+
   system.stateVersion = "22.05";
 
 	console.keyMap = "de";
@@ -25,28 +27,6 @@
 	i18n = {
 		defaultLocale = "en_US.UTF-8";
 		supportedLocales = [ "en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8" ];
-	};
-
-	users.users.nase = {
-		name = "nase";
-		home = "/home/niklas";
-		extraGroups = [ "wheel" ];
-		isNormalUser = true;
-		shell = pkgs.fish;
-		openssh.authorizedKeys.keys = [
-			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILuhR19nZctqp3nUHjo8cKppnHbrKjePtNL3VzT8lFlg nase@timber"
-			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKE926T8orbrGuuHTs15n8ON4E5gyAv+enD8GWNWSRNW nase@driftwood"
-			];
-    hashedPassword = "$6$tmq77efFOO.hfxev$s/0Ob1FwKdXUGNHloQd3ozesGLxBeMNXm0LtSaoecEuKlMJUbNqYH5UvxN4oW2dPvqxhT0JtNHNwS5DPQEJFd1";
-		packages = with pkgs; [
-			git
-			tmux
-			micro
-			htop
-			exa
-			bat
-			fish
-		];
 	};
 
 	# Enable misc. services
