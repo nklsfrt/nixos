@@ -88,6 +88,11 @@
 
   programs.dconf.enable = true;
 
+  services.zerotierone = {
+    enable = true;
+    joinNetworks = [ "abfd31bd471dbd23" ];
+  };
+
   ## Enable Pipewire for working audio
 
   hardware.pulseaudio.enable = false;
