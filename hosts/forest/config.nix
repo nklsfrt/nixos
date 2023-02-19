@@ -72,6 +72,27 @@ in
     '';
   };
 
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers = {
+      reverse_proxy = 
+      let
+        caddyfile = builtins.toFile "Caddyfile" ''
+        :80 {
+          respond "Hi!"
+        }
+        '';
+      in {
+        image = "caddy:2.6";
+        ports = [ "80:80" ];
+        volumes = [
+          "caddy_data:/data"
+          "${caddyfile}:/etc/caddy/Caddyfile"
+          ];
+      };
+    };
+  };
+
   system.stateVersion = "22.05"; # Did you read the comment?
 
 }
