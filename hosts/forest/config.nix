@@ -96,6 +96,16 @@ in
             "/var/run/docker.sock:/var/run/docker.sock:ro"
             ];
         };
+        syncthing = {
+          image = "syncthing/syncthing";
+          volumes = [ "syncthing_data:/var/syncthing" ];
+          extraOptions = [
+            "--label=traefik.enable=true"
+            "--label=traefik.http.routers.syncthing.entrypoints=web"
+            "--label=traefik.http.services.syncthing.loadbalancer.server.port=8384"
+            "--label=traefik.http.routers.syncthing.rule=Host(`sync.lan`)"
+          ];
+        };
       };
     };
   };
