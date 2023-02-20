@@ -57,6 +57,11 @@ in
     };
   };
 
+  services.zfs = {
+    trim.enable = true;
+    autoScrub.enable = true;
+  };
+
   services.openssh.listenAddresses = [ { addr = "${router-ip}";} ];
 
   services.adguardhome = {
