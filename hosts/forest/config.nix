@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 let
   wan-nic = "enp2s0";
   lan-nics = [ "enp3s0" "enp4s0" "enp5s0" ];
   lan-bridge = "br0";
   router-ip = "192.168.69.1";
+  wan-ports = [];
 in
 {
   
@@ -39,23 +40,27 @@ in
     };
     interfaces = {
       "${lan-bridge}" = {
-        useDHCP = true;
         ipv4.addresses = [ { address = "${router-ip}"; prefixLength = 24; }];
       };
-      enp2s0.useDHCP = true;
+      "${wan-nic}" = {
+        useDHCP = true;
+      };
     };
     firewall = {
       trustedInterfaces = [ "${lan-bridge}" ];
+      interfaces = {
+        "${wan-nic}" = {
+          allowedTCPPorts = lib.mkForce wan-ports;
+          allowedUDPPorts = lib.mkForce wan-ports;
+    };
+  };
     };
   };
 
+  services.openssh.listenAddresses = [ { addr = "${router-ip}";} ];
+
   services.adguardhome = {
     enable = true;
-    openFirewall = true;
-    settings = {
-      bind_address = [ "192.168.69.1" ];
-      bind_port = 3000;
-    };
   };
 
   services.dhcpd4 = {
