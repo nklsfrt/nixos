@@ -13,7 +13,6 @@
         "codeberg"
         ".mozilla/firefox/vlqejqkk.niklas"
         ".local/share/keyrings"
-        ".local/share/Steam"
         ".config/evolution"
         ".local/share/TelegramDesktop"
         ".local/share/PrismLauncher"
@@ -23,6 +22,7 @@
       files = [
         "./.background-image"
         ".config/monitors.xml"
+        ".config/sops/age/keys.txt"
         ".local/share/fish/fish_history"
       ];
       allowOther = true;
