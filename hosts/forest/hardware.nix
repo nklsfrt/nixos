@@ -17,6 +17,11 @@
       neededForBoot = true;
     };
 
+  fileSystems."/var/lib/docker/volumes" =
+    { device = "rpool/docker-volumes";
+      fsType = "zfs";
+    };
+
   fileSystems."/nix" =
     { device = "rpool/nix";
       fsType = "zfs";
@@ -26,7 +31,6 @@
     { device = "/dev/disk/by-uuid/028E-0D49";
       fsType = "vfat";
     };
-
 
   networking.useDHCP = lib.mkDefault false;
 
