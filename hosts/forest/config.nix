@@ -52,8 +52,8 @@ in
         "${wan-nic}" = {
           allowedTCPPorts = lib.mkForce wan-ports;
           allowedUDPPorts = lib.mkForce wan-ports;
-    };
-  };
+        };
+      };
     };
   };
 
@@ -77,23 +77,25 @@ in
     '';
   };
 
-  virtualisation.oci-containers = {
-    backend = "docker";
-    containers = {
-      reverse_proxy = 
-      let
-        caddyfile = builtins.toFile "Caddyfile" ''
-        :80 {
-          respond "Hi!"
-        }
-        '';
-      in {
-        image = "caddy:2.6";
-        ports = [ "80:80" ];
-        volumes = [
-          "caddy_data:/data"
-          "${caddyfile}:/etc/caddy/Caddyfile"
+  virtualisation = {
+    docker.extraOptions = "--ip ${router-ip}";
+    oci-containers = {
+      backend = "docker";
+      containers = {
+        reverse_proxy = {
+          image = "traefik:v2.9.8";
+          ports = [ "${router-ip}:80:80" "${router-ip}:8080:8080" ];
+          extraOptions = [];
+          cmd = [
+            "--api.insecure=true"
+            "--providers.docker=true"
+            "--providers.docker.exposedbydefault=false"
+            "--entrypoints.web.address=:80"
           ];
+          volumes = [
+            "/var/run/docker.sock:/var/run/docker.sock:ro"
+            ];
+        };
       };
     };
   };
