@@ -84,10 +84,16 @@ in
       containers = {
         reverse_proxy = {
           image = "traefik:v2.9.8";
-          ports = [ "${router-ip}:80:80" "${router-ip}:8080:8080" ];
-          extraOptions = [];
+          ports = [ "${router-ip}:80:80" ];
+          extraOptions = [
+            "--label=traefik.enable=true"
+            "--label=traefik.http.routers.traefik.entrypoints=web"
+            "--label=traefik.http.routers.traefik.rule=Host(`hub.lan`)"
+            "--label=traefik.http.routers.traefik.service=api@internal"
+            "--label=traefik.http.services.traefik.loadbalancer.server.port=8080"
+          ];
           cmd = [
-            "--api.insecure=true"
+            "--api.dashboard=true"
             "--providers.docker=true"
             "--providers.docker.exposedbydefault=false"
             "--entrypoints.web.address=:80"
