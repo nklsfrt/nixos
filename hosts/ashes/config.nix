@@ -34,7 +34,7 @@
       enable = true;
       interfaces = {
         # Open ports for HTTP/HTTPS
-        "ens3".allowedTCPPorts = [ 80 443 ];
+        "ens3".allowedTCPPorts = [ 80 443 13243 ];
         # Open port for HTTP/3
         "ens3".allowedUDPPorts = [ 443 ];
       };
