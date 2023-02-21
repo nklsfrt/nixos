@@ -46,9 +46,6 @@
 
   fileSystems."/persist".neededForBoot = true;
 
-  # Set the time zone.
-  time.timeZone = "Europe/Vienna";
-
   ## Enable the X11 windowing system.
 
   services.xserver = {
