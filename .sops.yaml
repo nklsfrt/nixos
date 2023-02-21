@@ -1,10 +1,10 @@
 keys:
   - &admin_nase-at-timber age1m07smzedcsl8jsk7v6xhl4t6uj5n2wdg5madmm6rjeuua02xlc6qn9dctf
-  - &admin_nase-at-driftwood age1d0xn2ytrtlg6lefawuhs4a7mlew48cpepnyfwv9wcg5pf92ns9vsx24s4v #
-  - &system_ashes age1t2ysmpkapnajmu8qspp9h3369n354cdzp69a08xjj390q7h5vgcq4d4w8s #
-  - &system_driftwood age1g6umavl6t8shf3pkvsrcyeg7cwg63my3az95zclh2jtk967xvsjscqj8zg #
+  - &admin_nase-at-driftwood age1d0xn2ytrtlg6lefawuhs4a7mlew48cpepnyfwv9wcg5pf92ns9vsx24s4v
+  - &system_ashes age1t2ysmpkapnajmu8qspp9h3369n354cdzp69a08xjj390q7h5vgcq4d4w8s
+  - &system_driftwood age1g6umavl6t8shf3pkvsrcyeg7cwg63my3az95zclh2jtk967xvsjscqj8zg
   - &system_forest age15hwqqeyn5hgh30vjw4puh0rtantr74h4zzz9n8hggna5hvyxhufql72rnp
-  - &system_timber age1z90h3qfhxs89pn8acspfyf8rz5fvm80dz6le0q4xzjyzzlrcc4ksjwhqf0
+  - &system_timber age138jwja7k6j7sgxx0yxxu5g78wmm06hh552tx3t8jc9l2zhflmgpqc4m60k
 creation_rules:
        
   - path_regex: hosts/ashes/secrets.yaml$
