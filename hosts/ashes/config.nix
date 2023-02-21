@@ -6,8 +6,9 @@
   ];
 
   sops.defaultSopsFile = ./secrets.yaml;
-  sops.secrets.libera_pass_hash = {};
-  sops.secrets.libera_pass_salt = {};
+  sops.secrets.znc_conf = {
+    owner = "znc";
+  };
   sops.secrets.tgtgbot_env = {};
 
   # Boot configuration	
@@ -43,22 +44,7 @@
   services.znc = {
     enable = true;
     openFirewall = true;
-    config = {
-      User.nklsfrt = {
-        LoadModule = [ "chansaver" ];
-        Admin = true;
-        Nick = "nklsfrt";
-        Network.libera = {
-          Server = "irc.libera.chat +6697";
-          LoadModule = [ "simple_away" "sasl" ];
-        };
-        Pass.password = {
-          Method = "sha256";
-          Hash = "${builtins.readFile (config.sops.secrets.libera_pass_hash.path)}";
-          Salt = "${builtins.readFile (config.sops.secrets.libera_pass_salt.path)}";
-        };
-      };
-    };
+    configFile = config.sops.secrets.znc_conf.path;
   };
 
   # Run a toogoodtoogobot for tg notifications
