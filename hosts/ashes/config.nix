@@ -6,6 +6,8 @@
   ];
 
   sops.defaultSopsFile = ./secrets.yaml;
+  sops.secrets.libera_pass_hash = {};
+  sops.secrets.libera_pass_salt = {};
   sops.secrets.tgtgbot_env = {};
 
   # Boot configuration	
@@ -34,6 +36,27 @@
         "ens3".allowedTCPPorts = [ 80 443 ];
         # Open port for HTTP/3
         "ens3".allowedUDPPorts = [ 443 ];
+      };
+    };
+  };
+
+  services.znc = {
+    enable = true;
+    openFirewall = true;
+    config = {
+      User.nklsfrt = {
+        LoadModule = [ "chansaver" ];
+        Admin = true;
+        Nick = "nklsfrt";
+        Network.libera = {
+          Server = "irc.libera.chat +6697";
+          LoadModule = [ "simple_away" "sasl" ];
+        };
+        Pass.password = {
+          Method = "sha256";
+          Hash = "${builtins.readFile (config.sops.secrets.libera_pass_hash.path)}";
+          Salt = "${builtins.readFile (config.sops.secrets.libera_pass_salt.path)}";
+        };
       };
     };
   };
