@@ -1,4 +1,4 @@
-{inputs, ...}:
+{inputs, abilities, user-profiles, ...}:
 
 with inputs.nixpkgs;
 with lib;
@@ -9,7 +9,7 @@ pipe ./. [
   (filterAttrs (n: v: v == "directory"))
   (mapAttrs (name: _: nixosSystem {
     system = "x86_64-linux";
-    specialArgs = { inherit inputs; };
+    specialArgs = { inherit inputs abilities user-profiles; };
     modules = [
       { networking.hostName = mkDefault name; }
       ./common.nix
