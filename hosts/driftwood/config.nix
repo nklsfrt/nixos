@@ -1,9 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{ config, abilities, pkgs, inputs, ... }:
 
 {
   imports = [
-    ../../users/nase/home.nix
-    ../../modules/gnome
+    ../../user-profiles/nase/home.nix
+    abilities.gnome
   ];
 
   boot.plymouth.enable = true;

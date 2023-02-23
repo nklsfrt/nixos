@@ -1,10 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, abilities, pkgs, inputs, ... }:
 
 {
   imports = with inputs; [
-    ../../users/nase/home.nix
-    ../../users/nase/impermanence.nix
-    ../../modules/gnome
+    ../../user-profiles/nase/home.nix
+    ../../user-profiles/nase/impermanence.nix
+    abilities.gnome
     impermanence.nixosModules.impermanence
   ];
   
