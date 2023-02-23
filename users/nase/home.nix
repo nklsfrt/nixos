@@ -82,10 +82,7 @@
         onlyoffice-bin
         nil
         evolution
-        evolution-data-server
         parsec-bin
-        gnome.nautilus
-        gnome.simple-scan
       ];
 
       programs.fish = {
