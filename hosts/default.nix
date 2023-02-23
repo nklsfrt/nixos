@@ -10,7 +10,7 @@ pipe ./. [
   (mapAttrs (name: _: nixosSystem {
     system = "x86_64-linux";
     specialArgs = { inherit inputs; };
-    modules = with inputs; [
+    modules = [
       { networking.hostName = mkDefault name; }
       ./common.nix
       ./${name}/config.nix
