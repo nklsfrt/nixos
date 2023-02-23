@@ -9,11 +9,23 @@ It defines the configurations of:
 - A VPS for my public facing services
 - My [home-server][homelab] which does all my routing, runs various self-hosted services and handles my backups.
 
+## Why NixOS?
+
+There are a number of reasons I chose NixOS for my personal infrastructure, to name the major ones:
+
+### Immutability
+
+NixOS's immutable approach to package management and configuration provides a number of benefits for system administrators _and_ developers. By ensuring that infrastructure components cannot be modified once they are deployed, it helps reducing the risk of errors, conflicts, and other issues that can arise from changes to the system's state.
+
+### Reproducibility
+
+Another key benefit of NixOS is its high degree of reproducibility. By fully defining the system's configuration and package installations, NixOS makes it easy to reproduce the same system state on multiple machines or at different points in time. It also provides tools for ensuring reproducibility at the package level, using a deterministic build process and a content-addressed store to ensure that packages are consistent and free from tampering.
+
 ## Specifics
 
 There are certain paradigms that I am trying to adhere to with this setup:
 
-### Ephemerality
+### Ephemerality and opt-in state
 
 My workstations are configured with ephemeral root filesystems and explicitly defined persistent storage to avoid any undeclared state that could cause configuration drift or similar.
 This is currently implemented via the [Impermanence][imp] module and using a `tmpfs` for `/`.
@@ -42,8 +54,6 @@ The _place_ it is declared in is chosen from lowest to highest specificity:
 3. System specific, individual configuration.
 
 This not only avoids a lot of duplicate code, but also reduces the chances of values being over-declared and having to deal with defaults and overrides explicitly.
-
-
 
 ### Secret Management
 
