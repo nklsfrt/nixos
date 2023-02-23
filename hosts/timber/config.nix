@@ -4,6 +4,7 @@
   imports = with inputs; [
     ../../users/nase/home.nix
     ../../users/nase/impermanence.nix
+    ../../modules/gnome
     impermanence.nixosModules.impermanence
   ];
   
@@ -48,42 +49,11 @@
 
   ## Enable the X11 windowing system.
 
-  services.xserver = {
-    enable = true;
-    layout = "de";
-    videoDrivers =  [ "nvidia" ];
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
-    desktopManager = {
-      gnome.enable = true;
-      wallpaper = {
-        mode = "fill";
-        combineScreens = false;
-      };
-    };
-  };
-
+  services.xserver.videoDrivers =  [ "nvidia" ];
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
   hardware.nvidia.powerManagement.enable = true;
-
-  # Disable unwanted services
-  services.gnome = {
-    core-os-services.enable = true;
-    core-shell.enable = true;
-    evolution-data-server.enable = true;
-    gnome-keyring.enable = true;
-    gnome-online-accounts.enable = true;
-    core-utilities.enable = false;
-    core-developer-tools.enable = false;
-    games.enable = false;
-  };
-
-  security.pam.services.login.enableGnomeKeyring = true;
-
-  programs.dconf.enable = true;
+  environment.systemPackages = with pkgs; [ nvidia-vaapi-driver ];
 
   services.zerotierone = {
     enable = true;
@@ -94,7 +64,6 @@
 
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-
   services.pipewire = {
     config.pipewire = {
       context.properties.default.clock.allowed-rates = [ 41000 48000 ];
@@ -105,8 +74,6 @@
   };
 
   programs.fuse.userAllowOther = true;
-
-  environment.systemPackages = with pkgs; [ nvidia-vaapi-driver ];
   
   # Set the root password
   users.users.root.hashedPassword = "$6$GKt/5QJ1wA0.E/Zw$g5oPpo42B1KOm547s2wvEwpw8Us7bP4FvfPkZPKx3jKaAP57Sis/MzxgBXmvZ2WyTCInIEsF2cQG1SE3jiYMg0";
