@@ -6,10 +6,6 @@
     ../../modules/gnome
   ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot";
-  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.plymouth.enable = true;
 
   networking.networkmanager.enable = true;
@@ -46,8 +42,6 @@
 
   powerManagement.powertop.enable = true;
   services.thermald.enable = true;
-
-  nixpkgs.config.allowUnfree = true;
 
   fonts.fonts = with pkgs; [
     iosevka-bin

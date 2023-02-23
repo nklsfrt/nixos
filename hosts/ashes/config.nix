@@ -12,9 +12,12 @@
   sops.secrets.tgtgbot_env = {};
 
   # Boot configuration	
-  boot.loader.grub = {
-    devices = [ "/dev/sda" ];
-    configurationLimit = 16;
+  boot.loader = {
+    systemd-boot.enable = false;
+    grub = {
+      devices = [ "/dev/sda" ];
+      configurationLimit = 16;
+    };
   };
 
   # Network configuration
