@@ -12,28 +12,13 @@
 
   boot = {
 
-    loader = {
-      # Use the systemd-boot EFI boot loader.
-      systemd-boot = {
-        enable = true;
-        # Don't keep more than 3 previous configurations as boot entries.
-        configurationLimit = 3;
-      };
-      # Configure efi mountpoint.
-      efi = {
-        efiSysMountPoint = "/boot";
-        canTouchEfiVariables = false;
-      };
-    };
+    loader.systemd-boot.configurationLimit = 3;
 
     # Load nvidia kernel modules in initramfs to avoid graphic issues in userland.
     initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 
     # Enable nvidia-drm via kernel parameter for wayland compatibility.
     kernelParams = [ "nvidia-drm.modeset=1" ];
-
-    # Use the latest kernel package compatible with zfs.
-    kernelPackages = pkgs.linuxPackages_latest;
 
     supportedFilesystems = [ "ntfs" ];
 
@@ -77,9 +62,6 @@
   
   # Set the root password
   users.users.root.hashedPassword = "$6$GKt/5QJ1wA0.E/Zw$g5oPpo42B1KOm547s2wvEwpw8Us7bP4FvfPkZPKx3jKaAP57Sis/MzxgBXmvZ2WyTCInIEsF2cQG1SE3jiYMg0";
-  
-  # Enable unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # Specify installed system fonts
   fonts.fonts = with pkgs; [

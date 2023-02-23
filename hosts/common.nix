@@ -1,8 +1,16 @@
-{ pkgs, ... }:{
+{ lib, pkgs, ... }:{
 
 	imports = [ ../users/nase ];
 
   system.stateVersion = "22.05";
+
+	boot = {
+		kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+		loader = {
+			systemd-boot.enable = lib.mkDefault true;
+			efi.efiSysMountPoint = lib.mkDefault "/boot";
+		};
+	};
 
 	console.keyMap = "de";
 
@@ -25,6 +33,8 @@
 		dates = "weekly";
 		options = "--delete-older-than 7d";
 	};
+
+	nixpkgs.config.allowUnfree = true;
 
 	i18n = {
 		defaultLocale = "en_US.UTF-8";
