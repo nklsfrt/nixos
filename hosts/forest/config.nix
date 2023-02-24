@@ -62,6 +62,22 @@ in
     autoScrub.enable = true;
   };
 
+  services.sanoid = {
+    enable = true;
+    templates.default = {
+      autosnap = true;
+      autoprune = true;
+      monthly = 6;
+      weekly = 4;
+      daily = 7;
+      hourly = 48;
+    };
+    datasets = {
+      "rpool/persist".useTemplate = [ "default" ];
+      "rpool/docker-volumes".useTemplate = [ "default" ];
+    };
+  };
+
   services.openssh.listenAddresses = [ { addr = "${router-ip}";} ];
 
   services.adguardhome = {
