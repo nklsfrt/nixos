@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 let
   wan-nic = "enp2s0";
   lan-nics = [ "enp3s0" "enp4s0" "enp5s0" ];
@@ -8,6 +8,8 @@ let
 in
 {
   
+  imports = with inputs; [ impermanence.nixosModules.impermanence ];
+
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.extraPools = [ "rpool" ];
@@ -15,6 +17,10 @@ in
   boot.loader.systemd-boot.enable = true;
 
   security.polkit.enable = true;
+
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    zfs rollback -r rpool/root@blank
+  '';
 
   boot = {
     kernel = {
@@ -151,6 +157,17 @@ in
   };
 
   system.stateVersion = "22.05"; # Did you read the comment?
+
+    environment.persistence."/persist" = {
+    hideMounts = true;
+    files = [
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
+      "/etc/ssh/ssh_host_rsa_key"
+    ];
+  };
+
 
 }
 
