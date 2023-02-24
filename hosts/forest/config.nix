@@ -88,6 +88,20 @@ in
 
   services.adguardhome = {
     enable = true;
+    mutableSettings = false;
+    settings = {
+      bind_host = "127.0.0.1"; # "disable" the web interface
+      dns = {
+        bind_hosts = [ "${router-ip}" ];
+        bind_port = "53";
+        bootstrap_dns = [
+          "9.9.9.10"
+          "149.112.112.10"
+        ];
+        rewrites = [ { domain = "*.lan"; answer = "${router-ip}"; } ];
+        enable_dnssec = true;
+      };
+    };
   };
 
   services.dhcpd4 = {
