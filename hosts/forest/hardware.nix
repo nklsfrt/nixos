@@ -20,6 +20,7 @@
   fileSystems."/var/lib/docker/volumes" =
     { device = "rpool/docker-volumes";
       fsType = "zfs";
+      neededForBoot = true;
     };
 
   fileSystems."/nix" =
