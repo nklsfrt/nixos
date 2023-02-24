@@ -8,7 +8,7 @@ let
 in
 {
   
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  boot.kernelPackages = lib.mkForce config.boot.zfs.package.latestCompatibleLinuxPackages;
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.extraPools = [ "rpool" ];
   networking.hostId = "10fa8e3e";
@@ -86,17 +86,21 @@ in
     docker.extraOptions = "--ip ${router-ip}";
     oci-containers = {
       backend = "docker";
-      containers = {
+      containers = 
+        let
+          stdOptions = { name, domain, port ? "8080" }:[
+            "--label=traefik.enable=true"
+            "--label=traefik.http.routers.${name}.entrypoints=web"
+            "--label=traefik.http.routers.${name}.rule=Host(`${domain}.lan`)"
+            "--label=traefik.http.services.${name}.loadbalancer.server.port=${port}"
+          ];
+      in
+      {
         reverse_proxy = {
           image = "traefik:v2.9.8";
           ports = [ "${router-ip}:80:80" ];
-          extraOptions = [
-            "--label=traefik.enable=true"
-            "--label=traefik.http.routers.traefik.entrypoints=web"
-            "--label=traefik.http.routers.traefik.rule=Host(`hub.lan`)"
-            "--label=traefik.http.routers.traefik.service=api@internal"
-            "--label=traefik.http.services.traefik.loadbalancer.server.port=8080"
-          ];
+          extraOptions = stdOptions { name = "traefik"; domain = "hub"; port = "8080"; }
+          ++ ["--label=traefik.http.routers.traefik.service=api@internal"];
           cmd = [
             "--api.dashboard=true"
             "--providers.docker=true"
@@ -110,12 +114,21 @@ in
         syncthing = {
           image = "syncthing/syncthing";
           volumes = [ "syncthing_data:/var/syncthing" ];
-          extraOptions = [
-            "--label=traefik.enable=true"
-            "--label=traefik.http.routers.syncthing.entrypoints=web"
-            "--label=traefik.http.services.syncthing.loadbalancer.server.port=8384"
-            "--label=traefik.http.routers.syncthing.rule=Host(`sync.lan`)"
+          extraOptions = stdOptions { name = "syncthing"; domain = "sync"; port = "8384"; };
+        };
+        dashdot = {
+          image = "mauricenino/dashdot";
+          volumes = [
+            "/etc/os-release:/mnt/host/etc/os-release:ro"
+            "/proc/1/ns/net:/mnt/host/proc/1/ns/net:ro" 
           ];
+          environment = {
+            DASHDOT_ENABLE_CPU_TEMPS = "true";
+            DASHDOT_ALWAYS_SHOW_PERCENTAGES = "true";
+            DASHDOT_WIDGET_LIST = "os,cpu,ram,storage";
+            DASHDOT_DISABLE_INTEGRATIONS = "true";
+          };
+          extraOptions = stdOptions { name = "dashdot"; domain = "mon"; port = "3001"; };
         };
       };
     };
