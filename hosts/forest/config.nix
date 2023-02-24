@@ -8,7 +8,7 @@ let
 in
 {
   
-  boot.kernelPackages = lib.mkForce config.boot.zfs.package.latestCompatibleLinuxPackages;
+  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.extraPools = [ "rpool" ];
   networking.hostId = "10fa8e3e";
