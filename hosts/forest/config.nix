@@ -118,6 +118,11 @@ in
     '';
   };
 
+  services.zerotierone = {
+    enable = true;
+    joinNetworks = [ "abfd31bd471dbd23" ];
+  };
+
   virtualisation = {
     docker.extraOptions = "--ip ${router-ip}";
     oci-containers = {
@@ -201,6 +206,9 @@ in
       "/etc/ssh/ssh_host_ed25519_key"
       "/etc/ssh/ssh_host_rsa_key.pub"
       "/etc/ssh/ssh_host_rsa_key"
+    ];
+    directories = [
+      "/var/lib/zerotier-one/"
     ];
   };
 
