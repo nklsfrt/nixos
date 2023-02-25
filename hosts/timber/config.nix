@@ -78,7 +78,7 @@
     ];
     directories = [
       "/etc/NetworkManager/system-connections/"
-      "/etc/wireguard/"
+      "/var/lib/zerotier-one/"
     ];
   };
 
