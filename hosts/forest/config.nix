@@ -124,17 +124,17 @@ in
       backend = "docker";
       containers = 
         let
-          stdOptions = { name, domain, port ? "8080" }:[
+          stdOptions = { name, domain, port ? "8080", proto ? "http", entry ? "web" }:[
             "--label=traefik.enable=true"
-            "--label=traefik.http.routers.${name}.entrypoints=web"
-            "--label=traefik.http.routers.${name}.rule=Host(`${domain}.lan`)"
-            "--label=traefik.http.services.${name}.loadbalancer.server.port=${port}"
+            "--label=traefik.${proto}.routers.${name}.entrypoints=${entry}"
+            "--label=traefik.${proto}.routers.${name}.rule=Host(`${domain}.lan`)"
+            "--label=traefik.${proto}.services.${name}.loadbalancer.server.port=${port}"
           ];
       in
       {
         reverse_proxy = {
           image = "traefik:v2.9.8";
-          ports = [ "${router-ip}:80:80" ];
+          ports = [ "${router-ip}:80:80" "${router-ip}:25565:25565" ];
           extraOptions = stdOptions { name = "traefik"; domain = "hub"; port = "8080"; }
           ++ ["--label=traefik.http.routers.traefik.service=api@internal"];
           cmd = [
@@ -142,6 +142,7 @@ in
             "--providers.docker=true"
             "--providers.docker.exposedbydefault=false"
             "--entrypoints.web.address=:80"
+            "--entrypoints.mc-tcp.address=:25565"
           ];
           volumes = [
             "/var/run/docker.sock:/var/run/docker.sock:ro"
@@ -165,6 +166,27 @@ in
             DASHDOT_DISABLE_INTEGRATIONS = "true";
           };
           extraOptions = stdOptions { name = "dashdot"; domain = "mon"; port = "3001"; };
+        };
+        minecraft-atm8 = {
+          image = "itzg/minecraft-server";
+          volumes = [
+            "minecraft-atm8_data:/data"
+          ];
+          environment = {
+            EULA = "true";
+            TYPE = "AUTO_CURSEFORGE";
+            ONLINE_MODE = "false";
+            CF_SLUG = "all-the-mods-8";
+            MOTD = "Achja?! Komma her!";
+            INIT_MEMORY = "6G";
+            MAX_MEMORY = "18G";
+          };
+          extraOptions = [
+            "--label=traefik.enable=true"
+            "--label=traefik.tcp.routers.minecraft-atm8.entrypoints=mc-tcp"
+            "--label=traefik.tcp.routers.minecraft-atm8.rule=HostSNI(`*`)"
+            "--label=traefik.tcp.services.minecraft-atm8.loadbalancer.server.port=25565"
+          ];
         };
       };
     };
