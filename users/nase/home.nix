@@ -53,8 +53,8 @@
         enable = true;
         package = pkgs.vscodium;
         userSettings = {
-          "git.autofetch" = "true";
-          "nix.enableLanguageServer" = "true";
+          "git.autofetch" = true;
+          "nix.enableLanguageServer" = true;
           "nix.serverPath" = "nil";
         };
         extensions = with pkgs.vscode-extensions; [
