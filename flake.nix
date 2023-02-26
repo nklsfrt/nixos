@@ -19,7 +19,9 @@
     user-profiles = import ./user-profiles { inherit lib; };
   in
 
-  { nixosConfigurations = import ./hosts { inherit inputs abilities user-profiles; }; };
+  {
+    nixosConfigurations = import ./hosts { inherit inputs abilities user-profiles; };
+  };
   
 }
 
