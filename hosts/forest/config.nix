@@ -7,8 +7,6 @@ let
   wan-ports = [ 9993 ];
 in
 {
-  
-  imports = with inputs; [ impermanence.nixosModules.impermanence ];
 
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   boot.supportedFilesystems = [ "zfs" ];
