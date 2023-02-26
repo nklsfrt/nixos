@@ -66,6 +66,7 @@
   # Specify installed system fonts
   fonts.fonts = with pkgs; [
     iosevka-bin
+    nerdfonts
   ];
 
   environment.persistence."/persist" = {
