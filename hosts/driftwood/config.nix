@@ -12,13 +12,13 @@
   networking.networkmanager.enable = true;
 
   hardware.opengl = {
-  	enable = true;
-  	extraPackages = with pkgs; [
-  	  intel-media-driver
-  	  vaapiIntel
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      vaapiIntel
       vaapiVdpau
       libvdpau-va-gl
-  	];
+    ];
   };
 
   services.xserver = {
