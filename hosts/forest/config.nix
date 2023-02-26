@@ -1,4 +1,4 @@
-{ lib, config, pkgs, inputs, ... }:
+{ lib, config, pkgs, ... }:
 let
   wan-nic = "enp2s0";
   lan-nics = [ "enp3s0" "enp4s0" "enp5s0" ];
@@ -8,8 +8,6 @@ let
 in
 {
   
-  imports = with inputs; [ impermanence.nixosModules.impermanence ];
-
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.extraPools = [ "rpool" ];

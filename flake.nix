@@ -12,8 +12,15 @@
   };
 
   outputs = inputs:
+  
+  let
+    lib = inputs.nixpkgs.lib;
+    abilities = import ./abilities { inherit lib; };
+    user-profiles = import ./user-profiles { inherit lib; };
+  in
+
   {
-    nixosConfigurations = import ./hosts { inherit inputs; };
+    nixosConfigurations = import ./hosts { inherit inputs abilities user-profiles; };
   };
   
 }
