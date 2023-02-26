@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:{
 
-	imports = [ ../users/nase ];
+	imports = [ ../user-profiles/nase ];
 
   system.stateVersion = "22.05";
 
@@ -45,4 +45,6 @@
   services.openssh.enable = true;
   programs.fish.enable = true;
   programs.command-not-found.enable = false;
+
+	zramSwap.enable = true;
 }

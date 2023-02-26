@@ -1,7 +1,7 @@
-{inputs, ...}:
+{ inputs, abilities, user-profiles, ...}:
 
-with inputs.nixpkgs;
-with lib;
+with inputs;
+with nixpkgs.lib;
 with builtins;
 
 pipe ./. [
@@ -9,12 +9,14 @@ pipe ./. [
   (filterAttrs (n: v: v == "directory"))
   (mapAttrs (name: _: nixosSystem {
     system = "x86_64-linux";
-    specialArgs = { inherit inputs; };
+    specialArgs = { inherit inputs abilities user-profiles; };
     modules = [
+      home-manager.nixosModules.home-manager
+      impermanence.nixosModules.impermanence
       { networking.hostName = mkDefault name; }
-      ./common.nix
       ./${name}/config.nix
       ./${name}/hardware.nix
+      ./common.nix
     ];
   }))
 ]
