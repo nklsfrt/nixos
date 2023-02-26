@@ -4,7 +4,7 @@ let
   lan-nics = [ "enp3s0" "enp4s0" "enp5s0" ];
   lan-bridge = "br0";
   router-ip = "192.168.69.1";
-  wan-ports = [];
+  wan-ports = [ 9993 ];
 in
 {
   
@@ -139,7 +139,7 @@ in
       {
         reverse_proxy = {
           image = "traefik:v2.9.8";
-          ports = [ "${router-ip}:80:80" "${router-ip}:25565:25565" ];
+          ports = [ "${router-ip}:80:80" "${router-ip}:25565:25565" "10.147.17.30:25565:25565" ];
           extraOptions = stdOptions { name = "traefik"; domain = "hub"; port = "8080"; }
           ++ ["--label=traefik.http.routers.traefik.service=api@internal"];
           cmd = [
