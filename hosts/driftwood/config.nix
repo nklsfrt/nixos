@@ -1,15 +1,7 @@
-{ config, abilities, pkgs, inputs, ... }:
+{ profiles, pkgs, inputs, ... }:
 
 {
-  imports = [
-    ../../user-profiles/nase/home.nix
-    abilities.gnome
-    abilities.pipewire
-  ];
-
-  boot.plymouth.enable = true;
-
-  networking.networkmanager.enable = true;
+  imports = [ profiles.laptop ];
 
   hardware.opengl = {
     enable = true;
@@ -20,24 +12,5 @@
       libvdpau-va-gl
     ];
   };
-
-  services.xserver = {
-    layout = "de";
-    xkbVariant = "";
-  };
-
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [ gutenprint ];
-  };
-
-  powerManagement.powertop.enable = true;
-  services.thermald.enable = true;
-
-  fonts.fonts = with pkgs; [
-    fira-code
-  ];
-
-  system.autoUpgrade.persistent = true;
 
 }

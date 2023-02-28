@@ -1,6 +1,6 @@
-{ lib, pkgs, ... }:{
+{ lib, pkgs, users, ... }:{
 
-  imports = [ ../user-profiles/nase ];
+  imports = [ users.nase ];
 
   system.stateVersion = "22.05";
 

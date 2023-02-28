@@ -1,11 +1,9 @@
-{ config, abilities, pkgs, inputs, ... }:
+{ config, abilities, profiles, pkgs, inputs, ... }:
 
 {
   imports = [
-    ../../user-profiles/nase/home.nix
-    ../../user-profiles/nase/impermanence.nix
-    abilities.gnome
-    abilities.pipewire
+    ../../users/nase/impermanence.nix
+    profiles.desktop
   ];
 
   boot = {
@@ -14,8 +12,6 @@
     kernelParams = [ "nvidia-drm.modeset=1" ];
     supportedFilesystems = [ "ntfs" ];
   };
-
-  system.autoUpgrade.persistent = true;
 
   fileSystems."/persist".neededForBoot = true;
 
@@ -36,21 +32,7 @@
     };
   };
 
-  services.xserver = {
-    layout = "de";
-    xkbVariant = "";
-  };
-
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [ gutenprint ];
-  };
-  
   programs.fuse.userAllowOther = true;
-
-  fonts.fonts = with pkgs; [
-    fira-code
-  ];
 
   environment.persistence."/persist" = {
     hideMounts = true;
