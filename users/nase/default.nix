@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:{
+{ lib, pkgs, graphical ? false, ... }:{
 
   users.users.nase = {
     name = "nase";
@@ -23,4 +23,5 @@
     ];
   };
   programs.fish.enable = true;
+
 }
