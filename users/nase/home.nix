@@ -1,17 +1,17 @@
-{ inputs, pkgs, ... }:
-
 {
-
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
-  
+
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
     users.nase = {
-
-      imports = [ ./dconf.nix ];
+      imports = [./dconf.nix];
 
       home = {
         username = "nase";
@@ -24,7 +24,7 @@
           monetary = "de_DE.UTF-8";
           paper = "de_DE.UTF-8";
           numeric = "de_DE.UTF-8";
-          measurement = "de_DE.UTF-8";    
+          measurement = "de_DE.UTF-8";
         };
         sessionVariables = {
           NIXOS_OZONE_WL = "1";
@@ -82,7 +82,7 @@
           path = "vlqejqkk.niklas";
         };
       };
-      
+
       home.packages = with pkgs; [
         spot
         pavucontrol
@@ -105,7 +105,7 @@
           };
           winreboot = {
             description = "Reboot the auto generated Windows boot entry.";
-            body =  "systemctl reboot --boot-loader-menu=1 --boot-loader-entry=auto-windows";
+            body = "systemctl reboot --boot-loader-menu=1 --boot-loader-entry=auto-windows";
           };
         };
       };
@@ -113,17 +113,17 @@
       programs.ssh = {
         enable = true;
         extraConfig = ''
-        Host ashes
-          HostName nklsfrt.de
-        Host forest
-          HostName 192.168.69.1
-        Host driftwood
-          HostName 192.168.69.5
-        Host timber
-          HostName 192.168.69.7
+          Host ashes
+            HostName nklsfrt.de
+          Host forest
+            HostName 192.168.69.1
+          Host driftwood
+            HostName 192.168.69.5
+          Host timber
+            HostName 192.168.69.7
         '';
       };
-      
+
       programs.gpg.enable = true;
       services.gpg-agent.enable = true;
     };

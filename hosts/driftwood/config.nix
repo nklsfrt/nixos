@@ -1,7 +1,10 @@
-{ profiles, pkgs, inputs, ... }:
-
 {
-  imports = [ profiles.laptop ];
+  profiles,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [profiles.laptop];
 
   hardware.opengl = {
     enable = true;
@@ -12,5 +15,4 @@
       libvdpau-va-gl
     ];
   };
-
 }

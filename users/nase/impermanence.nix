@@ -1,7 +1,5 @@
-{inputs, ...}:{
-
+{inputs, ...}: {
   home-manager.users.nase = {
-
     imports = with inputs; [
       impermanence.nixosModules.home-manager.impermanence
     ];
@@ -27,6 +25,5 @@
       ];
       allowOther = true;
     };
-    
   };
 }

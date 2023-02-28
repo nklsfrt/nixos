@@ -1,5 +1,8 @@
-{ abilities, users, ... }:{
-
+{
+  abilities,
+  users,
+  ...
+}: {
   imports = with abilities; [
     gnome
     audio
@@ -14,5 +17,4 @@
     layout = "de";
     xkbVariant = "";
   };
-  
 }
