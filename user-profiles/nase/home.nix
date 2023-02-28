@@ -111,7 +111,13 @@
         enable = true;
         extraConfig = ''
         Host ashes
-          HostName 2a01:4f8:1c1c:4bd6::1
+          HostName nklsfrt.de
+        Host forest
+          HostName 192.168.69.1
+        Host driftwood
+          HostName 192.168.69.5
+        Host timber
+          HostName 192.168.69.7
         '';
       };
       
