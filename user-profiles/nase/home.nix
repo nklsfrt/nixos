@@ -51,8 +51,13 @@
 
       programs.vscode = {
         enable = true;
+        enableUpdateCheck = false;
         package = pkgs.vscodium;
         userSettings = {
+          "editor" = {
+            "fontSize" = 14;
+            "fontFamily" = "Fira Code";
+          };
           "git.autofetch" = true;
           "nix.enableLanguageServer" = true;
           "nix.serverPath" = "nil";
