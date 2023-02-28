@@ -33,7 +33,7 @@
         settings = {
           main = {
             term = "xterm-256color";
-            font = "FiraCode Mono:size=12";
+            font = "Fira Code:size=11";
           };
           colors.alpha = 0.8;
         };
