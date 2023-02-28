@@ -105,13 +105,35 @@ in
   services.dhcpd4 = {
     enable = true;
     interfaces = [ "${lan-bridge}" ];
+    machines = [
+      {
+        hostName = "timber";
+        ethernetAddress = "44:af:28:62:d6:c1";
+        ipAddress = "192.168.69.7";
+      }
+      {
+        hostName = "driftwood";
+        ethernetAddress = "d0:53:49:f3:f7:12";
+        ipAddress = "192.168.69.5";
+      }
+      {
+        hostName = "Redmi-Note-8T";
+        ethernetAddress = "90:78:b2:a7:88:73";
+        ipAddress = "192.168.69.10";
+      }
+      {
+        hostName = "ZyXEL";
+        ethernetAddress = "cc:5d:4e:ec:17:f1";
+        ipAddress = "192.168.69.100";
+      }
+    ];
     extraConfig = ''
     option domain-name-servers ${router-ip};
     option routers ${router-ip};
     option subnet-mask 255.255.255.0;
     option broadcast-address 192.168.69.255;
     subnet 192.168.69.0 netmask 255.255.255.0 {
-      range 192.168.69.10 192.168.69.99;
+      range 192.168.69.101 192.168.69.254;
     }
     '';
   };
