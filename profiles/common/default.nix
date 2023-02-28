@@ -1,6 +1,10 @@
-{ lib, pkgs, users, ... }:{
-
-  imports = [ users.nase ];
+{
+  lib,
+  pkgs,
+  users,
+  ...
+}: {
+  imports = [users.nase];
 
   system.stateVersion = "22.05";
 
@@ -23,9 +27,9 @@
   };
 
   nix.settings = {
-    experimental-features = [ "nix-command flakes repl-flake" ];
+    experimental-features = ["nix-command flakes repl-flake"];
     auto-optimise-store = true;
-    trusted-users = [ "nase" ];
+    trusted-users = ["nase"];
   };
 
   nix.gc = {
@@ -38,7 +42,7 @@
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    supportedLocales = [ "en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8" ];
+    supportedLocales = ["en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8"];
   };
 
   # Enable misc. services

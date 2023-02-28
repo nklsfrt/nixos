@@ -1,3 +1,7 @@
-{ abilities, users, ... }:{
-   imports = [];
+{
+  abilities,
+  users,
+  ...
+}: {
+  imports = [];
 }

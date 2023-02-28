@@ -1,16 +1,18 @@
-{ lib, config, pkgs, ... }:
-let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
   wan-nic = "enp2s0";
-  lan-nics = [ "enp3s0" "enp4s0" "enp5s0" ];
+  lan-nics = ["enp3s0" "enp4s0" "enp5s0"];
   lan-bridge = "br0";
   router-ip = "192.168.69.1";
-  wan-ports = [ 9993 ];
-in
-{
-  
+  wan-ports = [9993];
+in {
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs.extraPools = [ "rpool" ];
+  boot.supportedFilesystems = ["zfs"];
+  boot.zfs.extraPools = ["rpool"];
   networking.hostId = "10fa8e3e";
   boot.loader.systemd-boot.enable = true;
 
@@ -22,7 +24,7 @@ in
 
   boot = {
     kernel = {
-      sysctl =  {
+      sysctl = {
         "net.ipv4.conf.${wan-nic}.forwarding" = true;
         "net.ipv6.conf.${wan-nic}.forwarding" = true;
         "net.ipv4.conf.${lan-bridge}.forwarding" = true;
@@ -34,7 +36,7 @@ in
   networking = {
     nat = {
       enable = true;
-      internalInterfaces = [ "${lan-bridge}" ];
+      internalInterfaces = ["${lan-bridge}"];
       externalInterface = wan-nic;
     };
     bridges = {
@@ -44,14 +46,19 @@ in
     };
     interfaces = {
       "${lan-bridge}" = {
-        ipv4.addresses = [ { address = "${router-ip}"; prefixLength = 24; }];
+        ipv4.addresses = [
+          {
+            address = "${router-ip}";
+            prefixLength = 24;
+          }
+        ];
       };
       "${wan-nic}" = {
         useDHCP = true;
       };
     };
     firewall = {
-      trustedInterfaces = [ "${lan-bridge}" ];
+      trustedInterfaces = ["${lan-bridge}"];
       interfaces = {
         "${wan-nic}" = {
           allowedTCPPorts = lib.mkForce wan-ports;
@@ -77,12 +84,12 @@ in
       hourly = 48;
     };
     datasets = {
-      "rpool/persist".useTemplate = [ "default" ];
-      "rpool/docker-volumes".useTemplate = [ "default" ];
+      "rpool/persist".useTemplate = ["default"];
+      "rpool/docker-volumes".useTemplate = ["default"];
     };
   };
 
-  services.openssh.listenAddresses = [ { addr = "${router-ip}";} ];
+  services.openssh.listenAddresses = [{addr = "${router-ip}";}];
 
   services.adguardhome = {
     enable = true;
@@ -90,13 +97,18 @@ in
     settings = {
       bind_host = "127.0.0.1"; # "disable" the web interface
       dns = {
-        bind_hosts = [ "${router-ip}" ];
+        bind_hosts = ["${router-ip}"];
         bind_port = "53";
         bootstrap_dns = [
           "9.9.9.10"
           "149.112.112.10"
         ];
-        rewrites = [ { domain = "*.lan"; answer = "${router-ip}"; } ];
+        rewrites = [
+          {
+            domain = "*.lan";
+            answer = "${router-ip}";
+          }
+        ];
         enable_dnssec = true;
       };
     };
@@ -104,7 +116,7 @@ in
 
   services.dhcpd4 = {
     enable = true;
-    interfaces = [ "${lan-bridge}" ];
+    interfaces = ["${lan-bridge}"];
     machines = [
       {
         hostName = "timber";
@@ -128,40 +140,49 @@ in
       }
     ];
     extraConfig = ''
-    option domain-name-servers ${router-ip};
-    option routers ${router-ip};
-    option subnet-mask 255.255.255.0;
-    option broadcast-address 192.168.69.255;
-    subnet 192.168.69.0 netmask 255.255.255.0 {
-      range 192.168.69.101 192.168.69.254;
-    }
+      option domain-name-servers ${router-ip};
+      option routers ${router-ip};
+      option subnet-mask 255.255.255.0;
+      option broadcast-address 192.168.69.255;
+      subnet 192.168.69.0 netmask 255.255.255.0 {
+        range 192.168.69.101 192.168.69.254;
+      }
     '';
   };
 
   services.zerotierone = {
     enable = true;
-    joinNetworks = [ "abfd31bd471dbd23" ];
+    joinNetworks = ["abfd31bd471dbd23"];
   };
 
   virtualisation = {
     docker.extraOptions = "--ip ${router-ip}";
     oci-containers = {
       backend = "docker";
-      containers = 
-        let
-          stdOptions = { name, domain, port ? "8080", proto ? "http", entry ? "web" }:[
-            "--label=traefik.enable=true"
-            "--label=traefik.${proto}.routers.${name}.entrypoints=${entry}"
-            "--label=traefik.${proto}.routers.${name}.rule=Host(`${domain}.lan`)"
-            "--label=traefik.${proto}.services.${name}.loadbalancer.server.port=${port}"
-          ];
-      in
-      {
+      containers = let
+        stdOptions = {
+          name,
+          domain,
+          port ? "8080",
+          proto ? "http",
+          entry ? "web",
+        }: [
+          "--label=traefik.enable=true"
+          "--label=traefik.${proto}.routers.${name}.entrypoints=${entry}"
+          "--label=traefik.${proto}.routers.${name}.rule=Host(`${domain}.lan`)"
+          "--label=traefik.${proto}.services.${name}.loadbalancer.server.port=${port}"
+        ];
+      in {
         reverse_proxy = {
           image = "traefik:v2.9.8";
-          ports = [ "${router-ip}:80:80" "${router-ip}:25565:25565" "10.147.17.30:25565:25565" ];
-          extraOptions = stdOptions { name = "traefik"; domain = "hub"; port = "8080"; }
-          ++ ["--label=traefik.http.routers.traefik.service=api@internal"];
+          ports = ["${router-ip}:80:80" "${router-ip}:25565:25565" "10.147.17.30:25565:25565"];
+          extraOptions =
+            stdOptions {
+              name = "traefik";
+              domain = "hub";
+              port = "8080";
+            }
+            ++ ["--label=traefik.http.routers.traefik.service=api@internal"];
           cmd = [
             "--api.dashboard=true"
             "--providers.docker=true"
@@ -171,18 +192,22 @@ in
           ];
           volumes = [
             "/var/run/docker.sock:/var/run/docker.sock:ro"
-            ];
+          ];
         };
         syncthing = {
           image = "syncthing/syncthing";
-          volumes = [ "syncthing_data:/var/syncthing" ];
-          extraOptions = stdOptions { name = "syncthing"; domain = "sync"; port = "8384"; };
+          volumes = ["syncthing_data:/var/syncthing"];
+          extraOptions = stdOptions {
+            name = "syncthing";
+            domain = "sync";
+            port = "8384";
+          };
         };
         dashdot = {
           image = "mauricenino/dashdot";
           volumes = [
             "/etc/os-release:/mnt/host/etc/os-release:ro"
-            "/proc/1/ns/net:/mnt/host/proc/1/ns/net:ro" 
+            "/proc/1/ns/net:/mnt/host/proc/1/ns/net:ro"
           ];
           environment = {
             DASHDOT_ENABLE_CPU_TEMPS = "true";
@@ -190,7 +215,11 @@ in
             DASHDOT_WIDGET_LIST = "os,cpu,ram,storage";
             DASHDOT_DISABLE_INTEGRATIONS = "true";
           };
-          extraOptions = stdOptions { name = "dashdot"; domain = "mon"; port = "3001"; };
+          extraOptions = stdOptions {
+            name = "dashdot";
+            domain = "mon";
+            port = "3001";
+          };
         };
         minecraft-atm8 = {
           image = "itzg/minecraft-server";
@@ -217,7 +246,7 @@ in
     };
   };
 
-    environment.persistence."/persist" = {
+  environment.persistence."/persist" = {
     hideMounts = true;
     files = [
       "/etc/ssh/ssh_host_ed25519_key.pub"
@@ -229,7 +258,4 @@ in
       "/var/lib/zerotier-one/"
     ];
   };
-
-
 }
-
