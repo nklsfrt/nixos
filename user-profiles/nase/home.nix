@@ -10,22 +10,26 @@
     useUserPackages = true;
     useGlobalPkgs = true;
     users.nase = {
+
       imports = [ ./dconf.nix ];
-      home.username = "nase";
-      home.homeDirectory = "/home/niklas";
-      home.stateVersion = "22.05";
 
-      home.language = {
-        base = "en_US.UTF-8";
-        address = "de_DE.UTF-8";
-        time = "de_DE.UTF-8";
-        monetary = "de_DE.UTF-8";
-        paper = "de_DE.UTF-8";
-        numeric = "de_DE.UTF-8";
-        measurement = "de_DE.UTF-8";    
+      home = {
+        username = "nase";
+        homeDirectory = "/home/niklas";
+        stateVersion = "22.05";
+        language = {
+          base = "en_US.UTF-8";
+          address = "de_DE.UTF-8";
+          time = "de_DE.UTF-8";
+          monetary = "de_DE.UTF-8";
+          paper = "de_DE.UTF-8";
+          numeric = "de_DE.UTF-8";
+          measurement = "de_DE.UTF-8";    
+        };
+        sessionVariables = {
+          NIXOS_OZONE_WL = "1";
+        };
       };
-
-      home.sessionVariables.NIXOS_OZONE_WL = "1"; # Launch (recent) electron-applications with wayland support.
 
       programs.foot = {
         enable = true;
@@ -93,9 +97,7 @@
       programs.fish = {
         enable = true;
         functions = {
-          fish_greeting = {
-            body = "";
-          };
+          fish_greeting.body = "";
           sshmux = {
             description = "Launches a remote tmux session or attaches to an existing one.";
             body = "ssh -t $argv systemd-run --scope --user tmux new -A -s ssh";
