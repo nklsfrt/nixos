@@ -45,6 +45,8 @@
     enable = true;
     drivers = with pkgs; [ gutenprint ];
   };
+  
+  programs.fuse.userAllowOther = true;
 
   fonts.fonts = with pkgs; [
     fira-code
