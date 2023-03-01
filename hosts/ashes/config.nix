@@ -4,10 +4,6 @@
   inputs,
   ...
 }: {
-  imports = [
-    inputs.sops-nix.nixosModules.sops
-  ];
-
   sops.defaultSopsFile = ./secrets.yaml;
   sops.secrets.znc_conf = {
     owner = "znc";
