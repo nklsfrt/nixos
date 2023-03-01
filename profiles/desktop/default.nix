@@ -8,7 +8,7 @@
     audio
     fonts
     printing
-    ../../users/nase/home.nix
+    users.nase
   ];
 
   system.autoUpgrade.persistent = true;

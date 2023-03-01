@@ -16,8 +16,8 @@ with builtins;
         system = "x86_64-linux";
         specialArgs = {inherit inputs abilities profiles users;};
         modules = [
-          home-manager.nixosModules.home-manager
           impermanence.nixosModules.impermanence
+          sops-nix.nixosModules.sops
           {networking.hostName = mkDefault name;}
           ./${name}/config.nix
           ./${name}/hardware.nix
