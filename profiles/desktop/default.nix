@@ -8,6 +8,7 @@
     audio
     fonts
     printing
+    persistence
     users.nase
   ];
 
