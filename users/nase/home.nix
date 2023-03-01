@@ -1,10 +1,12 @@
-{pkgs, ...}: {
+{inputs, pkgs, ...}: {
   imports = [
+    inputs.impermanence.nixosModules.home-manager.impermanence
     ./dconf.nix
     ./firefox.nix
     ./fish.nix
     ./foot.nix
     ./git.nix
+    ./persistence.nix
     ./ssh.nix
     ./vscode.nix
   ];
