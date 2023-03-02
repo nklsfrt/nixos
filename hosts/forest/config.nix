@@ -231,6 +231,7 @@ in {
             TYPE = "AUTO_CURSEFORGE";
             ONLINE_MODE = "false";
             CF_SLUG = "all-the-mods-8";
+            ALLOW_FLIGHT = "true";
             MOTD = "Achja?! Komma her!";
             INIT_MEMORY = "6G";
             MAX_MEMORY = "18G";
