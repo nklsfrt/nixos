@@ -47,6 +47,7 @@
     enable = true;
     dates = "daily";
     flake = "git+https://codeberg.org/nklsfrt/nixos";
+    flags = ["--refresh"];
   };
 
   nix.settings = {
