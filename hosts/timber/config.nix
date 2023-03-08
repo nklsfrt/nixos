@@ -19,6 +19,8 @@
 
   fileSystems."/persist".neededForBoot = true;
 
+  powerManagement.cpuFreqGovernor = "performance";
+
   services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
