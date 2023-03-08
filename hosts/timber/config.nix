@@ -41,5 +41,4 @@
       "/var/lib/zerotier-one/"
     ];
   };
-
 }
