@@ -39,7 +39,7 @@
 
   environment.persistence."/persist" = {
     directories = [
-      "/var/ib/zerotier-one/"
+      "/var/lib/zerotier-one/"
     ];
   };
 
