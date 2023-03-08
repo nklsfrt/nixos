@@ -7,7 +7,6 @@
   ...
 }: {
   imports = [
-    ../../users/nase/impermanence.nix
     profiles.desktop
   ];
 
