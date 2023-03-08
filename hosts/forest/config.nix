@@ -247,6 +247,8 @@ in {
     };
   };
 
+  powerManagement.cpuFreqGovernor = "ondemand";
+
   environment.persistence."/persist" = {
     hideMounts = true;
     files = [
