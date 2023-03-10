@@ -225,6 +225,7 @@ in {
           image = "itzg/minecraft-server";
           volumes = [
             "minecraft-atm8_data:/data"
+            "minecraft-atm8_mods:/mods"
           ];
           environment = {
             EULA = "true";
