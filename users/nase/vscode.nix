@@ -19,4 +19,7 @@
       james-yu.latex-workshop
     ];
   };
+  home.packages = with pkgs; [
+    nil
+  ];
 }
