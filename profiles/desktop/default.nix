@@ -12,7 +12,10 @@
     users.nase
   ];
 
-  system.autoUpgrade.persistent = true;
+  system.autoUpgrade = {
+    persistent = true;
+    operation = "boot";
+  };
 
   services.xserver = {
     layout = "de";
