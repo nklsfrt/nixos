@@ -71,7 +71,6 @@
     supportedLocales = ["en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8"];
   };
 
-  # Enable misc. services
   services.openssh.enable = true;
   programs.command-not-found.enable = false;
 
