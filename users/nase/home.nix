@@ -41,7 +41,6 @@
     tdesktop
     signal-desktop
     onlyoffice-bin
-    nil
     evolution
     parsec-bin
   ];
