@@ -1,9 +1,7 @@
 {
   config,
-  abilities,
   profiles,
   pkgs,
-  inputs,
   ...
 }: {
   imports = [
@@ -23,7 +21,7 @@
 
   services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl.enable = true;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+  #hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
   hardware.nvidia.powerManagement.enable = true;
   environment.systemPackages = with pkgs; [nvidia-vaapi-driver];
 
