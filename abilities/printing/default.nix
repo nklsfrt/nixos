@@ -3,4 +3,10 @@
     enable = true;
     drivers = with pkgs; [gutenprint];
   };
+
+  hardware.sane = {
+    enable = true;
+    openFirewall = true;
+    extraBackends = with pkgs; [sane-airscan];
+  };
 }
