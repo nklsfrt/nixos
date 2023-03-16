@@ -17,6 +17,7 @@
       matklad.rust-analyzer
       ms-azuretools.vscode-docker
       james-yu.latex-workshop
+      arrterian.nix-env-selector
     ];
   };
   home.packages = with pkgs; [
