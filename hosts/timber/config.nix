@@ -1,11 +1,17 @@
 {
   config,
-  profiles,
+  abilities,
+  users,
   pkgs,
   ...
 }: {
-  imports = [
-    profiles.desktop
+  imports = with abilities; [
+    audio
+    fonts
+    gnome
+    persistence
+    printing
+    users.nase
   ];
 
   boot = {

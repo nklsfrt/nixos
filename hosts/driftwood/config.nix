@@ -1,10 +1,21 @@
 {
-  profiles,
   pkgs,
   inputs,
+  abilities,
+  users,
   ...
 }: {
-  imports = [profiles.laptop];
+  imports = with abilities; [
+    audio
+    fonts
+    gnome
+    persistence
+    printing
+    users.nase
+  ];
+
+  boot.plymouth.enable = true;
+  services.thermald.enable = true;
 
   fileSystems."/persist".neededForBoot = true;
 
