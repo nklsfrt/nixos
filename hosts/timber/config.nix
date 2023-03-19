@@ -4,9 +4,7 @@
   pkgs,
   ...
 }: {
-  imports = [
-    profiles.desktop
-  ];
+  imports = [profiles.graphical];
 
   boot = {
     loader.systemd-boot.configurationLimit = 3;
