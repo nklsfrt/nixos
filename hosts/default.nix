@@ -15,13 +15,15 @@ with builtins;
       nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs abilities profiles users;};
-        modules = [
-          impermanence.nixosModules.impermanence
-          sops-nix.nixosModules.sops
-          {networking.hostName = mkDefault name;}
-          ./${name}/config.nix
-          ./${name}/hardware.nix
-          profiles.common
-        ];
+        modules =
+          [
+            impermanence.nixosModules.impermanence
+            sops-nix.nixosModules.sops
+            {networking.hostName = mkDefault name;}
+            ./${name}/config.nix
+            ./${name}/hardware.nix
+            profiles.common
+          ]
+          ++ optional (builtins.pathExists ./${name}/home.nix) [./${name}/home.nix];
       }))
   ]
