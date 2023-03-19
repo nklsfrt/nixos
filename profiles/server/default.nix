@@ -1,7 +1,0 @@
-{
-  abilities,
-  users,
-  ...
-}: {
-  imports = [];
-}

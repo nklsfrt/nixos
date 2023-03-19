@@ -4,7 +4,7 @@
   inputs,
   ...
 }: {
-  imports = [profiles.laptop];
+  imports = [profiles.graphical];
 
   fileSystems."/persist".neededForBoot = true;
 
