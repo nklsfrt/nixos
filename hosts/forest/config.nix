@@ -16,6 +16,8 @@ in {
   networking.hostId = "10fa8e3e";
   boot.loader.systemd-boot.enable = true;
 
+  boot.initrd.services.swraid.mdadmConf = "ARRAY /dev/md/boot metadata=1.2 name=nixos:boot UUID=daeb523b:cf62f824:c525b5fb:fd615ec0";
+
   security.polkit.enable = true;
 
   boot.initrd.postDeviceCommands = lib.mkAfter ''
