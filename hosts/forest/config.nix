@@ -4,8 +4,8 @@
   pkgs,
   ...
 }: let
-  wan-nic = "enp2s0";
-  lan-nics = ["enp3s0" "enp4s0" "enp5s0"];
+  wan-nic = "enp3s0";
+  lan-nics = ["enp4s0" "enp5s0" "enp6s0"];
   lan-bridge = "br0";
   router-ip = "192.168.69.1";
   wan-ports = [9993];
