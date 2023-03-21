@@ -24,6 +24,6 @@ with builtins;
             ./${name}/hardware.nix
             profiles.common
           ]
-          ++ optional (builtins.pathExists ./${name}/home.nix) [./${name}/home.nix];
+          ++ optional (builtins.pathExists ./${name}/home.nix) ./${name}/home.nix;
       }))
   ]
