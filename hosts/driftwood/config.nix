@@ -6,6 +6,9 @@
 }: {
   imports = [profiles.graphical];
 
+  boot.plymouth.enable = true;
+  services.thermald.enable = true;
+
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
