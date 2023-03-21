@@ -9,6 +9,19 @@
   boot.plymouth.enable = true;
   services.thermald.enable = true;
 
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
+  '';
+
+  systemd.user.services.set-brightness = {
+    description = "Sets the default screen brightness.";
+    wantedBy = ["gnome-session.target"];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "/bin/sh -c 'echo 200 > /sys/class/backlight/intel_backlight/brightness'";
+    };
+  };
+
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
