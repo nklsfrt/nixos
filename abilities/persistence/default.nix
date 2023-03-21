@@ -1,6 +1,8 @@
 {...}: {
   programs.fuse.userAllowOther = true;
 
+  fileSystems."/persist".neededForBoot = true;
+
   environment.persistence."/persist" = {
     hideMounts = true;
     files = [
