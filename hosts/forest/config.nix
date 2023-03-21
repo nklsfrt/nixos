@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  abilities,
   pkgs,
   ...
 }: let
@@ -10,6 +11,9 @@
   router-ip = "192.168.69.1";
   wan-ports = [9993];
 in {
+
+  imports = [abilities.persistence];
+
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   boot.supportedFilesystems = ["zfs"];
   boot.zfs.extraPools = ["rpool"];
@@ -252,12 +256,6 @@ in {
 
   environment.persistence."/persist" = {
     hideMounts = true;
-    files = [
-      "/etc/ssh/ssh_host_ed25519_key.pub"
-      "/etc/ssh/ssh_host_ed25519_key"
-      "/etc/ssh/ssh_host_rsa_key.pub"
-      "/etc/ssh/ssh_host_rsa_key"
-    ];
     directories = [
       "/var/lib/zerotier-one/"
     ];
