@@ -14,8 +14,6 @@
     supportedFilesystems = ["ntfs"];
   };
 
-  fileSystems."/persist".neededForBoot = true;
-
   powerManagement.cpuFreqGovernor = "performance";
 
   services.xserver.videoDrivers = ["nvidia"];

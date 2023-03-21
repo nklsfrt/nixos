@@ -18,7 +18,6 @@
   fileSystems."/persist" = {
     device = "rpool/persist";
     fsType = "zfs";
-    neededForBoot = true;
   };
 
   fileSystems."/var/lib/docker/volumes" = {
