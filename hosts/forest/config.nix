@@ -11,7 +11,6 @@
   router-ip = "192.168.69.1";
   wan-ports = [9993];
 in {
-
   imports = [abilities.persistence];
 
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
