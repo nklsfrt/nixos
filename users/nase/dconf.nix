@@ -100,6 +100,7 @@ with lib.hm.gvariant; {
 
     "org/gnome/shell" = {
       enabled-extensions = ["places-menu@gnome-shell-extensions.gcampax.github.com"];
+      favorite-apps = [ "org.gnome.Nautilus.desktop" "firefox.desktop" "codium.desktop" ];
       welcome-dialog-last-shown-version = "43.1";
     };
 
