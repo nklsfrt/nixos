@@ -34,7 +34,10 @@
   boot = {
     kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
     loader = {
-      systemd-boot.enable = lib.mkDefault true;
+      systemd-boot = {
+        enable = lib.mkDefault true;
+        configurationLimit = 5;
+      };
       efi.efiSysMountPoint = lib.mkDefault "/boot";
     };
   };
