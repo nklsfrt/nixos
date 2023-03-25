@@ -17,7 +17,6 @@
     rygel.enable = false;
   };
 
-  services.avahi.enable = false;
   services.geoclue2.enable = false;
 
   environment.systemPackages = with pkgs.gnome; [
