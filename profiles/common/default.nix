@@ -8,7 +8,7 @@
     name = "nase";
     home = "/home/niklas";
     description = "Niklas Furtwängler";
-    extraGroups = ["wheel"];
+    extraGroups = ["wheel" "lp" "scanner"];
     isNormalUser = true;
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
