@@ -42,7 +42,6 @@
     signal-desktop
     onlyoffice-bin
     evolution
-    parsec-bin
   ];
 
   programs.gpg.enable = true;

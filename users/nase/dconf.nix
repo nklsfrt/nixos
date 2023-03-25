@@ -11,10 +11,6 @@ with lib.hm.gvariant; {
       player-bitrate = "320";
     };
 
-    "org/gnome/Weather" = {
-      locations = "[<(uint32 2, <('Graz', 'LOWG', true, [(0.82030474843733492, 0.269362475406694)], [(0.82146830708976193, 0.2696533694331239)])>)>]";
-    };
-
     "org/gnome/desktop/input-sources" = {
       sources = [(mkTuple ["xkb" "de"])];
       xkb-options = ["terminate:ctrl_alt_bksp"];
@@ -99,14 +95,8 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/shell" = {
-      enabled-extensions = ["places-menu@gnome-shell-extensions.gcampax.github.com"];
       favorite-apps = ["org.gnome.Nautilus.desktop" "firefox.desktop" "codium.desktop"];
       welcome-dialog-last-shown-version = "43.1";
-    };
-
-    "org/gnome/shell/weather" = {
-      automatic-location = true;
-      locations = "[<(uint32 2, <('Graz', 'LOWG', true, [(0.82030474843733492, 0.269362475406694)], [(0.82146830708976193, 0.2696533694331239)])>)>]";
     };
 
     "org/gnome/simple-scan" = {
