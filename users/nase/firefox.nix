@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  profileName = "plktvsa.nase";
+in {
   programs.firefox = {
     enable = true;
     package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
@@ -35,7 +37,7 @@
     };
     profiles.nase = {
       name = "nase";
-      path = "plktvsa.nase";
+      path = profileName;
       settings = {
         # enable resolution of .lan suffix
         "browser.fixup.domainsuffixwhitelist.lan" = true;
