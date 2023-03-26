@@ -3,18 +3,34 @@
     enable = true;
     package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
       extraPolicies = {
-        DisableTelemetry = true;
+        DisableFirefoxStudies = true;
         DisableFirefoxAccounts = true;
         DisablePocket = true;
+        DisableTelemetry = true;
+        EnableTrackingProtection = {
+          Value = true;
+          Cryptomining = true;
+          Fingerprinting = true;
+        };
+        EncryptedMediaExtensions.Enabled = true;
+        FirefoxHome = {
+          Pocket = false;
+          SponsoredTopSites = false;
+          SponsoredPocket = false;
+          Highlights = false;
+          Snippets = false;
+        };
         NoDefaultBookmarks = true;
         OfferToSaveLogins = false;
+        OverrideFirstRunPage = "";
+        PictureInPicture.Enabled = false;
         UserMessaging = {
-          WhatsNew = false;
           ExtensionRecommendations = false;
           MoreFromMozilla = false;
           SkipOnboarding = true;
+          UrlbarInterventions = false;
+          WhatsNew = false;
         };
-        OverrideFirstRunPage = "";
       };
     };
     profiles.nase = {
@@ -31,9 +47,6 @@
         "datareporting.policy.firstRunURL" = "";
         # various privacy and telemetry settings
         "browser.contentblocking.category" = "strict";
-        "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
-        "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
-        "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
         # pretty self explainatory I guess
         "browser.uiCustomization.state" = "{\"placements\":{\"widget-overflow-fixed-list\":[],\"unified-extensions-area\":[],\"nav-bar\":[\"back-button\",\"forward-button\",\"stop-reload-button\",\"urlbar-container\",\"downloads-button\"],\"toolbar-menubar\":[\"menubar-items\"],\"TabsToolbar\":[\"tabbrowser-tabs\",\"new-tab-button\",\"alltabs-button\"],\"PersonalToolbar\":[\"import-button\",\"personal-bookmarks\"]},\"seen\":[\"save-to-pocket-button\",\"developer-button\"],\"dirtyAreaCache\":[\"nav-bar\",\"PersonalToolbar\",\"TabsToolbar\"],\"currentVersion\":19,\"newElementCount\":4}";
         "privacy.trackingprotection.enabled" = true;
