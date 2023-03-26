@@ -57,4 +57,13 @@ in {
       };
     };
   };
+  home.persistence."/persist/home/niklas" = {
+    directories = [
+      ".mozilla/firefox/${profileName}/extensions"
+    ];
+    files = [
+      ".mozilla/firefox/${profileName}/places.sqlite"
+      ".mozilla/firefox/${profileName}/cookies.sqlite"
+    ];
+  };
 }
