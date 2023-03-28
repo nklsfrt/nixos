@@ -1,12 +1,12 @@
 {
   abilities,
   users,
+  pkgs,
   ...
 }: {
   imports = with abilities; [
     gnome
     audio
-    fonts
     printing
     persistence
     users.nase
@@ -21,4 +21,8 @@
     layout = "de";
     xkbVariant = "";
   };
+
+  fonts.fonts = with pkgs; [
+    fira-code
+  ];
 }
