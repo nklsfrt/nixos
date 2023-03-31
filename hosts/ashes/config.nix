@@ -5,9 +5,6 @@
   ...
 }: {
   sops.defaultSopsFile = ./secrets.yaml;
-  sops.secrets.znc_conf = {
-    owner = "znc";
-  };
   sops.secrets.tgtgbot_env = {};
 
   boot.loader = {
@@ -40,12 +37,6 @@
         "ens3".allowedUDPPorts = [443];
       };
     };
-  };
-
-  services.znc = {
-    enable = true;
-    openFirewall = true;
-    configFile = config.sops.secrets.znc_conf.path;
   };
 
   virtualisation.oci-containers = {
