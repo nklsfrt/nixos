@@ -16,10 +16,6 @@ with lib.hm.gvariant; {
       xkb-options = ["terminate:ctrl_alt_bksp"];
     };
 
-    "org/gome/desktop/peripherals/touchpad" = {
-      tap-to-click = "true";
-    };
-
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       font-antialiasing = "grayscale";
