@@ -1,9 +1,37 @@
 {pkgs, ...}: let
   profileName = "plktvsa.nase";
 in {
-  programs.firefox = {
+  programs.firefox = with pkgs; {
     enable = true;
-    package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
+    package = wrapFirefox firefox-esr-102-unwrapped {
+      nixExtensions = [
+        # generate hashes with 'cat FILENAME | openssl dgst -sha256 -binary | openssl base64 -A'
+        (fetchFirefoxAddon {
+          name = "bitwarden";
+          url = "https://addons.mozilla.org/firefox/downloads/file/4071765/bitwarden_password_manager-2023.2.1.xpi";
+          hash = "sha256-KC5uXx85wa3PPuEk50SNapXBUqizisOAf+j1YsyP0CY=";
+        })
+        (fetchFirefoxAddon {
+          name = "ublock";
+          url = "https://addons.mozilla.org/firefox/downloads/file/4079064/ublock_origin-1.47.4.xpi";
+          hash = "sha256-o1psh1i6dGFq/AlkjJbXTsLn0n/jDzEdHbbppJZueFg=";
+        })
+        (fetchFirefoxAddon {
+          name = "sponsorblock";
+          url = "https://addons.mozilla.org/firefox/downloads/file/4085308/sponsorblock-5.3.1.xpi";
+          hash = "sha256-AjhaB2WqiPv/VTlTogL8yjEBKx+w7ZuCMgwFcpKaOEk=";
+        })
+        (fetchFirefoxAddon {
+          name = "clearurls";
+          url = "https://addons.mozilla.org/firefox/downloads/file/4064884/clearurls-1.26.1.xpi";
+          hash = "sha256-4gFo1jyxuLo60N5M20LFQNmf4AqpZ5tZ9JvMw28QYpE";
+        })
+        (fetchFirefoxAddon {
+          name = "localcdn";
+          url = "https://addons.mozilla.org/firefox/downloads/file/4085331/localcdn_fork_of_decentraleyes-2.6.48.xpi";
+          hash = "sha256-HtqXOTPwLuYTi8BuHHCUWMD9l+Gc5jCAENp+K+B2eu0=";
+        })
+      ];
       extraPolicies = {
         DisableFirefoxStudies = true;
         DisableFirefoxAccounts = true;
