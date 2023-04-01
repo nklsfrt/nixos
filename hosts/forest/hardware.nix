@@ -11,23 +11,23 @@
   boot.kernelModules = ["kvm-intel"];
 
   fileSystems."/" = {
-    device = "rpool/root";
+    device = "rpool/nixos/root";
     fsType = "zfs";
   };
 
   fileSystems."/persist" = {
-    device = "rpool/persist";
+    device = "rpool/nixos/persist";
     fsType = "zfs";
   };
 
   fileSystems."/var/lib/docker/volumes" = {
-    device = "rpool/docker-volumes";
+    device = "rpool/storage/docker-volumes";
     fsType = "zfs";
     neededForBoot = true;
   };
 
   fileSystems."/nix" = {
-    device = "rpool/nix";
+    device = "rpool/nixos/nix";
     fsType = "zfs";
   };
 
