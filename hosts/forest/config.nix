@@ -18,6 +18,7 @@ in {
   boot.zfs.extraPools = ["rpool"];
   networking.hostId = "10fa8e3e";
   boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   security.polkit.enable = true;
 
