@@ -22,7 +22,7 @@ in {
   security.polkit.enable = true;
 
   boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r rpool/root@blank
+    zfs rollback -r rpool/nixos/root@blank
   '';
 
   boot = {
@@ -87,8 +87,8 @@ in {
       hourly = 48;
     };
     datasets = {
-      "rpool/persist".useTemplate = ["default"];
-      "rpool/docker-volumes".useTemplate = ["default"];
+      "rpool/nixos/persist".useTemplate = ["default"];
+      "rpool/storage/docker-volumes".useTemplate = ["default"];
     };
   };
 
