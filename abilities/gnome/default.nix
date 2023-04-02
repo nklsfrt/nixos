@@ -27,8 +27,14 @@
     simple-scan
   ];
 
-  programs.seahorse.enable = true;
-  programs.file-roller.enable = true;
+  programs = {
+    kdeconnect = {
+      enable = true;
+      package = pkgs.gnomeExtensions.gsconnect;
+    };
+    seahorse.enable = true;
+    file-roller.enable = true;
+  };
 
   security.pam.services.login.enableGnomeKeyring = true;
 }
