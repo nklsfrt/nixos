@@ -7,6 +7,7 @@
       ".mozilla/firefox/vlqejqkk.niklas"
       ".local/share/keyrings"
       ".config/evolution"
+      ".config/gsconnect"
       ".local/share/TelegramDesktop"
       ".local/share/PrismLauncher"
       "Documents"
