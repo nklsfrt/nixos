@@ -2,7 +2,6 @@
   lib,
   config,
   abilities,
-  pkgs,
   ...
 }: let
   wan-nic = "enp3s0";
