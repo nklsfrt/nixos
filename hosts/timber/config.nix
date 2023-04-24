@@ -7,18 +7,14 @@
   imports = [profiles.graphical];
 
   boot = {
-    initrd.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
-    kernelParams = ["nvidia-drm.modeset=1"];
+    initrd.kernelModules = ["amdgpu"];
     supportedFilesystems = ["ntfs"];
   };
 
   powerManagement.cpuFreqGovernor = "performance";
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = ["amdgpu"];
   hardware.opengl.enable = true;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
-  hardware.nvidia.powerManagement.enable = true;
-  environment.systemPackages = with pkgs; [nvidia-vaapi-driver];
 
   services.zerotierone = {
     enable = true;
