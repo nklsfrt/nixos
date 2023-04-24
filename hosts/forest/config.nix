@@ -118,40 +118,60 @@ in {
     };
   };
 
-  services.dhcpd4 = {
+  services.kea.dhcp4 = {
     enable = true;
-    interfaces = ["${lan-bridge}"];
-    machines = [
-      {
-        hostName = "timber";
-        ethernetAddress = "44:af:28:62:d6:c1";
-        ipAddress = "192.168.69.7";
-      }
-      {
-        hostName = "driftwood";
-        ethernetAddress = "d0:53:49:f3:f7:12";
-        ipAddress = "192.168.69.5";
-      }
-      {
-        hostName = "Redmi-Note-8T";
-        ethernetAddress = "90:78:b2:a7:88:73";
-        ipAddress = "192.168.69.10";
-      }
-      {
-        hostName = "ZyXEL";
-        ethernetAddress = "cc:5d:4e:ec:17:f1";
-        ipAddress = "192.168.69.100";
-      }
-    ];
-    extraConfig = ''
-      option domain-name-servers ${router-ip};
-      option routers ${router-ip};
-      option subnet-mask 255.255.255.0;
-      option broadcast-address 192.168.69.255;
-      subnet 192.168.69.0 netmask 255.255.255.0 {
-        range 192.168.69.101 192.168.69.254;
-      }
-    '';
+    settings = {
+      multi-threading = {
+        enable-multi-threading = true;
+        thread-pool-size = 4;
+        packet-queue-size = 16;
+      };
+      option-data = [
+        {
+          name = "domain-name-servers";
+          data = "${router-ip}";
+          always-send = true;
+        }
+        {
+          name = "routers";
+          data = "${router-ip}";
+          always-send = true;
+        }
+      ];
+      interfaces-config.interfaces = ["${lan-bridge}"];
+      subnet4 = [
+        {
+          subnet = "192.168.69.0/24";
+          pools = [
+            {
+              pool = "192.168.69.101 - 192.168.69.254";
+            }
+          ];
+          reservations = [
+            {
+              hostname = "timber";
+              hw-address = "9c:6b:00:06:29:ef";
+              ip-address = "192.168.69.7";
+            }
+            {
+              hostname = "driftwood";
+              hw-address = "d0:53:49:f3:f7:12";
+              ip-address = "192.168.69.5";
+            }
+            {
+              hostname = "Redmi-Note-8T";
+              hw-address = "90:78:b2:a7:88:73";
+              ip-address = "192.168.69.10";
+            }
+            {
+              hostname = "ZyXEL NWA50AX";
+              hw-address = "b8:ec:a3:e1:f9:e6";
+              ip-address = "192.168.69.100";
+            }
+          ];
+        }
+      ];
+    };
   };
 
   services.zerotierone = {
