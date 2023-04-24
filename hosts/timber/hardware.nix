@@ -29,6 +29,12 @@
     options = ["subvol=persist" "compress=zstd"];
   };
 
+  fileSystems."/var/lib/libvirt/images" = {
+    device = "/dev/disk/by-uuid/96784b15-65e9-49d8-9752-9af9630fb75d";
+    fsType = "btrfs";
+    options = ["subvol=persist/virt"];
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/156D-0C6C";
     fsType = "vfat";
