@@ -11,6 +11,10 @@ with lib.hm.gvariant; {
       player-bitrate = "320";
     };
 
+    "org/gnome/desktop/background" = {
+      picture-uri = "file:///home/niklas/.background-image";
+    };
+
     "org/gnome/desktop/input-sources" = {
       sources = [(mkTuple ["xkb" "de"])];
       xkb-options = ["terminate:ctrl_alt_bksp"];
