@@ -25,6 +25,12 @@
     neededForBoot = true;
   };
 
+  fileSystems."/var/lib/private/factorio" = {
+    device = "rpool/storage/factorio";
+    fsType = "zfs";
+    neededForBoot = true;
+  };
+
   fileSystems."/nix" = {
     device = "rpool/nixos/nix";
     fsType = "zfs";
