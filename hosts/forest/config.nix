@@ -178,6 +178,17 @@ in {
     joinNetworks = ["abfd31bd471dbd23"];
   };
 
+  services.factorio = {
+    enable = true;
+    bind = "10.147.17.30";
+    openFirewall = true;
+    lan = true;
+    saveName = "pixelbude";
+    game-name = "Pixelbude";
+    description = "dreh' mal ein'!";
+    admins =  ["znapop" "_koon" "TingelTangel"];
+  };
+
   virtualisation = {
     docker.extraOptions = "--ip ${router-ip}";
     oci-containers = {
