@@ -1,9 +1,4 @@
-{
-  config,
-  profiles,
-  pkgs,
-  ...
-}: {
+{profiles, ...}: {
   imports = [profiles.graphical];
 
   boot = {
