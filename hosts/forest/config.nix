@@ -186,7 +186,7 @@ in {
     saveName = "pixelbude";
     game-name = "Pixelbude";
     description = "dreh' mal ein'!";
-    admins =  ["znapop" "_koon" "TingelTangel"];
+    admins = ["znapop" "_koon" "TingelTangel"];
   };
 
   virtualisation = {
