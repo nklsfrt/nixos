@@ -256,6 +256,7 @@ in {
           };
         };
         minecraft-atm8 = {
+          autoStart = false;
           image = "itzg/minecraft-server";
           volumes = [
             "minecraft-atm8_data:/data"
