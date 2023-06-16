@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{...}: {
   home.persistence."/persist/home/niklas" = {
     directories = [
       ".ssh"
