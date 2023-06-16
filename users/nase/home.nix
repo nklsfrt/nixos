@@ -42,6 +42,7 @@
     signal-desktop
     onlyoffice-bin
     evolution
+    nix-output-monitor
   ];
 
   programs.gpg.enable = true;
