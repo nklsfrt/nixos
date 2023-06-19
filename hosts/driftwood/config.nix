@@ -1,7 +1,6 @@
 {
   profiles,
   pkgs,
-  inputs,
   ...
 }: {
   imports = [profiles.graphical];

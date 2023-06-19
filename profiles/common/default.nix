@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  users,
   ...
 }: {
   users.users.nase = {
