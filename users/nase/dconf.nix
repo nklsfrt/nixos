@@ -12,7 +12,7 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/desktop/background" = {
-      picture-uri = "file:///home/niklas/.background-image";
+      picture-uri-dark = "file:///home/niklas/.background-image";
     };
 
     "org/gnome/desktop/input-sources" = {
