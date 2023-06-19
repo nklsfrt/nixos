@@ -13,6 +13,7 @@
     ./persistence.nix
     ./ssh.nix
     ./vscode.nix
+    ./pywal.nix
   ];
 
   home = {
