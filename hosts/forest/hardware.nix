@@ -31,6 +31,12 @@
     neededForBoot = true;
   };
 
+  fileSystems."/media/library" = {
+    device = "rpool/storage/library";
+    fsType = "zfs";
+    neededForBoot = true;
+  };
+
   fileSystems."/nix" = {
     device = "rpool/nixos/nix";
     fsType = "zfs";
