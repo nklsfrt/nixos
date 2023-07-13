@@ -23,4 +23,7 @@
   home.packages = with pkgs; [
     nil
   ];
+  home.persistence."/persist/home/niklas".directories = [
+    ".config/VSCodium"
+  ];
 }
