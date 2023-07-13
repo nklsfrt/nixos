@@ -27,14 +27,14 @@ There are certain paradigms that I am trying to adhere to with this setup:
 
 ### Ephemerality and opt-in state
 
-My workstations are configured with ephemeral root filesystems and explicitly defined persistent storage to avoid any undeclared state that could cause configuration drift or similar.
+My workstations are configured with ephemeral root file systems and explicitly defined persistent storage to avoid any undeclared state that could cause configuration drift or similar.
 This is currently implemented via the [Impermanence][imp] module and using a `tmpfs` for `/`.
 
-### Seperation of Concerns
+### Separation of Concerns
 
-My user environments and system configurations are declared independently from configuration that is solely dependent on the individual system's hardware, making them easily interchangable and applicable to any of my systems. This is made possible by [Home Manager][hm].
+My user environments and system configurations are declared independently from configuration that is solely dependent on the individual system's hardware, making them easily interchangeable and applicable to any of my systems. This is made possible by [Home Manager][hm].
 
-I am currently working on further seperating things by modularizing each systems configuration into distinct abilities/roles/profiles to avoid as much duplicate code as possible.
+I am currently working on further separating things by modularizing each systems configuration into distinct abilities/roles/profiles to avoid as much duplicate code as possible.
 
 ### Prioritization by Specificity
 
@@ -45,7 +45,7 @@ The _method used_ to declare it is preferred from highest to lowest specificity:
 1. Is there an home option available via Home Manager?
 2. Is there a system-wide option available via NixOS?
 3. Does Nix provide a way to manually implement what I want?
-4. Bind mount neccessary configuration via persistent storage if applicable.
+4. Bind mount necessary configuration via persistent storage if applicable.
 
 The _place_ it is declared in is chosen from lowest to highest specificity:
 
@@ -57,7 +57,7 @@ This not only avoids a lot of duplicate code, but also reduces the chances of va
 
 ### Secret Management
 
-Since this flake is aiming to be an exhaustive declaration of my infrastructure, there is the need to deal with secrets in a confidential manner. I am using [sops-nix][sops-nix] - a NixOS module implementation of Mozillas [SOPS][sops] - to be able to store secret information securely encrypted in this repo. Those secrets are then decrypted at activation time for the system to use during runtime.
+Since this flake is aiming to be an exhaustive declaration of my infrastructure, there is the need to deal with secrets in a confidential manner. I am using [sops-nix][sops-nix] - a NixOS module implementation of Mozilla's [SOPS][sops] - to be able to store secret information securely encrypted in this repo. Those secrets are then decrypted at activation time for the system to use during runtime.
 
 ## Disclaimer
 
