@@ -10,6 +10,7 @@
     ./fish.nix
     ./foot.nix
     ./git.nix
+    ./obsidian.nix
     ./persistence.nix
     ./ssh.nix
     ./vscode.nix
