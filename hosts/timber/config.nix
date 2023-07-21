@@ -8,7 +8,7 @@
 
   boot = {
     initrd.kernelModules = ["kvmfr" "vfio" "vfio_pci" "vfio_iommu_type1" "amdgpu"];
-    extraModulePackages = [ config.boot.kernelPackages.kvmfr ];
+    extraModulePackages = [config.boot.kernelPackages.kvmfr];
     kernelParams = ["kvmfr.static_size_mb=32" "vfio-pci.ids=1002:731f,1002:ab38" "amd_pstate=active"];
     supportedFilesystems = ["ntfs"];
   };
