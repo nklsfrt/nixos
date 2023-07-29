@@ -255,18 +255,19 @@ in {
             port = "3001";
           };
         };
-        minecraft-atm8 = {
+        minecraft-litv3 = {
           autoStart = false;
           image = "itzg/minecraft-server";
           volumes = [
-            "minecraft-atm8_data:/data"
-            "minecraft-atm8_mods:/mods"
+            "minecraft-litv3_data:/data"
+            "minecraft-litv3_mods:/mods"
           ];
           environment = {
             EULA = "true";
             TYPE = "AUTO_CURSEFORGE";
             ONLINE_MODE = "false";
-            CF_SLUG = "all-the-mods-8";
+            CF_SLUG = "life-in-the-village-3";
+            CF_API_KEY = "$$2a$$10$$XLOLJAY35fUGwNg2Jo0Yeu0sze/zTwuSrZxlOcFWh.1ioi6mDfAsO";
             ALLOW_FLIGHT = "true";
             MOTD = "Achja?! Komma her!";
             INIT_MEMORY = "6G";
@@ -279,6 +280,30 @@ in {
             "--label=traefik.tcp.services.minecraft-atm8.loadbalancer.server.port=25565"
           ];
         };
+        # minecraft-atm8 = {
+        #   autoStart = false;
+        #   image = "itzg/minecraft-server";
+        #   volumes = [
+        #     "minecraft-atm8_data:/data"
+        #     "minecraft-atm8_mods:/mods"
+        #   ];
+        #   environment = {
+        #     EULA = "true";
+        #     TYPE = "AUTO_CURSEFORGE";
+        #     ONLINE_MODE = "false";
+        #     CF_SLUG = "all-the-mods-8";
+        #     ALLOW_FLIGHT = "true";
+        #     MOTD = "Achja?! Komma her!";
+        #     INIT_MEMORY = "6G";
+        #     MAX_MEMORY = "18G";
+        #   };
+        #   extraOptions = [
+        #     "--label=traefik.enable=true"
+        #     "--label=traefik.tcp.routers.minecraft-atm8.entrypoints=mc-tcp"
+        #     "--label=traefik.tcp.routers.minecraft-atm8.rule=HostSNI(`*`)"
+        #     "--label=traefik.tcp.services.minecraft-atm8.loadbalancer.server.port=25565"
+        #   ];
+        # };
       };
     };
   };
