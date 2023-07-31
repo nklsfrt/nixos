@@ -36,7 +36,7 @@
   };
 
   services.udev.extraRules = ''
-    SUBSYSTEM=="kvmfr", OWNER="nase", GROUP="kvm", MODE="0600"
+    SUBSYSTEM=="kvmfr", OWNER="nase", GROUP="kvm", MODE="0660"
   '';
 
   environment.systemPackages = with pkgs; [
