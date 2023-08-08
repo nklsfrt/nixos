@@ -10,11 +10,11 @@
 
   services.gnome = {
     core-utilities.enable = false;
-    sushi.enable = true;
     gnome-initial-setup.enable = false;
     gnome-remote-desktop.enable = false;
     gnome-user-share.enable = false;
     rygel.enable = false;
+    sushi.enable = true;
   };
 
   services.geoclue2.enable = false;

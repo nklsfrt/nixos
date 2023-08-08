@@ -9,4 +9,5 @@
     openFirewall = true;
     extraBackends = with pkgs; [sane-airscan];
   };
+  environment.systemPackages = [pkgs.simple-scan];
 }

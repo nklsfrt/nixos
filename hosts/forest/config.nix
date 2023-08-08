@@ -328,18 +328,20 @@ in {
           volumes = [
             "your-spotify-server_db:/data/db"
           ];
-          extraOptions = [ "--network=traefik" ];
+          extraOptions = ["--network=traefik"];
         };
         your-spotify-client = {
           image = "yooooomi/your_spotify_client";
           environment = {
             API_ENDPOINT = "http://spot.lan:8080";
           };
-          extraOptions = stdOptions {
-            name = "spott";
-            domain = "spott";
-            port = "3000";
-          } ++ [ "--network=traefik" ];
+          extraOptions =
+            stdOptions {
+              name = "spott";
+              domain = "spott";
+              port = "3000";
+            }
+            ++ ["--network=traefik"];
         };
         minecraft-litv3 = {
           autoStart = false;
