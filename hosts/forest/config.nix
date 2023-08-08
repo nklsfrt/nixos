@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   abilities,
   ...
@@ -173,6 +174,24 @@ in {
     };
   };
 
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+    secrets = {
+      firefly-iii-env = {};
+      firefly-iii_db-env = {};
+      firefly-iii_imp-env = {};
+      your-spotify-server-env = {};
+    };
+  };
+
+  system.activationScripts.mkTraefik = let
+    docker = config.virtualisation.oci-containers.backend;
+    dockerBin = "${pkgs.${docker}}/bin/${docker}";
+  in ''
+    ${dockerBin} network inspect traefik >/dev/null 2>&1 || ${dockerBin} network create traefik --subnet 172.20.0.0/16
+  '';
+
   services.zerotierone = {
     enable = true;
     joinNetworks = ["abfd31bd471dbd23"];
@@ -190,7 +209,7 @@ in {
   };
 
   virtualisation = {
-    docker.extraOptions = "--ip ${router-ip}";
+    docker.extraOptions = "--ip ${router-ip} --dns ${router-ip}";
     oci-containers = {
       backend = "docker";
       containers = let
@@ -205,6 +224,7 @@ in {
           "--label=traefik.${proto}.routers.${name}.entrypoints=${entry}"
           "--label=traefik.${proto}.routers.${name}.rule=Host(`${domain}.lan`)"
           "--label=traefik.${proto}.services.${name}.loadbalancer.server.port=${port}"
+          "--network=traefik"
         ];
       in {
         reverse_proxy = {
@@ -214,7 +234,6 @@ in {
             stdOptions {
               name = "traefik";
               domain = "hub";
-              port = "8080";
             }
             ++ ["--label=traefik.http.routers.traefik.service=api@internal"];
           cmd = [
@@ -254,6 +273,73 @@ in {
             domain = "mon";
             port = "3001";
           };
+        };
+        firefly-iii = {
+          image = "fireflyiii/core";
+          ports = ["8080"];
+          volumes = [
+            "firefly-iii_upload:/var/html/storage/upload"
+          ];
+          extraOptions = stdOptions {
+            name = "firefly";
+            domain = "ff";
+          };
+          environmentFiles = [
+            "/run/secrets/firefly-iii-env"
+          ];
+        };
+        firefly-iii_db = {
+          image = "mariadb";
+          volumes = [
+            "firefly-iii_db:/var/lib/mysql"
+          ];
+          environmentFiles = [
+            "/run/secrets/firefly-iii_db-env"
+          ];
+          extraOptions = [
+            "--network=traefik"
+          ];
+        };
+        firefly-iii_importer = {
+          image = "fireflyiii/data-importer";
+          environmentFiles = [
+            "/run/secrets/firefly-iii_imp-env"
+          ];
+          extraOptions = stdOptions {
+            name = "firefly-imp";
+            domain = "ff-imp";
+          };
+        };
+        your-spotify-server = {
+          image = "yooooomi/your_spotify_server";
+          environmentFiles = ["/run/secrets/your-spotify-server-env"];
+          environment = {
+            API_ENDPOINT = "http://your-spotify-server:8080";
+            CLIENT_ENDPOINT = "http://your-spotify-client:3000";
+            MONGO_ENDPOINT = "mongodb://your-spotify-server_db:27017/your_spotify";
+          };
+          extraOptions = stdOptions {
+            name = "your_spotify";
+            domain = "spot";
+          };
+        };
+        your-spotify-server_db = {
+          image = "mongo:4";
+          volumes = [
+            "your-spotify-server_db:/data/db"
+          ];
+          extraOptions = [ "--network=traefik" ];
+        };
+        your-spotify-client = {
+          image = "yooooomi/your_spotify_client";
+          environment = {
+            API_ENDPOINT = "http://spot.lan:8080";
+          };
+          extraOptions = stdOptions {
+            name = "spott";
+            domain = "spott";
+            port = "3000";
+          } ++ [ "--network=traefik" ];
         };
         minecraft-litv3 = {
           autoStart = false;
