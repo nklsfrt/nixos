@@ -12,9 +12,9 @@
     ./git.nix
     ./obsidian.nix
     ./persistence.nix
+    ./pywal.nix
     ./ssh.nix
     ./vscode.nix
-    ./pywal.nix
   ];
 
   home = {
@@ -37,14 +37,14 @@
   };
 
   home.packages = with pkgs; [
-    spot
-    pavucontrol
     easyeffects
-    tdesktop
-    signal-desktop
-    onlyoffice-bin
     evolution
     nix-output-monitor
+    onlyoffice-bin
+    pavucontrol
+    signal-desktop
+    spot
+    tdesktop
   ];
 
   programs.gpg.enable = true;
