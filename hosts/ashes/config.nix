@@ -1,11 +1,4 @@
-{
-  config,
-  inputs,
-  ...
-}: {
-  sops.defaultSopsFile = ./secrets.yaml;
-  sops.secrets.tgtgbot_env = {};
-
+{inputs, ...}: {
   boot.loader = {
     systemd-boot.enable = false;
     grub = {
@@ -34,17 +27,6 @@
       interfaces = {
         "ens3".allowedTCPPorts = [80 443 13243];
         "ens3".allowedUDPPorts = [443];
-      };
-    };
-  };
-
-  virtualisation.oci-containers = {
-    backend = "docker";
-    containers = {
-      tgtgbot = {
-        image = "derhenning/tgtg";
-        volumes = ["tokens:/tokens"];
-        environmentFiles = ["${config.sops.secrets.tgtgbot_env.path}"];
       };
     };
   };
