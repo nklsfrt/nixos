@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   users.users.nase = {
@@ -64,6 +65,16 @@
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
+  };
+
+  nix.registry = {
+    nixpkgs = {
+      from = {
+        id = "nixpkgs";
+        type = "indirect";
+      };
+      flake = inputs.nixpkgs;
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
