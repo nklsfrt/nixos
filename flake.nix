@@ -20,8 +20,7 @@
     profiles = import ./profiles {inherit lib;};
     users = import ./users {inherit lib;};
   in {
-    nixosConfigurations =
-      import ./hosts {inherit inputs abilities profiles users;};
+    nixosConfigurations = import ./hosts {inherit inputs abilities profiles users;};
     formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.alejandra;
   };
 }
