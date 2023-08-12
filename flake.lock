@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1691672736,
-        "narHash": "sha256-HNPA/dKHerA0p4OsToEcW/DtTSXBcK5gFRsy/yPgV/Y=",
+        "lastModified": 1691856649,
+        "narHash": "sha256-1/KYCwNyOPpUoyno9Yj3zMHITQaW+wPzVlJFPOPPCo4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6e1eff9aac0e8d84bda7f2d60ba6108eea9b7e79",
+        "rev": "406d34d919e9e8b831b531782cf5ef6995188566",
         "type": "github"
       },
       "original": {
@@ -100,11 +100,11 @@
     "website": {
       "flake": false,
       "locked": {
-        "lastModified": 1676965858,
-        "narHash": "sha256-tIUg4mlD6np/V0TNsbwRDclXkn1pOmmeV5Z+AiBSpGQ=",
+        "lastModified": 1691863547,
+        "narHash": "sha256-2vOv5JoAwcHtkN8RcCByV/wKMIAaV1/u3//1T1NmoJk=",
         "ref": "main",
-        "rev": "ad0c00474535db4a5470c6b4e391092e4ef93568",
-        "revCount": 8,
+        "rev": "624886807e356920e67b832e2db7ca08f5922383",
+        "revCount": 12,
         "type": "git",
         "url": "https://codeberg.org/nklsfrt/nklsfrt.de"
       },
