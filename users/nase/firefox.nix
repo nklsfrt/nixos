@@ -31,6 +31,11 @@ in {
           url = "https://addons.mozilla.org/firefox/downloads/file/4085331/localcdn_fork_of_decentraleyes-2.6.48.xpi";
           hash = "sha256-HtqXOTPwLuYTi8BuHHCUWMD9l+Gc5jCAENp+K+B2eu0=";
         })
+        (fetchFirefoxAddon {
+          name = "javascript-restrictor";
+          url = "https://addons.mozilla.org/firefox/downloads/file/4131644/javascript_restrictor-0.13.xpi";
+          hash = "sha256-zGV5N8tbP9Bbcq2kcizRFkNIaaV3oX+wTBR+ScfViZw=";
+        })
       ];
       extraPolicies = {
         DisableFirefoxStudies = true;
