@@ -23,6 +23,8 @@
       htop
       exa
       bat
+      fzf
+      fd
       fish
     ];
   };
