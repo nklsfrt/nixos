@@ -20,5 +20,11 @@
         body = "systemctl reboot --boot-loader-menu=1 --boot-loader-entry=auto-windows";
       };
     };
+    plugins = [
+      {
+        name = "fzf.fish";
+        src = pkgs.fishPlugins.fzf-fish;
+      }
+    ];
   };
 }
