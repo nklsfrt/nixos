@@ -45,7 +45,6 @@
     signal-desktop
     spot
     tdesktop
-    fzf
   ];
 
   programs.gpg.enable = true;
