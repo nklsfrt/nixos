@@ -8,18 +8,18 @@ in {
         # generate hashes with 'cat FILENAME | openssl dgst -sha256 -binary | openssl base64 -A'
         (fetchFirefoxAddon {
           name = "bitwarden";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4071765/bitwarden_password_manager-2023.2.1.xpi";
-          hash = "sha256-KC5uXx85wa3PPuEk50SNapXBUqizisOAf+j1YsyP0CY=";
+          url = "https://addons.mozilla.org/firefox/downloads/file/4140393/bitwarden_password_manager-2023.7.1.xpi";
+          hash = "sha256-ozlx2A9VInn5ZXl4aTiujojEuVwp+DOcQvXeR/FSAK0=";
         })
         (fetchFirefoxAddon {
           name = "ublock";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4079064/ublock_origin-1.47.4.xpi";
-          hash = "sha256-o1psh1i6dGFq/AlkjJbXTsLn0n/jDzEdHbbppJZueFg=";
+          url = "https://addons.mozilla.org/firefox/downloads/file/4141256/ublock_origin-1.51.0.xpi";
+          hash = "sha256-i3NGi8IzoR3SiVIZRmOBeD0ZEjhX3Qtv0WoBgg/KSDQ=";
         })
         (fetchFirefoxAddon {
           name = "sponsorblock";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4085308/sponsorblock-5.3.1.xpi";
-          hash = "sha256-AjhaB2WqiPv/VTlTogL8yjEBKx+w7ZuCMgwFcpKaOEk=";
+          url = "https://addons.mozilla.org/firefox/downloads/file/4163966/sponsorblock-5.4.19.xpi";
+          hash = "sha256-laP2rXUToeK1GvMT7OSl4t1oXYph43kpHEboOe4Fn3A=";
         })
         (fetchFirefoxAddon {
           name = "clearurls";
@@ -33,8 +33,8 @@ in {
         })
         (fetchFirefoxAddon {
           name = "javascript-restrictor";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4131644/javascript_restrictor-0.13.xpi";
-          hash = "sha256-zGV5N8tbP9Bbcq2kcizRFkNIaaV3oX+wTBR+ScfViZw=";
+          url = "https://addons.mozilla.org/firefox/downloads/file/4161098/javascript_restrictor-0.14.xpi";
+          hash = "sha256-Q+50xb5hLozrbyLwuwYFRpKRVcRRSaZRYA+h4xPGMaY=";
         })
       ];
       extraPolicies = {
