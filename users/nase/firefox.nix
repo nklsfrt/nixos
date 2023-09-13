@@ -3,7 +3,7 @@
 in {
   programs.firefox = with pkgs; {
     enable = true;
-    package = wrapFirefox firefox-esr-102-unwrapped {
+    package = wrapFirefox firefox-esr-115-unwrapped {
       nixExtensions = [
         # generate hashes with 'cat FILENAME | openssl dgst -sha256 -binary | openssl base64 -A'
         (fetchFirefoxAddon {
