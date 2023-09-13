@@ -180,8 +180,6 @@ in {
     secrets = {
       firefly-iii-env = {};
       firefly-iii_db-env = {};
-      firefly-iii_imp-env = {};
-      your-spotify-server-env = {};
     };
   };
 
@@ -310,88 +308,6 @@ in {
             domain = "ff-imp";
           };
         };
-        your-spotify-server = {
-          image = "yooooomi/your_spotify_server";
-          environmentFiles = ["/run/secrets/your-spotify-server-env"];
-          environment = {
-            API_ENDPOINT = "http://your-spotify-server:8080";
-            CLIENT_ENDPOINT = "http://your-spotify-client:3000";
-            MONGO_ENDPOINT = "mongodb://your-spotify-server_db:27017/your_spotify";
-          };
-          extraOptions = stdOptions {
-            name = "your_spotify";
-            domain = "spot";
-          };
-        };
-        your-spotify-server_db = {
-          image = "mongo:4";
-          volumes = [
-            "your-spotify-server_db:/data/db"
-          ];
-          extraOptions = ["--network=traefik"];
-        };
-        your-spotify-client = {
-          image = "yooooomi/your_spotify_client";
-          environment = {
-            API_ENDPOINT = "http://spot.lan:8080";
-          };
-          extraOptions =
-            stdOptions {
-              name = "spott";
-              domain = "spott";
-              port = "3000";
-            }
-            ++ ["--network=traefik"];
-        };
-        minecraft-litv3 = {
-          autoStart = false;
-          image = "itzg/minecraft-server";
-          volumes = [
-            "minecraft-litv3_data:/data"
-            "minecraft-litv3_mods:/mods"
-          ];
-          environment = {
-            EULA = "true";
-            TYPE = "AUTO_CURSEFORGE";
-            ONLINE_MODE = "false";
-            CF_SLUG = "life-in-the-village-3";
-            CF_API_KEY = "$$2a$$10$$XLOLJAY35fUGwNg2Jo0Yeu0sze/zTwuSrZxlOcFWh.1ioi6mDfAsO";
-            ALLOW_FLIGHT = "true";
-            MOTD = "Achja?! Komma her!";
-            INIT_MEMORY = "6G";
-            MAX_MEMORY = "18G";
-          };
-          extraOptions = [
-            "--label=traefik.enable=true"
-            "--label=traefik.tcp.routers.minecraft-atm8.entrypoints=mc-tcp"
-            "--label=traefik.tcp.routers.minecraft-atm8.rule=HostSNI(`*`)"
-            "--label=traefik.tcp.services.minecraft-atm8.loadbalancer.server.port=25565"
-          ];
-        };
-        # minecraft-atm8 = {
-        #   autoStart = false;
-        #   image = "itzg/minecraft-server";
-        #   volumes = [
-        #     "minecraft-atm8_data:/data"
-        #     "minecraft-atm8_mods:/mods"
-        #   ];
-        #   environment = {
-        #     EULA = "true";
-        #     TYPE = "AUTO_CURSEFORGE";
-        #     ONLINE_MODE = "false";
-        #     CF_SLUG = "all-the-mods-8";
-        #     ALLOW_FLIGHT = "true";
-        #     MOTD = "Achja?! Komma her!";
-        #     INIT_MEMORY = "6G";
-        #     MAX_MEMORY = "18G";
-        #   };
-        #   extraOptions = [
-        #     "--label=traefik.enable=true"
-        #     "--label=traefik.tcp.routers.minecraft-atm8.entrypoints=mc-tcp"
-        #     "--label=traefik.tcp.routers.minecraft-atm8.rule=HostSNI(`*`)"
-        #     "--label=traefik.tcp.services.minecraft-atm8.loadbalancer.server.port=25565"
-        #   ];
-        # };
       };
     };
   };
