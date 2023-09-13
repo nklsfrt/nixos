@@ -301,9 +301,9 @@ in {
           ];
         };
         firefly-iii_importer = {
-          image = "fireflyiii/data-importer";
-          environmentFiles = [
-            "/run/secrets/firefly-iii_imp-env"
+          image = "benkl/firefly-iii-fints-importer";
+          volumes = [
+            "firefly-iii-importer_configs:/app/configurations"
           ];
           extraOptions = stdOptions {
             name = "firefly-imp";
