@@ -21,7 +21,7 @@
       tmux
       micro
       htop
-      exa
+      eza
       bat
       fzf
       fd
