@@ -5,6 +5,7 @@
 }: {
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
+    inputs.nix-index-database.hmModules.nix-index
     ./dconf.nix
     ./firefox.nix
     ./fish.nix
@@ -46,6 +47,8 @@
     spot
     tdesktop
   ];
+
+  programs.nix-index.enable = true;
 
   programs.gpg.enable = true;
   services.gpg-agent.enable = true;
