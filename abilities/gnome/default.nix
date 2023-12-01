@@ -21,7 +21,7 @@
 
   environment.systemPackages = with pkgs.gnome; [
     gnome-calculator
-    loupe
+    pkgs.loupe
     gnome-music
     nautilus
     simple-scan
