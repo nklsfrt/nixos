@@ -1,42 +1,9 @@
 {pkgs, ...}: let
-  profileName = "plktvsa.nase";
+  profilePath = "plktvsa.nase";
 in {
   programs.firefox = with pkgs; {
     enable = true;
-    package = wrapFirefox firefox-esr-115-unwrapped {
-      nixExtensions = [
-        # generate hashes with 'cat FILENAME | openssl dgst -sha256 -binary | openssl base64 -A'
-        (fetchFirefoxAddon {
-          name = "bitwarden";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4140393/bitwarden_password_manager-2023.7.1.xpi";
-          hash = "sha256-ozlx2A9VInn5ZXl4aTiujojEuVwp+DOcQvXeR/FSAK0=";
-        })
-        (fetchFirefoxAddon {
-          name = "ublock";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4141256/ublock_origin-1.51.0.xpi";
-          hash = "sha256-i3NGi8IzoR3SiVIZRmOBeD0ZEjhX3Qtv0WoBgg/KSDQ=";
-        })
-        (fetchFirefoxAddon {
-          name = "sponsorblock";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4163966/sponsorblock-5.4.19.xpi";
-          hash = "sha256-laP2rXUToeK1GvMT7OSl4t1oXYph43kpHEboOe4Fn3A=";
-        })
-        (fetchFirefoxAddon {
-          name = "clearurls";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4064884/clearurls-1.26.1.xpi";
-          hash = "sha256-4gFo1jyxuLo60N5M20LFQNmf4AqpZ5tZ9JvMw28QYpE";
-        })
-        (fetchFirefoxAddon {
-          name = "localcdn";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4085331/localcdn_fork_of_decentraleyes-2.6.48.xpi";
-          hash = "sha256-HtqXOTPwLuYTi8BuHHCUWMD9l+Gc5jCAENp+K+B2eu0=";
-        })
-        (fetchFirefoxAddon {
-          name = "javascript-restrictor";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4161098/javascript_restrictor-0.14.xpi";
-          hash = "sha256-Q+50xb5hLozrbyLwuwYFRpKRVcRRSaZRYA+h4xPGMaY=";
-        })
-      ];
+    package = wrapFirefox firefox-unwrapped {
       extraPolicies = {
         DisableFirefoxStudies = true;
         DisableFirefoxAccounts = true;
@@ -70,7 +37,7 @@ in {
     };
     profiles.nase = {
       name = "nase";
-      path = profileName;
+      path = profilePath;
       settings = {
         # enable resolution of .lan suffix
         "browser.fixup.domainsuffixwhitelist.lan" = true;
@@ -92,11 +59,7 @@ in {
   };
   home.persistence."/persist/home/niklas" = {
     directories = [
-      ".mozilla/firefox/${profileName}/extensions"
-    ];
-    files = [
-      ".mozilla/firefox/${profileName}/places.sqlite"
-      ".mozilla/firefox/${profileName}/cookies.sqlite"
+      ".mozilla/firefox/${profilePath}"
     ];
   };
 }
