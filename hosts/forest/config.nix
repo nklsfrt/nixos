@@ -93,7 +93,7 @@ in {
     };
   };
 
-  services.openssh.listenAddresses = [{addr = "${router-ip}";}];
+  services.openssh.listenAddresses = [{addr = "${router-ip}"; port=22;}];
 
   services.adguardhome = {
     enable = true;
