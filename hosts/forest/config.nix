@@ -9,7 +9,7 @@
   lan-nics = ["enp4s0" "enp5s0" "enp6s0"];
   lan-bridge = "br0";
   router-ip = "192.168.69.1";
-  wan-ports = [9993];
+  wan-ports = [];
 in {
   imports = [abilities.persistence];
 
@@ -190,21 +190,6 @@ in {
     ${dockerBin} network inspect traefik >/dev/null 2>&1 || ${dockerBin} network create traefik --subnet 172.20.0.0/16
   '';
 
-  services.zerotierone = {
-    enable = true;
-    joinNetworks = ["abfd31bd471dbd23"];
-  };
-
-  services.factorio = {
-    enable = true;
-    bind = "10.147.17.30";
-    openFirewall = true;
-    lan = true;
-    saveName = "pixelbude";
-    game-name = "Pixelbude";
-    description = "dreh' mal ein'!";
-    admins = ["znapop" "_koon" "TingelTangel"];
-  };
 
   virtualisation = {
     docker.extraOptions = "--ip ${router-ip} --dns ${router-ip}";
@@ -314,10 +299,4 @@ in {
 
   powerManagement.cpuFreqGovernor = "ondemand";
 
-  environment.persistence."/persist" = {
-    hideMounts = true;
-    directories = [
-      "/var/lib/zerotier-one/"
-    ];
-  };
 }

@@ -18,10 +18,6 @@
   services.xserver.videoDrivers = ["amdgpu"];
   hardware.opengl.enable = true;
 
-  services.zerotierone = {
-    enable = true;
-    joinNetworks = ["abfd31bd471dbd23"];
-  };
 
   virtualisation.libvirtd = {
     enable = true;
@@ -48,7 +44,6 @@
 
   environment.persistence."/persist" = {
     directories = [
-      "/var/lib/zerotier-one/"
       "/var/lib/libvirt/qemu/"
     ];
   };
