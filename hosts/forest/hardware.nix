@@ -25,12 +25,6 @@
     neededForBoot = true;
   };
 
-  fileSystems."/var/lib/private/factorio" = {
-    device = "rpool/storage/factorio";
-    fsType = "zfs";
-    neededForBoot = true;
-  };
-
   fileSystems."/media/library" = {
     device = "rpool/storage/library";
     fsType = "zfs";
