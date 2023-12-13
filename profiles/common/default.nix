@@ -86,6 +86,10 @@
     supportedLocales = ["en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8"];
   };
 
+  security.sudo.extraConfig = ''
+    Defaults lecture = never
+  '';
+
   services.openssh.enable = true;
   programs.command-not-found.enable = false;
 }
