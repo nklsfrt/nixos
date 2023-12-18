@@ -54,6 +54,17 @@
           index proof.asc
         }
       }
+
+      sync.nklsfrt.de {
+        reverse_proxy http://localhost:8384 {
+          header_up Host {upstream_hostport}
+        }
+      }
     '';
+  };
+
+  services.syncthing = {
+    enable = true;
+    openDefaultPorts = true;
   };
 }
