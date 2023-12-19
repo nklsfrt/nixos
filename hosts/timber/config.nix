@@ -31,6 +31,11 @@
     '';
   };
 
+  services.syncthing = {
+    enable = true;
+    openDefaultPorts = true;
+  };
+
   services.udev.extraRules = ''
     SUBSYSTEM=="kvmfr", OWNER="nase", GROUP="kvm", MODE="0660"
   '';
@@ -45,6 +50,11 @@
   environment.persistence."/persist" = {
     directories = [
       "/var/lib/libvirt/qemu/"
+      { 
+        directory = "/var/lib/syncthing/";
+        user = "syncthing";
+        group = "syncthing";
+      }
     ];
   };
 }
