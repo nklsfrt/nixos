@@ -48,13 +48,6 @@
         redir https://nklsfrt.de/
       }
 
-      proof.nklsfrt.de {
-        root * ${webroot}
-        file_server {
-          index proof.asc
-        }
-      }
-
       sync.nklsfrt.de {
         reverse_proxy http://localhost:8384 {
           header_up Host {upstream_hostport}
