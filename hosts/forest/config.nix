@@ -93,7 +93,12 @@ in {
     };
   };
 
-  services.openssh.listenAddresses = [{addr = "${router-ip}"; port=22;}];
+  services.openssh.listenAddresses = [
+    {
+      addr = "${router-ip}";
+      port = 22;
+    }
+  ];
 
   services.adguardhome = {
     enable = true;
@@ -189,7 +194,6 @@ in {
   in ''
     ${dockerBin} network inspect traefik >/dev/null 2>&1 || ${dockerBin} network create traefik --subnet 172.20.0.0/16
   '';
-
 
   virtualisation = {
     docker.extraOptions = "--ip ${router-ip} --dns ${router-ip}";
@@ -298,5 +302,4 @@ in {
   };
 
   powerManagement.cpuFreqGovernor = "ondemand";
-
 }

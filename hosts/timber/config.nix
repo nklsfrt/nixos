@@ -18,7 +18,6 @@
   services.xserver.videoDrivers = ["amdgpu"];
   hardware.opengl.enable = true;
 
-
   virtualisation.libvirtd = {
     enable = true;
     qemu.verbatimConfig = ''
@@ -50,7 +49,7 @@
   environment.persistence."/persist" = {
     directories = [
       "/var/lib/libvirt/qemu/"
-      { 
+      {
         directory = "/var/lib/syncthing/";
         user = "syncthing";
         group = "syncthing";
