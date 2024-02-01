@@ -53,7 +53,16 @@
           header_up Host {upstream_hostport}
         }
       }
+
+      db.nklsfrt.de {
+        reverse_proxy http://localhost:3306
+      }
     '';
+  };
+
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;    
   };
 
   services.syncthing = {
