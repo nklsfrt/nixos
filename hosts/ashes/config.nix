@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   boot.loader = {
     systemd-boot.enable = false;
     grub = {
@@ -25,7 +29,7 @@
     firewall = {
       enable = true;
       interfaces = {
-        "ens3".allowedTCPPorts = [80 443];
+        "ens3".allowedTCPPorts = [80 443 3306];
         "ens3".allowedUDPPorts = [443];
       };
     };
@@ -53,16 +57,15 @@
           header_up Host {upstream_hostport}
         }
       }
-
-      db.nklsfrt.de {
-        reverse_proxy http://localhost:3306
-      }
     '';
   };
 
   services.mysql = {
     enable = true;
-    package = pkgs.mariadb;    
+    package = pkgs.mariadb;
+    settings = {
+      mysqld = {bind-address = "78.47.95.229";};
+    };
   };
 
   services.syncthing = {
