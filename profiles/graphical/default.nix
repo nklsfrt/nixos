@@ -17,9 +17,9 @@
     operation = "boot";
   };
 
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "de";
-    xkbVariant = "";
+    variant = "";
   };
 
   fonts.packages = with pkgs; [
