@@ -24,7 +24,7 @@ with lib.hm.gvariant; {
       color-scheme = "prefer-dark";
       font-antialiasing = "grayscale";
       font-hinting = "slight";
-      gtk-theme = "Adwaita-dark";
+      gtk-theme = "Adwaita";
       monospace-font-name = "Iosevka Term 10";
     };
 
