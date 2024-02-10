@@ -48,6 +48,13 @@
     tdesktop
   ];
 
+  gtk = {
+    enable = true;
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+  };
+
   programs.nix-index.enable = true;
 
   programs.gpg.enable = true;
