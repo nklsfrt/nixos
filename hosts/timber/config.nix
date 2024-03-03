@@ -37,9 +37,14 @@
   environment.systemPackages = with pkgs; [
     virt-manager
   ];
-  environment.etc."pipewire/pipewire.conf.d/set-sample-rates.conf".text = ''
-    context.properties.default.clock.allowed-rates = [41000 48000]
-  '';
+
+  services.pipewire.extraConfig.pipewire = {
+    "10-clock-rate" = {
+      "context.properties" = {
+        "default.clock.allowed-rates" = [41000 48000];
+      };
+    };
+  };
 
   environment.persistence."/persist" = {
     directories = [
