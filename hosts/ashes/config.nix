@@ -52,6 +52,10 @@
         redir https://nklsfrt.de/
       }
 
+      proof.nklsfrt.de {
+        redir https://keyoxide.org/aspe:keyoxide.org:54UMIULBO36HX33OT5SO77ZF4A
+      }
+
       sync.nklsfrt.de {
         reverse_proxy http://localhost:8384 {
           header_up Host {upstream_hostport}
