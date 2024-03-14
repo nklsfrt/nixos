@@ -121,11 +121,11 @@
     "website": {
       "flake": false,
       "locked": {
-        "lastModified": 1710457173,
-        "narHash": "sha256-CFXaJUBjDy7/wTO2evTwtXKOvTZ6BztX2z+IwTSPURU=",
+        "lastModified": 1710460431,
+        "narHash": "sha256-UjhkwPyuFOfugvu0FOftRbEbR84UlcKyRI3E6dXd74I=",
         "ref": "main",
-        "rev": "1be4b7f646f1be694e1e81d1059a4c8fadd286d4",
-        "revCount": 17,
+        "rev": "4942d05dc07a4c2f7b20a68cead2892e2a517d19",
+        "revCount": 18,
         "type": "git",
         "url": "https://codeberg.org/nklsfrt/nklsfrt.de"
       },
