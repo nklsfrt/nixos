@@ -12,6 +12,7 @@
       ".config/Signal"
       ".config/spotify"
       ".config/VSCodium"
+      ".local/share/fractal"
       ".local/share/TelegramDesktop"
       ".local/share/PrismLauncher"
       ".local/state/wireplumber"

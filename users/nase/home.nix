@@ -44,6 +44,7 @@
     onlyoffice-bin
     pavucontrol
     signal-desktop
+    fractal
     spot
     tdesktop
   ];
