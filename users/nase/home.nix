@@ -40,6 +40,7 @@
   home.packages = with pkgs; [
     easyeffects
     evolution
+    logseq
     nix-output-monitor
     onlyoffice-bin
     pavucontrol
