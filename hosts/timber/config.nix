@@ -1,15 +1,9 @@
-{
-  config,
-  pkgs,
-  profiles,
-  ...
-}: {
+{profiles, ...}: {
   imports = [profiles.graphical];
 
   boot = {
-    initrd.kernelModules = ["kvmfr" "vfio" "vfio_pci" "vfio_iommu_type1" "amdgpu"];
-    extraModulePackages = [config.boot.kernelPackages.kvmfr];
-    kernelParams = ["kvmfr.static_size_mb=32" "vfio-pci.ids=1002:731f,1002:ab38" "amd_pstate=active"];
+    initrd.kernelModules = ["vfio" "vfio_pci" "vfio_iommu_type1" "amdgpu"];
+    kernelParams = ["vfio-pci.ids=1002:731f,1002:ab38" "amd_pstate=active"];
     supportedFilesystems = ["ntfs"];
   };
 
@@ -18,37 +12,11 @@
   services.xserver.videoDrivers = ["amdgpu"];
   hardware.opengl.enable = true;
 
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu.verbatimConfig = ''
-      namespaces = []
-      cgroup_device_acl = [
-        "/dev/kvmfr0",
-        "/dev/kvm",
-        "/dev/null"
-      ]
-    '';
-  };
-
-  services.udev.extraRules = ''
-    SUBSYSTEM=="kvmfr", OWNER="nase", GROUP="kvm", MODE="0660"
-  '';
-
-  environment.systemPackages = with pkgs; [
-    virt-manager
-  ];
-
   services.pipewire.extraConfig.pipewire = {
     "10-clock-rate" = {
       "context.properties" = {
         "default.clock.allowed-rates" = [41000 48000];
       };
     };
-  };
-
-  environment.persistence."/persist" = {
-    directories = [
-      "/var/lib/libvirt/qemu/"
-    ];
   };
 }
