@@ -13,6 +13,11 @@
   services.xserver.videoDrivers = ["amdgpu"];
   hardware.opengl.enable = true;
 
+  programs.ausweisapp = {
+    enable = true;
+    openFirewall = true;
+  };
+
   services.pipewire.extraConfig.pipewire = {
     "10-clock-rate" = {
       "context.properties" = {
