@@ -103,8 +103,8 @@ in {
   services.adguardhome = {
     enable = true;
     mutableSettings = false;
+    host = "127.0.0.1"; # "disable" the web interface
     settings = {
-      bind_host = "127.0.0.1"; # "disable" the web interface
       dns = {
         bind_hosts = ["${router-ip}"];
         bind_port = "53";
