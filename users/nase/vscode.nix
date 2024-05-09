@@ -15,12 +15,11 @@
       "python.linting.pylintEnabled" = true;
     };
     extensions = with pkgs.vscode-extensions; [
-      mkhl.direnv
-      james-yu.latex-workshop
       jnoortheen.nix-ide
       matklad.rust-analyzer
-      ms-azuretools.vscode-docker
+      mkhl.direnv
       ms-python.python
+      nvarner.typst-lsp
     ];
   };
   programs.direnv = {
