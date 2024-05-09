@@ -13,6 +13,10 @@
   services.xserver.videoDrivers = ["amdgpu"];
   hardware.opengl.enable = true;
 
+  boot.kernelModules = [ "nct6775" ];
+  programs.coolercontrol.enable = true;
+  environment.persistence."/persist".directories = [ "/etc/coolercontrol" ];
+
   programs.ausweisapp = {
     enable = true;
     openFirewall = true;
