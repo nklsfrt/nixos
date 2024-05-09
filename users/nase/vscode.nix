@@ -15,7 +15,7 @@
       "python.linting.pylintEnabled" = true;
     };
     extensions = with pkgs.vscode-extensions; [
-      arrterian.nix-env-selector
+      mkhl.direnv
       james-yu.latex-workshop
       jnoortheen.nix-ide
       matklad.rust-analyzer
