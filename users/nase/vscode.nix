@@ -30,5 +30,6 @@
   ];
   home.persistence."/persist/home/niklas".directories = [
     ".config/VSCodium"
+    ".local/share/direnv"
   ];
 }
