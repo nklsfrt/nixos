@@ -12,7 +12,6 @@
       "git.autofetch" = true;
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
-      "python.linting.pylintEnabled" = true;
     };
     extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
