@@ -4,18 +4,24 @@
   config,
   abilities,
   ...
-}: let
+}:
+let
   wan-nic = "enp3s0";
-  lan-nics = ["enp4s0" "enp5s0" "enp6s0"];
+  lan-nics = [
+    "enp4s0"
+    "enp5s0"
+    "enp6s0"
+  ];
   lan-bridge = "br0";
   router-ip = "192.168.69.1";
-  wan-ports = [];
-in {
-  imports = [abilities.persistence];
+  wan-ports = [ ];
+in
+{
+  imports = [ abilities.persistence ];
 
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-  boot.supportedFilesystems = ["zfs"];
-  boot.zfs.extraPools = ["rpool"];
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.extraPools = [ "rpool" ];
   networking.hostId = "10fa8e3e";
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -40,7 +46,7 @@ in {
   networking = {
     nat = {
       enable = true;
-      internalInterfaces = ["${lan-bridge}"];
+      internalInterfaces = [ "${lan-bridge}" ];
       externalInterface = wan-nic;
     };
     bridges = {
@@ -62,7 +68,7 @@ in {
       };
     };
     firewall = {
-      trustedInterfaces = ["${lan-bridge}"];
+      trustedInterfaces = [ "${lan-bridge}" ];
       interfaces = {
         "${wan-nic}" = {
           allowedTCPPorts = lib.mkForce wan-ports;
@@ -88,8 +94,8 @@ in {
       hourly = 48;
     };
     datasets = {
-      "rpool/nixos/persist".useTemplate = ["default"];
-      "rpool/storage/docker-volumes".useTemplate = ["default"];
+      "rpool/nixos/persist".useTemplate = [ "default" ];
+      "rpool/storage/docker-volumes".useTemplate = [ "default" ];
     };
   };
 
@@ -106,7 +112,7 @@ in {
     host = "127.0.0.1"; # "disable" the web interface
     settings = {
       dns = {
-        bind_hosts = ["${router-ip}"];
+        bind_hosts = [ "${router-ip}" ];
         bind_port = "53";
         bootstrap_dns = [
           "9.9.9.10"
@@ -143,15 +149,11 @@ in {
           always-send = true;
         }
       ];
-      interfaces-config.interfaces = ["${lan-bridge}"];
+      interfaces-config.interfaces = [ "${lan-bridge}" ];
       subnet4 = [
         {
           subnet = "192.168.69.0/24";
-          pools = [
-            {
-              pool = "192.168.69.101 - 192.168.69.254";
-            }
-          ];
+          pools = [ { pool = "192.168.69.101 - 192.168.69.254"; } ];
           reservations = [
             {
               hostname = "timber";
@@ -181,123 +183,119 @@ in {
 
   sops = {
     defaultSopsFile = ./secrets.yaml;
-    age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     secrets = {
-      firefly-iii-env = {};
-      firefly-iii_db-env = {};
+      firefly-iii-env = { };
+      firefly-iii_db-env = { };
     };
   };
 
-  system.activationScripts.mkTraefik = let
-    docker = config.virtualisation.oci-containers.backend;
-    dockerBin = "${pkgs.${docker}}/bin/${docker}";
-  in ''
-    ${dockerBin} network inspect traefik >/dev/null 2>&1 || ${dockerBin} network create traefik --subnet 172.20.0.0/16
-  '';
+  system.activationScripts.mkTraefik =
+    let
+      docker = config.virtualisation.oci-containers.backend;
+      dockerBin = "${pkgs.${docker}}/bin/${docker}";
+    in
+    ''
+      ${dockerBin} network inspect traefik >/dev/null 2>&1 || ${dockerBin} network create traefik --subnet 172.20.0.0/16
+    '';
 
   virtualisation = {
     docker.extraOptions = "--ip ${router-ip} --dns ${router-ip}";
     oci-containers = {
       backend = "docker";
-      containers = let
-        stdOptions = {
-          name,
-          domain,
-          port ? "8080",
-          proto ? "http",
-          entry ? "web",
-        }: [
-          "--label=traefik.enable=true"
-          "--label=traefik.${proto}.routers.${name}.entrypoints=${entry}"
-          "--label=traefik.${proto}.routers.${name}.rule=Host(`${domain}.lan`)"
-          "--label=traefik.${proto}.services.${name}.loadbalancer.server.port=${port}"
-          "--network=traefik"
-        ];
-      in {
-        reverse_proxy = {
-          image = "traefik:v2.9.8";
-          ports = ["${router-ip}:80:80" "${router-ip}:25565:25565" "10.147.17.30:25565:25565"];
-          extraOptions =
-            stdOptions {
-              name = "traefik";
-              domain = "hub";
-            }
-            ++ ["--label=traefik.http.routers.traefik.service=api@internal"];
-          cmd = [
-            "--api.dashboard=true"
-            "--providers.docker=true"
-            "--providers.docker.exposedbydefault=false"
-            "--entrypoints.web.address=:80"
-            "--entrypoints.mc-tcp.address=:25565"
-          ];
-          volumes = [
-            "/var/run/docker.sock:/var/run/docker.sock:ro"
-          ];
-        };
-        syncthing = {
-          image = "syncthing/syncthing";
-          volumes = ["syncthing_data:/var/syncthing"];
-          extraOptions = stdOptions {
-            name = "syncthing";
-            domain = "sync";
-            port = "8384";
+      containers =
+        let
+          stdOptions =
+            {
+              name,
+              domain,
+              port ? "8080",
+              proto ? "http",
+              entry ? "web",
+            }:
+            [
+              "--label=traefik.enable=true"
+              "--label=traefik.${proto}.routers.${name}.entrypoints=${entry}"
+              "--label=traefik.${proto}.routers.${name}.rule=Host(`${domain}.lan`)"
+              "--label=traefik.${proto}.services.${name}.loadbalancer.server.port=${port}"
+              "--network=traefik"
+            ];
+        in
+        {
+          reverse_proxy = {
+            image = "traefik:v2.9.8";
+            ports = [
+              "${router-ip}:80:80"
+              "${router-ip}:25565:25565"
+              "10.147.17.30:25565:25565"
+            ];
+            extraOptions =
+              stdOptions {
+                name = "traefik";
+                domain = "hub";
+              }
+              ++ [ "--label=traefik.http.routers.traefik.service=api@internal" ];
+            cmd = [
+              "--api.dashboard=true"
+              "--providers.docker=true"
+              "--providers.docker.exposedbydefault=false"
+              "--entrypoints.web.address=:80"
+              "--entrypoints.mc-tcp.address=:25565"
+            ];
+            volumes = [ "/var/run/docker.sock:/var/run/docker.sock:ro" ];
+          };
+          syncthing = {
+            image = "syncthing/syncthing";
+            volumes = [ "syncthing_data:/var/syncthing" ];
+            extraOptions = stdOptions {
+              name = "syncthing";
+              domain = "sync";
+              port = "8384";
+            };
+          };
+          dashdot = {
+            image = "mauricenino/dashdot";
+            volumes = [
+              "/etc/os-release:/mnt/host/etc/os-release:ro"
+              "/proc/1/ns/net:/mnt/host/proc/1/ns/net:ro"
+            ];
+            environment = {
+              DASHDOT_ENABLE_CPU_TEMPS = "true";
+              DASHDOT_ALWAYS_SHOW_PERCENTAGES = "true";
+              DASHDOT_WIDGET_LIST = "os,cpu,ram,storage";
+              DASHDOT_DISABLE_INTEGRATIONS = "true";
+            };
+            extraOptions = stdOptions {
+              name = "dashdot";
+              domain = "mon";
+              port = "3001";
+            };
+          };
+          firefly-iii = {
+            image = "fireflyiii/core";
+            ports = [ "8080" ];
+            volumes = [ "firefly-iii_upload:/var/html/storage/upload" ];
+            extraOptions = stdOptions {
+              name = "firefly";
+              domain = "ff";
+            };
+            environmentFiles = [ "/run/secrets/firefly-iii-env" ];
+          };
+          firefly-iii_db = {
+            image = "mariadb";
+            volumes = [ "firefly-iii_db:/var/lib/mysql" ];
+            environmentFiles = [ "/run/secrets/firefly-iii_db-env" ];
+            extraOptions = [ "--network=traefik" ];
+          };
+          firefly-iii_importer = {
+            image = "benkl/firefly-iii-fints-importer";
+            volumes = [ "firefly-iii-importer_configs:/app/configurations" ];
+            extraOptions = stdOptions {
+              name = "firefly-imp";
+              domain = "ff-imp";
+            };
           };
         };
-        dashdot = {
-          image = "mauricenino/dashdot";
-          volumes = [
-            "/etc/os-release:/mnt/host/etc/os-release:ro"
-            "/proc/1/ns/net:/mnt/host/proc/1/ns/net:ro"
-          ];
-          environment = {
-            DASHDOT_ENABLE_CPU_TEMPS = "true";
-            DASHDOT_ALWAYS_SHOW_PERCENTAGES = "true";
-            DASHDOT_WIDGET_LIST = "os,cpu,ram,storage";
-            DASHDOT_DISABLE_INTEGRATIONS = "true";
-          };
-          extraOptions = stdOptions {
-            name = "dashdot";
-            domain = "mon";
-            port = "3001";
-          };
-        };
-        firefly-iii = {
-          image = "fireflyiii/core";
-          ports = ["8080"];
-          volumes = [
-            "firefly-iii_upload:/var/html/storage/upload"
-          ];
-          extraOptions = stdOptions {
-            name = "firefly";
-            domain = "ff";
-          };
-          environmentFiles = [
-            "/run/secrets/firefly-iii-env"
-          ];
-        };
-        firefly-iii_db = {
-          image = "mariadb";
-          volumes = [
-            "firefly-iii_db:/var/lib/mysql"
-          ];
-          environmentFiles = [
-            "/run/secrets/firefly-iii_db-env"
-          ];
-          extraOptions = [
-            "--network=traefik"
-          ];
-        };
-        firefly-iii_importer = {
-          image = "benkl/firefly-iii-fints-importer";
-          volumes = [
-            "firefly-iii-importer_configs:/app/configurations"
-          ];
-          extraOptions = stdOptions {
-            name = "firefly-imp";
-            domain = "ff-imp";
-          };
-        };
-      };
     };
   };
 

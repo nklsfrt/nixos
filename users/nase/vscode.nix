@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.vscode = {
     enable = true;
     enableUpdateCheck = false;
@@ -27,9 +28,7 @@
     enable = true;
     nix-direnv.enable = true;
   };
-  home.packages = with pkgs; [
-    nil
-  ];
+  home.packages = with pkgs; [ nil ];
   home.persistence."/persist/home/niklas".directories = [
     ".config/VSCodium"
     ".local/share/direnv"
