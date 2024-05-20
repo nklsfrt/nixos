@@ -3,12 +3,17 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   users.users.nase = {
     name = "nase";
     home = "/home/niklas";
     description = "Niklas Furtwängler";
-    extraGroups = ["wheel" "lp" "scanner"];
+    extraGroups = [
+      "wheel"
+      "lp"
+      "scanner"
+    ];
     isNormalUser = true;
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
@@ -54,13 +59,13 @@
     enable = true;
     dates = "daily";
     flake = "git+https://codeberg.org/nklsfrt/nixos";
-    flags = ["--refresh"];
+    flags = [ "--refresh" ];
   };
 
   nix.settings = {
-    experimental-features = ["nix-command flakes repl-flake"];
+    experimental-features = [ "nix-command flakes repl-flake" ];
     auto-optimise-store = true;
-    trusted-users = ["nase"];
+    trusted-users = [ "nase" ];
   };
 
   nix.gc = {
@@ -83,7 +88,10 @@
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    supportedLocales = ["en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8"];
+    supportedLocales = [
+      "en_US.UTF-8/UTF-8"
+      "de_DE.UTF-8/UTF-8"
+    ];
   };
 
   security.sudo.extraConfig = ''

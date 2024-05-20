@@ -3,11 +3,17 @@
   lib,
   modulesPath,
   ...
-}: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "sd_mod"];
-  boot.kernelModules = ["kvm-amd"];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "usbhid"
+    "sd_mod"
+  ];
+  boot.kernelModules = [ "kvm-amd" ];
 
   fileSystems."/" = {
     device = "tmpfs";
@@ -19,19 +25,26 @@
   fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/96784b15-65e9-49d8-9752-9af9630fb75d";
     fsType = "btrfs";
-    options = ["subvol=nix" "compress=zstd" "noatime"];
+    options = [
+      "subvol=nix"
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   fileSystems."/persist" = {
     device = "/dev/disk/by-uuid/96784b15-65e9-49d8-9752-9af9630fb75d";
     fsType = "btrfs";
-    options = ["subvol=persist" "compress=zstd"];
+    options = [
+      "subvol=persist"
+      "compress=zstd"
+    ];
   };
 
   fileSystems."/var/lib/libvirt/images" = {
     device = "/dev/disk/by-uuid/96784b15-65e9-49d8-9752-9af9630fb75d";
     fsType = "btrfs";
-    options = ["subvol=persist/virt"];
+    options = [ "subvol=persist/virt" ];
   };
 
   fileSystems."/boot" = {

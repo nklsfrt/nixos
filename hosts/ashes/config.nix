@@ -1,12 +1,9 @@
+{ inputs, pkgs, ... }:
 {
-  inputs,
-  pkgs,
-  ...
-}: {
   boot.loader = {
     systemd-boot.enable = false;
     grub = {
-      devices = ["/dev/sda"];
+      devices = [ "/dev/sda" ];
       configurationLimit = 16;
     };
   };
@@ -29,46 +26,54 @@
     firewall = {
       enable = true;
       interfaces = {
-        "ens3".allowedTCPPorts = [80 443 3306];
-        "ens3".allowedUDPPorts = [443];
+        "ens3".allowedTCPPorts = [
+          80
+          443
+          3306
+        ];
+        "ens3".allowedUDPPorts = [ 443 ];
       };
     };
   };
 
-  services.caddy = let
-    webroot = inputs.website.outPath;
-  in {
-    enable = true;
-    adapter = "caddyfile";
-    configFile = builtins.toFile "Caddyfile" ''
-      nklsfrt.de {
-        header Strict-Transport-Security max-age=31536000
-        encode zstd gzip
-        root * ${webroot}
-        file_server
-      }
-
-      www.nklsfrt.de {
-        redir https://nklsfrt.de/
-      }
-
-      proof.nklsfrt.de {
-        redir https://keyoxide.org/aspe:keyoxide.org:54UMIULBO36HX33OT5SO77ZF4A
-      }
-
-      sync.nklsfrt.de {
-        reverse_proxy http://localhost:8384 {
-          header_up Host {upstream_hostport}
+  services.caddy =
+    let
+      webroot = inputs.website.outPath;
+    in
+    {
+      enable = true;
+      adapter = "caddyfile";
+      configFile = builtins.toFile "Caddyfile" ''
+        nklsfrt.de {
+          header Strict-Transport-Security max-age=31536000
+          encode zstd gzip
+          root * ${webroot}
+          file_server
         }
-      }
-    '';
-  };
+
+        www.nklsfrt.de {
+          redir https://nklsfrt.de/
+        }
+
+        proof.nklsfrt.de {
+          redir https://keyoxide.org/aspe:keyoxide.org:54UMIULBO36HX33OT5SO77ZF4A
+        }
+
+        sync.nklsfrt.de {
+          reverse_proxy http://localhost:8384 {
+            header_up Host {upstream_hostport}
+          }
+        }
+      '';
+    };
 
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
     settings = {
-      mysqld = {bind-address = "78.47.95.229";};
+      mysqld = {
+        bind-address = "78.47.95.229";
+      };
     };
   };
 

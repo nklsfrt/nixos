@@ -1,6 +1,8 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   profilePath = "plktvsa.nase";
-in {
+in
+{
   programs.firefox = with pkgs; {
     enable = true;
     package = wrapFirefox firefox-unwrapped {
@@ -58,8 +60,6 @@ in {
     };
   };
   home.persistence."/persist/home/niklas" = {
-    directories = [
-      ".mozilla/firefox/${profilePath}"
-    ];
+    directories = [ ".mozilla/firefox/${profilePath}" ];
   };
 }

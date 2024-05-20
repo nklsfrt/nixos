@@ -3,11 +3,19 @@
   lib,
   modulesPath,
   ...
-}: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "sd_mod" "sr_mod" "rtsx_pci_sdmmc"];
-  boot.kernelModules = ["kvm-intel"];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ehci_pci"
+    "ahci"
+    "sd_mod"
+    "sr_mod"
+    "rtsx_pci_sdmmc"
+  ];
+  boot.kernelModules = [ "kvm-intel" ];
 
   fileSystems."/" = {
     device = "tmpfs";
@@ -19,13 +27,20 @@
   fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/2bff79bb-135e-4f05-b401-68a89cec458f";
     fsType = "btrfs";
-    options = ["subvol=nix" "noatime" "compress=zstd"];
+    options = [
+      "subvol=nix"
+      "noatime"
+      "compress=zstd"
+    ];
   };
 
   fileSystems."/persist" = {
     device = "/dev/disk/by-uuid/2bff79bb-135e-4f05-b401-68a89cec458f";
     fsType = "btrfs";
-    options = ["subvol=persist" "compress=zstd"];
+    options = [
+      "subvol=persist"
+      "compress=zstd"
+    ];
   };
 
   fileSystems."/boot" = {
