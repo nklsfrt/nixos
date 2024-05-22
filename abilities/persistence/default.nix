@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.fuse.userAllowOther = true;
 
   fileSystems."/persist".neededForBoot = true;
@@ -11,8 +12,6 @@
       "/etc/ssh/ssh_host_rsa_key.pub"
       "/etc/ssh/ssh_host_rsa_key"
     ];
-    directories = [
-      "/etc/NetworkManager/system-connections/"
-    ];
+    directories = [ "/etc/NetworkManager/system-connections/" ];
   };
 }
