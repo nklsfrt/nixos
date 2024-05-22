@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.vscode = {
     enable = true;
     enableUpdateCheck = false;
@@ -12,6 +13,8 @@
       "git.autofetch" = true;
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
+      "terminal.integrated.allowWorkspaceConfiguration" = true;
+      "terminal.integrated.allowAddWorkspaceFolderCommand" = true;
     };
     extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
@@ -25,9 +28,7 @@
     enable = true;
     nix-direnv.enable = true;
   };
-  home.packages = with pkgs; [
-    nil
-  ];
+  home.packages = with pkgs; [ nil ];
   home.persistence."/persist/home/niklas".directories = [
     ".config/VSCodium"
     ".local/share/direnv"

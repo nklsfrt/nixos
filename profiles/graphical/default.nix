@@ -3,7 +3,8 @@
   users,
   pkgs,
   ...
-}: {
+}:
+{
   imports = with abilities; [
     gnome
     audio
@@ -22,7 +23,5 @@
     variant = "";
   };
 
-  fonts.packages = with pkgs; [
-    fira-code
-  ];
+  fonts.packages = with pkgs; [ fira-code ];
 }

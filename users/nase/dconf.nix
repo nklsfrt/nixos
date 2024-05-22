@@ -1,6 +1,7 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
-{lib, ...}:
-with lib.hm.gvariant; {
+{ lib, ... }:
+with lib.hm.gvariant;
+{
   dconf.settings = {
     "apps/seahorse" = {
       server-publish-to = "hkps://keys.openpgp.org";
@@ -16,8 +17,13 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/desktop/input-sources" = {
-      sources = [(mkTuple ["xkb" "de"])];
-      xkb-options = ["terminate:ctrl_alt_bksp"];
+      sources = [
+        (mkTuple [
+          "xkb"
+          "de"
+        ])
+      ];
+      xkb-options = [ "terminate:ctrl_alt_bksp" ];
     };
 
     "org/gnome/desktop/interface" = {
@@ -86,7 +92,9 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"];
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -101,8 +109,12 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/shell" = {
-      favorite-apps = ["org.gnome.Nautilus.desktop" "firefox.desktop" "codium.desktop"];
-      enabled-extensions = ["gsconnect@andyholmes.github.io"];
+      favorite-apps = [
+        "org.gnome.Nautilus.desktop"
+        "firefox.desktop"
+        "codium.desktop"
+      ];
+      enabled-extensions = [ "gsconnect@andyholmes.github.io" ];
       welcome-dialog-last-shown-version = "43.1";
     };
 
