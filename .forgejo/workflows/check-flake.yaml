@@ -6,6 +6,4 @@ jobs:
     steps:
       - name: check out repo code
         uses: actions/checkout@v4
-
-      - name: check flake
         run: nix flake check
