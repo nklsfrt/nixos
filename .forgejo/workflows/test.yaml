@@ -2,6 +2,7 @@ on: [push]
 
 jobs:
   echo_test:
+    runs_on: native
     steps:
       - name: echo test
         run: echo "test"
