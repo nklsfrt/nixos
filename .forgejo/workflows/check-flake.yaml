@@ -2,7 +2,7 @@ on: [push]
 
 jobs:
   check_flake:
-    runs-on: nix
+    runs-on: native
     steps:
       - name: check out repo code
         uses: actions/checkout@v4
