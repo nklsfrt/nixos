@@ -1,8 +1,0 @@
-on: [push]
-
-jobs:
-  echo_test:
-    runs-on: native
-    steps:
-      - name: echo test
-        run: echo "test"
