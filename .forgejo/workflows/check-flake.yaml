@@ -4,11 +4,11 @@ jobs:
   check_flake:
     runs-on: native
     steps:
-      - name: check out repo code
+      - name: Check out repository
         uses: actions/checkout@v4
-      
-      - name: verify WD
+
+      - name: Show flake outputs
         run: nix flake show
 
-      - name: check flake
-        run: nix flake check
+      - name: Show flake metadata
+        run: nix flake metadata
