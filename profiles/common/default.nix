@@ -62,25 +62,16 @@
     flags = [ "--refresh" ];
   };
 
-  nix.settings = {
-    experimental-features = [ "nix-command flakes repl-flake" ];
-    auto-optimise-store = true;
-    trusted-users = [ "nase" ];
-  };
-
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
-
-  nix.registry = {
-    nixpkgs = {
-      from = {
-        id = "nixpkgs";
-        type = "indirect";
-      };
-      flake = inputs.nixpkgs;
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+    registry.nixpkgs.flake = inputs.nixpkgs;
+    settings = {
+      experimental-features = [ "nix-command flakes repl-flake" ];
+      trusted-users = [ "nase" ];
     };
   };
 
