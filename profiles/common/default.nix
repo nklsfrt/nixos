@@ -8,7 +8,7 @@
   users.users.nase = {
     name = "nase";
     home = "/home/niklas";
-    description = "Niklas Furtwängler";
+    description = "niklas";
     extraGroups = [
       "wheel"
       "lp"
