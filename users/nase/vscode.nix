@@ -13,12 +13,10 @@
       "git.autofetch" = true;
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
-      "terminal.integrated.allowWorkspaceConfiguration" = true;
-      "terminal.integrated.allowAddWorkspaceFolderCommand" = true;
     };
     extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
-      matklad.rust-analyzer
+      rust-lang.rust-analyzer
       mkhl.direnv
       ms-python.python
       nvarner.typst-lsp
