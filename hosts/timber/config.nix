@@ -20,7 +20,7 @@
   powerManagement.cpuFreqGovernor = "performance";
 
   services.xserver.videoDrivers = [ "amdgpu" ];
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   boot.kernelModules = [ "nct6775" ];
   programs.coolercontrol.enable = true;
