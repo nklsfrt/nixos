@@ -1,0 +1,13 @@
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+
+jobs:
+  update_flake_lock:
+  runs-on: native
+  steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+    
+    - name: Show flake outputs
+      uses: nix flake metadata
