@@ -21,6 +21,11 @@
     fsType = "ext4";
   };
 
+  swapDevices = [ {
+    device = "/var/lib/swapfile";
+    size = 4 * 1024;
+  } ];
+
   networking.useDHCP = lib.mkDefault true;
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
