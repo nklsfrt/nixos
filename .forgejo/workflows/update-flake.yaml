@@ -1,9 +1,8 @@
 name: Update flake
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   update_flake_lock:
@@ -26,4 +25,10 @@ jobs:
 
       - name: Commit
         if: success()
-        run: echo "would commit"
+        run: |
+          git config --global user.name 'forgejo-actions'
+          git config --global user.email 'actions@noreply.forgejo.org'
+          git checkout -b updated-flake
+          git add flake.lock
+          git commit -m 'Update flake.lock'
+          git push origin updated-flake
