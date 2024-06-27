@@ -1,8 +1,11 @@
 name: Update flake
 
 on:
+  push:
+    branches:
+      - 'main'
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '20 4 * * 0'
 
 jobs:
   update_flake_lock:
