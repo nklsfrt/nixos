@@ -1,3 +1,5 @@
+name: Update flake
+
 on:
   schedule:
     - cron: '*/10 * * * *'
@@ -20,3 +22,7 @@ jobs:
 
       - name: Check flake evaluation
         run: nix flake check --log-format raw -vv
+
+      - name: Commit
+        if: success()
+        run:
