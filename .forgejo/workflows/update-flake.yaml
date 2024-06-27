@@ -22,7 +22,7 @@ jobs:
         if: success()
         run: |
           git config --global user.name 'forgejo-actions'
-          git config --global user.email 'actions@noreply.forgejo.org'
+          git config --global user.email 'forgejo-actions@noreply.forgejo.org'
           git checkout -b updated-flake
           git add flake.lock
           git commit -m 'Update flake.lock'
