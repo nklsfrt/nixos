@@ -26,4 +26,4 @@ jobs:
 
       - name: Commit
         if: success()
-        run:
+        run: echo "would commit"
