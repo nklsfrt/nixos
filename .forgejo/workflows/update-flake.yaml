@@ -15,7 +15,7 @@ jobs:
           ref: updated-flake
 
       - name: Rebase from main
-        run: git rebase origin/main
+        run: git rebase origin main
 
       - name: Update flake.lock
         run: nix flake update
