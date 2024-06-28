@@ -15,9 +15,6 @@ jobs:
       - name: Update flake.lock
         run: nix flake update
 
-      - name: Stage flake.lock
-        run: git add flake.lock
-
       - name: Check flake evaluation
         run: nix flake check
 
@@ -26,6 +23,7 @@ jobs:
         run: |
           git config --global user.name '${{ github.actor }}'
           git config --global user.email '${{ github.actor }}@noreply.codeberg.org'
+          git checkout -b updated-flake
           git add flake.lock
           git commit -m 'Update flake.lock'
           git push origin updated-flake
