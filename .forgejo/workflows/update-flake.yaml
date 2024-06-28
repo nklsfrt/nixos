@@ -11,11 +11,6 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-        with:
-          ref: updated-flake
-
-      - name: Rebase from main
-        run: git rebase main
 
       - name: Update flake.lock
         run: nix flake update
