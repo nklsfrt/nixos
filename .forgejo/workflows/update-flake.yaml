@@ -15,7 +15,7 @@ jobs:
           ref: updated-flake
 
       - name: Rebase from main
-        run: git rebase updated-flake main
+        run: git rebase main
 
       - name: Update flake.lock
         run: nix flake update
@@ -34,3 +34,13 @@ jobs:
           git add flake.lock
           git commit -m 'Update flake.lock'
           git push origin updated-flake
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update flake.lock
+          branch: update-flake-branch
+          title: Update flake.lock
+          body: This PR updates the flake.lock file with the latest versions.
+          base: main
