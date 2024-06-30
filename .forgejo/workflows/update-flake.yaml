@@ -17,14 +17,3 @@ jobs:
 
       - name: Check flake evaluation
         run: nix flake check
-
-      - name: Create Pull Request
-        if: success()
-        uses: https://github.com/peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: update flake.lock
-          branch: updated-flake
-          title: Update flake.lock.
-          body: This PR updates the flake.lock file with the latest versions.
-          base: main
