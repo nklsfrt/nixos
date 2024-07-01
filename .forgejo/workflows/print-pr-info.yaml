@@ -1,10 +1,10 @@
 on:
   pull_request:
-    - [opened, closed]
+    types: [opened, closed]
 
 jobs:
   print_pr_info:
     runs-on: native
     steps:
-      - name: print event info
+      - name: hopefully print event info
         run: echo ${{ github.event.pull_request }}
