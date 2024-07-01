@@ -3,5 +3,8 @@ on:
     - [opened, closed]
 
 jobs:
-  steps:
-    - run: echo ${{ github.event.pull_request }}
+  print_pr_info:
+    runs-on: native
+    steps:
+      - name: print event info
+        run: echo ${{ github.event.pull_request }}
