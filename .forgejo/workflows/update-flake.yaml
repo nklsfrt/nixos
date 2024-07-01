@@ -14,3 +14,7 @@ jobs:
 
       - name: Check flake evaluation
         run: nix flake check
+
+      - name: Confirm success
+        if: success()
+        run: echo "Evaluation was successful!"
