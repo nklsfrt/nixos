@@ -6,5 +6,9 @@ jobs:
   print_pr_info:
     runs-on: native
     steps:
-      - name: hopefully print event info
-        run: echo ${{ toJSON(github.event.pull_request) }}
+      - name: print event info
+        shell: bash
+        env:
+          PR: ${{ toJSON(github.event.pull_request) }}
+        run: |
+          echo $PR
