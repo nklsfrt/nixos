@@ -3,16 +3,8 @@
   imports = [ profiles.graphical ];
 
   boot = {
-    initrd.kernelModules = [
-      "vfio"
-      "vfio_pci"
-      "vfio_iommu_type1"
-      "amdgpu"
-    ];
-    kernelParams = [
-      "vfio-pci.ids=1002:731f,1002:ab38"
-      "amd_pstate=active"
-    ];
+    initrd.kernelModules = [ "amdgpu" ];
+    kernelParams = [ "amd_pstate=active" ];
     binfmt.emulatedSystems = [ "aarch64-linux" ];
     supportedFilesystems = [ "ntfs" ];
   };
