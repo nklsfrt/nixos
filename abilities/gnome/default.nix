@@ -20,11 +20,11 @@
 
   services.geoclue2.enable = false;
 
-  environment.systemPackages = with pkgs.gnome; [
+  environment.systemPackages = with pkgs; [
     gnome-calculator
-    pkgs.loupe
-    pkgs.clapper
-    gnome-music
+    loupe
+    clapper
+    gnome.gnome-music
     nautilus
     simple-scan
   ];
