@@ -27,7 +27,7 @@
     enable = true;
     nix-direnv.enable = true;
   };
-  home.packages = with pkgs; [ nil ];
+  home.packages = [ pkgs.nil ];
   home.persistence."/persist/home/niklas".directories = [
     ".config/VSCodium"
     ".local/share/direnv"
