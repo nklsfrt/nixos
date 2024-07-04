@@ -10,6 +10,7 @@
       };
       "editor.fontSize" = 14;
       "editor.fontFamily" = "Fira Code";
+      "editor.fontLigatures" = "true";
       "git.autofetch" = true;
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
