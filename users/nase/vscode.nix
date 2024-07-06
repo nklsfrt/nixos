@@ -5,12 +5,17 @@
     enableUpdateCheck = false;
     package = pkgs.vscodium;
     userSettings = {
+      "[python]" = {
+        "editor.defaultFormatter" = "ms-python.black-formatter";
+        "editor.formatOnSave" = true;
+      };
       "[rust]" = {
         "editor.formatOnSave" = true;
       };
       "editor.fontSize" = 14;
       "editor.fontFamily" = "Fira Code";
       "editor.fontLigatures" = "true";
+      "flake8.args" = [ "--max-line-length=180" ];
       "git.autofetch" = true;
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
@@ -20,6 +25,7 @@
       rust-lang.rust-analyzer
       mkhl.direnv
       ms-python.python
+      ms-python.black-formatter
       nvarner.typst-lsp
     ];
   };
