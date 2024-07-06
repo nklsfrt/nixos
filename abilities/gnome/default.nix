@@ -27,6 +27,7 @@
     gnome.gnome-music
     nautilus
     simple-scan
+    ptyxis
   ];
 
   programs = {
