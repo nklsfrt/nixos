@@ -1,6 +1,9 @@
-{ profiles, ... }:
+{ profiles, abilities, ... }:
 {
-  imports = [ profiles.graphical ];
+  imports = [
+    profiles.graphical
+    abilities.virtualization
+  ];
 
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
