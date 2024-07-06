@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  users.users.nase.extraGroups = [ "libvirtd" ];
+
   virtualisation.libvirtd = {
     enable = true;
     qemu = {
@@ -18,8 +20,8 @@
     };
   };
 
-  virtualisation.containers.enable = true;
   virtualisation = {
+    containers.enable = true;
     podman = {
       enable = true;
       dockerCompat = true;
