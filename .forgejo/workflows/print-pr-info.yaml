@@ -1,6 +1,8 @@
+name: Print information about opened PR
+
 on:
   pull_request:
-    types: [opened, closed]
+    types: [opened, synchronized]
 
 jobs:
   print_pr_info:
