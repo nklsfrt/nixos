@@ -9,6 +9,7 @@
       persistence."/persist/home/niklas" = {
         directories = [
           ".local/share/gnome-boxes"
+          ".config/libvirt"
           ".local/state/syncthing"
         ];
       };
