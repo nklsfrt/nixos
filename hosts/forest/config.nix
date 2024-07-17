@@ -8,9 +8,22 @@ systemd.network =
     lan1 = "lan1";
     lan2 = "lan2";
     lan3 = "lan3";
-    lan-bridge = "bridge1";
-  in
-  {
+  wan-nic = "wan";
+in
+{
+
+  networking = {
+    nat = {
+      enable = true;
+      internalInterfaces = [ lan-bridge ];
+      externalInterface = wan-nic;
+    };
+    firewall.trustedInterfaces = [ lan-bridge ];
+    nftables.enable = true;
+    useNetworkd = true;
+  };
+
+  systemd.network = {
     enable = true;
     links = {
       "10-${wan-nic}" = {
