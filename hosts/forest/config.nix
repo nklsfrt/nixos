@@ -49,22 +49,22 @@ systemd.network =
       "30-${lan1}" = {
         matchConfig.Name = lan1;
         networkConfig.Bridge = lan-bridge;
-        linkConfig.RequiredForOnline = "enslaved";
+        linkConfig.RequiredForOnline = "no-carrier";
       };
       "30-${lan2}" = {
         matchConfig.Name = lan2;
         networkConfig.Bridge = lan-bridge;
-        linkConfig.RequiredForOnline = "enslaved";
+        linkConfig.RequiredForOnline = "no-carrier";
       };
       "30-${lan3}" = {
         matchConfig.Name = lan3;
         networkConfig.Bridge = lan-bridge;
-        linkConfig.RequiredForOnline = "enslaved";
+        linkConfig.RequiredForOnline = "no-carrier";
       };
       "40-${lan-bridge}" = {
         matchConfig.Name = "${lan-bridge}";
         networkConfig.IPForward = true;
-        linkConfig.RequiredForOnline = "routable";
+        linkConfig.RequiredForOnline = "no-carrier";
       };
     };
   };
