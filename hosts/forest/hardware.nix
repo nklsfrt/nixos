@@ -7,49 +7,21 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "nvme"
-    "usbhid"
-    "usb_storage"
-    "sd_mod"
-    "sdhci_pci"
-  ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sdhci_pci" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "rpool/nixos/root";
-    fsType = "zfs";
-  };
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/f8754946-498c-43f7-8165-00ddcd4d76b9";
+      fsType = "ext4";
+    };
 
-  fileSystems."/persist" = {
-    device = "rpool/nixos/persist";
-    fsType = "zfs";
-  };
-
-  fileSystems."/var/lib/docker/volumes" = {
-    device = "rpool/storage/docker-volumes";
-    fsType = "zfs";
-    neededForBoot = true;
-  };
-
-  fileSystems."/media/library" = {
-    device = "rpool/storage/library";
-    fsType = "zfs";
-    neededForBoot = true;
-  };
-
-  fileSystems."/nix" = {
-    device = "rpool/nixos/nix";
-    fsType = "zfs";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/1732-7A79";
-    fsType = "vfat";
-  };
-
-  networking.useDHCP = lib.mkDefault false;
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/4DA6-39AF";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
