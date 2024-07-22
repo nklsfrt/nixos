@@ -156,4 +156,18 @@ in
       };
     };
   };
+
+  services.caddy = {
+    enable = true;
+    configFile = pkgs.writeText "Caddyfile" ''
+      mon.lan {
+        tls internal
+        reverse_proxy 127.0.0.1:19999
+      }
+      agh.lan {
+        tls internal
+        reverse_proxy 127.0.0.1:3000
+      }
+    '';
+  };
 }
