@@ -147,4 +147,13 @@ in
       ];
     };
   };
+
+  services.netdata = {
+    enable = true;
+    config = {
+      web = {
+        "bind to" = "127.0.0.1:19999";
+      };
+    };
+  };
 }
