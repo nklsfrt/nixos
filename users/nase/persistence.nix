@@ -5,7 +5,6 @@
       ".ssh"
       ".gnupg"
       "codeberg"
-      ".mozilla/firefox/vlqejqkk.niklas"
       ".local/share/keyrings"
       ".cache/spotify/Users"
       ".config/evolution"
