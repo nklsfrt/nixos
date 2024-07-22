@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   router-ip = "192.168.69.1";
   lan-bridge = "bridge1";
@@ -21,87 +21,88 @@ in
   };
 
   systemd.network = {
-      enable = true;
-      links = {
-        "10-${wan-nic}" = {
-          matchConfig.PermanentMACAddress = "7c:2b:e1:13:88:9f";
-          linkConfig.Name = "${wan-nic}";
-        };
-        "10-${lan1}" = {
-          matchConfig.PermanentMACAddress = "7c:2b:e1:13:88:a0";
-          linkConfig.Name = lan1;
-        };
-        "10-${lan2}" = {
-          matchConfig.PermanentMACAddress = "7c:2b:e1:13:88:a1";
-          linkConfig.Name = lan2;
-        };
-        "10-${lan3}" = {
-          matchConfig.PermanentMACAddress = "7c:2b:e1:13:88:a2";
-          linkConfig.Name = lan3;
-        };
+    enable = true;
+    links = {
+      "10-${wan-nic}" = {
+        matchConfig.PermanentMACAddress = "7c:2b:e1:13:88:9f";
+        linkConfig.Name = "${wan-nic}";
       };
-      netdevs = {
-        "20-${lan-bridge}" = {
-          netdevConfig = {
-            Kind = "bridge";
-            Name = "${lan-bridge}";
-          };
-        };
+      "10-${lan1}" = {
+        matchConfig.PermanentMACAddress = "7c:2b:e1:13:88:a0";
+        linkConfig.Name = lan1;
       };
-      networks = {
-        "30-${wan-nic}" = {
-          matchConfig.Name = "${wan-nic}";
-          networkConfig = {
-            DHCP = "yes";
-            IPForward = true;
-          };
-        };
-        "30-${lan1}" = {
-          matchConfig.Name = lan1;
-          networkConfig.Bridge = lan-bridge;
-          linkConfig.RequiredForOnline = "no-carrier";
-        };
-        "30-${lan2}" = {
-          matchConfig.Name = lan2;
-          networkConfig.Bridge = lan-bridge;
-          linkConfig.RequiredForOnline = "no-carrier";
-        };
-        "30-${lan3}" = {
-          matchConfig.Name = lan3;
-          networkConfig.Bridge = lan-bridge;
-          linkConfig.RequiredForOnline = "no-carrier";
-        };
-        "40-${lan-bridge}" = {
-          matchConfig.Name = "${lan-bridge}";
-          networkConfig = {
-            IPForward = true;
-            Address = "${router-ip}/24";
-          };
-          linkConfig.RequiredForOnline = "no-carrier";
+      "10-${lan2}" = {
+        matchConfig.PermanentMACAddress = "7c:2b:e1:13:88:a1";
+        linkConfig.Name = lan2;
+      };
+      "10-${lan3}" = {
+        matchConfig.PermanentMACAddress = "7c:2b:e1:13:88:a2";
+        linkConfig.Name = lan3;
+      };
+    };
+    netdevs = {
+      "20-${lan-bridge}" = {
+        netdevConfig = {
+          Kind = "bridge";
+          Name = "${lan-bridge}";
         };
       };
     };
+    networks = {
+      "30-${wan-nic}" = {
+        matchConfig.Name = "${wan-nic}";
+        networkConfig = {
+          DHCP = "yes";
+          IPForward = true;
+        };
+      };
+      "30-${lan1}" = {
+        matchConfig.Name = lan1;
+        networkConfig.Bridge = lan-bridge;
+        linkConfig.RequiredForOnline = "no-carrier";
+      };
+      "30-${lan2}" = {
+        matchConfig.Name = lan2;
+        networkConfig.Bridge = lan-bridge;
+        linkConfig.RequiredForOnline = "no-carrier";
+      };
+      "30-${lan3}" = {
+        matchConfig.Name = lan3;
+        networkConfig.Bridge = lan-bridge;
+        linkConfig.RequiredForOnline = "no-carrier";
+      };
+      "40-${lan-bridge}" = {
+        matchConfig.Name = "${lan-bridge}";
+        networkConfig = {
+          IPForward = true;
+          Address = "${router-ip}/24";
+        };
+        linkConfig.RequiredForOnline = "no-carrier";
+      };
+    };
+  };
 
   services.adguardhome = {
     enable = true;
-    # mutableSettings = false;
-    # host = "127.0.0.1"; # "disable" the web interface
+    mutableSettings = false;
     settings = {
+      # http.address = "127.0.0.1";
       dns = {
         bind_hosts = [ "${router-ip}" ];
-        bind_port = "53";
+        port = 53;
+        upstream_dns = [ "quic://p2.freedns.controld.com" ];
         bootstrap_dns = [
           "9.9.9.10"
           "149.112.112.10"
         ];
-        rewrites = [
-          {
-            domain = "*.lan";
-            answer = "${router-ip}";
-          }
-        ];
         enable_dnssec = true;
       };
+      filtering.rewrites = [
+        {
+          domain = "*.lan";
+          answer = "${router-ip}";
+        }
+      ];
     };
   };
 
