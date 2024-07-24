@@ -56,6 +56,7 @@ in
         "privacy.trackingprotection.enabled" = true;
         "privacy.trackingprotection.socialtracking.enabled" = false;
         "media.videocontrols.picture-in-picture.video-toggle.enabled" = false;
+        "dom.private-attribution.submission.enabled" = false;
       };
       search = {
         force = true;
