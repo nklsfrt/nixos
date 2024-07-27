@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   inputs,
@@ -88,6 +89,11 @@
   security.sudo.extraConfig = ''
     Defaults lecture = never
   '';
+
+  sops = {
+    defaultSopsFile = ../../hosts/${config.networking.hostName}/secrets.yaml;
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  };
 
   services.openssh.enable = true;
   programs.command-not-found.enable = false;
