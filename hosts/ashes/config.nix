@@ -1,10 +1,21 @@
-{ inputs, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   boot.loader = {
     systemd-boot.enable = false;
     grub = {
       devices = [ "/dev/sda" ];
       configurationLimit = 16;
+    };
+  };
+
+  sops = {
+    secrets = {
+      forgejo_runner_token = { };
     };
   };
 
@@ -79,6 +90,17 @@
       mysqld = {
         bind-address = "78.47.95.229";
       };
+    };
+  };
+
+  services.gitea-actions-runner = {
+    package = pkgs.forgejo-runner;
+    instances.default = {
+      enable = true;
+      name = "ashes";
+      url = "https://codeberg.org";
+      tokenFile = config.sops.secrets.forgejo_runner_token.path;
+      labels = ["native:host"];
     };
   };
 }
