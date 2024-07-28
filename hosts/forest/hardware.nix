@@ -7,10 +7,15 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sdhci_pci" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sdhci_pci" ];
+    initrd.kernelModules = [ ];
+    kernelModules = [ "kvm-intel" ];
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+    extraModulePackages = [ ];
+    supportedFilesystems = [ "zfs" ];
+    zfs.extraPools = [ "vault" ];
+  };
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/f8754946-498c-43f7-8165-00ddcd4d76b9";

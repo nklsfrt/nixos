@@ -10,6 +10,7 @@ in
 {
 
   networking = {
+    hostId = "90af6e90";
     nat = {
       enable = true;
       internalInterfaces = [ lan-bridge ];
@@ -170,5 +171,8 @@ in
         reverse_proxy 127.0.0.1:3000
       }
     '';
+    };
+    
+    zfs.autoScrub.enable = true;
   };
 }
