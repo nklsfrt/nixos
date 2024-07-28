@@ -83,94 +83,96 @@ in
     };
   };
 
-  services.adguardhome = {
-    enable = true;
-    mutableSettings = false;
-    settings = {
-      # http.address = "127.0.0.1";
-      dns = {
-        bind_hosts = [ "${router-ip}" ];
-        port = 53;
-        upstream_dns = [ "quic://p2.freedns.controld.com" ];
-        bootstrap_dns = [
-          "9.9.9.10"
-          "149.112.112.10"
-        ];
-        enable_dnssec = true;
-      };
-      filtering.rewrites = [
-        {
-          domain = "*.lan";
-          answer = "${router-ip}";
-        }
-      ];
-    };
-  };
+  services = {
 
-  services.kea.dhcp4 = {
-    enable = true;
-    settings = {
-      option-data = [
-        {
-          name = "domain-name-servers";
-          data = "${router-ip}";
-          always-send = true;
-        }
-        {
-          name = "routers";
-          data = "${router-ip}";
-          always-send = true;
-        }
-      ];
-      interfaces-config.interfaces = [ "${lan-bridge}" ];
-      subnet4 = [
-        {
-          id = 1;
-          subnet = "192.168.69.0/24";
-          pools = [ { pool = "192.168.69.101 - 192.168.69.254"; } ];
-          reservations = [
-            {
-              hostname = "timber";
-              hw-address = "9c:6b:00:06:29:ef";
-              ip-address = "192.168.69.7";
-            }
-            {
-              hostname = "driftwood";
-              hw-address = "d0:53:49:f3:f7:12";
-              ip-address = "192.168.69.5";
-            }
-            {
-              hostname = "ZyXEL NWA50AX";
-              hw-address = "b8:ec:a3:e1:f9:e6";
-              ip-address = "192.168.69.100";
-            }
+    adguardhome = {
+      enable = true;
+      mutableSettings = false;
+      settings = {
+        # http.address = "127.0.0.1";
+        dns = {
+          bind_hosts = [ "${router-ip}" ];
+          port = 53;
+          upstream_dns = [ "quic://p2.freedns.controld.com" ];
+          bootstrap_dns = [
+            "9.9.9.10"
+            "149.112.112.10"
           ];
-        }
-      ];
-    };
-  };
-
-  services.netdata = {
-    enable = true;
-    config = {
-      web = {
-        "bind to" = "127.0.0.1:19999";
+          enable_dnssec = true;
+        };
+        filtering.rewrites = [
+          {
+            domain = "*.lan";
+            answer = "${router-ip}";
+          }
+        ];
       };
     };
-  };
 
-  services.caddy = {
-    enable = true;
-    configFile = pkgs.writeText "Caddyfile" ''
-      mon.lan {
-        tls internal
-        reverse_proxy 127.0.0.1:19999
-      }
-      agh.lan {
-        tls internal
-        reverse_proxy 127.0.0.1:3000
-      }
-    '';
+    kea.dhcp4 = {
+      enable = true;
+      settings = {
+        option-data = [
+          {
+            name = "domain-name-servers";
+            data = "${router-ip}";
+            always-send = true;
+          }
+          {
+            name = "routers";
+            data = "${router-ip}";
+            always-send = true;
+          }
+        ];
+        interfaces-config.interfaces = [ "${lan-bridge}" ];
+        subnet4 = [
+          {
+            id = 1;
+            subnet = "192.168.69.0/24";
+            pools = [ { pool = "192.168.69.101 - 192.168.69.254"; } ];
+            reservations = [
+              {
+                hostname = "timber";
+                hw-address = "9c:6b:00:06:29:ef";
+                ip-address = "192.168.69.7";
+              }
+              {
+                hostname = "driftwood";
+                hw-address = "d0:53:49:f3:f7:12";
+                ip-address = "192.168.69.5";
+              }
+              {
+                hostname = "ZyXEL NWA50AX";
+                hw-address = "b8:ec:a3:e1:f9:e6";
+                ip-address = "192.168.69.100";
+              }
+            ];
+          }
+        ];
+      };
+    };
+
+    netdata = {
+      enable = true;
+      config = {
+        web = {
+          "bind to" = "127.0.0.1:19999";
+        };
+      };
+    };
+
+    caddy = {
+      enable = true;
+      configFile = pkgs.writeText "Caddyfile" ''
+        mon.lan {
+          tls internal
+          reverse_proxy 127.0.0.1:19999
+        }
+        agh.lan {
+          tls internal
+          reverse_proxy 127.0.0.1:3000
+        }
+      '';
     };
     
     zfs.autoScrub.enable = true;
