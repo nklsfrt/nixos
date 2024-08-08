@@ -1,6 +1,7 @@
 name: Print information about opened PR
 
 on:
+  workflow_dispatch:
   pull_request:
     types: [opened, synchronized]
 

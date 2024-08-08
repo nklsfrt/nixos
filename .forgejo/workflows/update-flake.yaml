@@ -1,4 +1,7 @@
+name: Update the flock.lock file
+
 on:
+  workflow_dispatch:
   schedule:
     - cron: '20 4 * * 6'
 
