@@ -83,16 +83,6 @@
     openDefaultPorts = true;
   };
 
-  services.mysql = {
-    enable = true;
-    package = pkgs.mariadb;
-    settings = {
-      mysqld = {
-        bind-address = "78.47.95.229";
-      };
-    };
-  };
-
   services.gitea-actions-runner = {
     package = pkgs.forgejo-runner;
     instances.default = {
