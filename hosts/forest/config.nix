@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   router-ip = "192.168.69.1";
   lan-bridge = "bridge1";
@@ -10,6 +10,9 @@ in
 {
 
   networking = {
+    nameservers = [
+      "76.76.2.11#p2.freedns.controld.com"
+    ];
     hostId = "90af6e90";
     nat = {
       enable = true;
@@ -22,6 +25,7 @@ in
   };
 
   systemd.network = {
+    config.networkConfig.IPv6PrivacyExtensions = true;
     enable = true;
     links = {
       "10-${wan-nic}" = {
@@ -54,7 +58,11 @@ in
         matchConfig.Name = "${wan-nic}";
         networkConfig = {
           DHCP = "yes";
-          IPForward = true;
+          IPForward = "yes";
+          IPv6AcceptRA = "yes";
+        };
+        dhcpV6Config = {
+          PrefixDelegationHint = "::/64";
         };
       };
       "30-${lan1}" = {
@@ -75,81 +83,39 @@ in
       "40-${lan-bridge}" = {
         matchConfig.Name = "${lan-bridge}";
         networkConfig = {
-          IPForward = true;
+          IPForward = "yes";
+          ConfigureWithoutCarrier = "yes";
           Address = "${router-ip}/24";
+          DHCPServer = "yes";
+          IPv6SendRA = "yes";
+          DHCPPrefixDelegation = "yes";
         };
-        linkConfig.RequiredForOnline = "no-carrier";
+        dhcpPrefixDelegationConfig = {
+          UplinkInterface = "wan";
+        };
+        dhcpServerConfig = {
+          DNS = router-ip;
+          PoolOffset = 100;
+          Router = router-ip;
+        };
+        ipv6SendRAConfig = {
+          EmitDNS = "yes";
+          DNS = "_link_local";
+        };
+        # linkConfig.RequiredForOnline = "no-carrier";
       };
     };
   };
 
   services = {
 
-    adguardhome = {
+    resolved = {
       enable = true;
-      mutableSettings = false;
-      settings = {
-        # http.address = "127.0.0.1";
-        dns = {
-          bind_hosts = [ "${router-ip}" ];
-          port = 53;
-          upstream_dns = [ "quic://p2.freedns.controld.com" ];
-          bootstrap_dns = [
-            "9.9.9.10"
-            "149.112.112.10"
-          ];
-          enable_dnssec = true;
-        };
-        filtering.rewrites = [
-          {
-            domain = "*.lan";
-            answer = "${router-ip}";
-          }
-        ];
-      };
-    };
-
-    kea.dhcp4 = {
-      enable = true;
-      settings = {
-        option-data = [
-          {
-            name = "domain-name-servers";
-            data = "${router-ip}";
-            always-send = true;
-          }
-          {
-            name = "routers";
-            data = "${router-ip}";
-            always-send = true;
-          }
-        ];
-        interfaces-config.interfaces = [ "${lan-bridge}" ];
-        subnet4 = [
-          {
-            id = 1;
-            subnet = "192.168.69.0/24";
-            pools = [ { pool = "192.168.69.101 - 192.168.69.254"; } ];
-            reservations = [
-              {
-                hostname = "timber";
-                hw-address = "9c:6b:00:06:29:ef";
-                ip-address = "192.168.69.7";
-              }
-              {
-                hostname = "driftwood";
-                hw-address = "d0:53:49:f3:f7:12";
-                ip-address = "192.168.69.5";
-              }
-              {
-                hostname = "ZyXEL NWA50AX";
-                hw-address = "b8:ec:a3:e1:f9:e6";
-                ip-address = "192.168.69.100";
-              }
-            ];
-          }
-        ];
-      };
+      dnssec = "true";
+      llmnr = "false";
+      dnsovertls = "true";
+      fallbackDns = [ "1.0.0.1" "2606:4700:4700::1001" ];
+      extraConfig = "DNSStubListenerExtra=${router-ip}\nDNSStubListenerExtra=fe80::492:b5ff:fe49:7944";
     };
 
     netdata = {
@@ -159,6 +125,11 @@ in
           "bind to" = "127.0.0.1:19999";
         };
       };
+    };
+
+    paperless = {
+      enable = true;
+      passwordFile = config.sops.secrets.paperless_admin_password.path;
     };
 
     caddy = {
@@ -172,9 +143,17 @@ in
           tls internal
           reverse_proxy 127.0.0.1:3000
         }
+        paper.lan {
+          tls internal
+          reverse_proxy 127.0.0.1:28981
+        }
       '';
     };
-    
+
     zfs.autoScrub.enable = true;
+  };
+
+  sops.secrets = {
+    paperless_admin_password = { };
   };
 }
