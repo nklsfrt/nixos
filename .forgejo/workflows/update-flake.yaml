@@ -1,4 +1,4 @@
-name: Update the flock.lock file
+name: Update the flake.lock file
 
 on:
   workflow_dispatch:
