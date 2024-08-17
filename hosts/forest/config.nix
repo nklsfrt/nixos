@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 let
-  router-ip = "192.168.69.1";
+  router-ipv4 = "192.168.69.1";
+  router-ipv6 = "2001:9e8:e126:d7ff:492:b5ff:fe49:7944";
   lan-bridge = "bridge1";
   lan1 = "lan1";
   lan2 = "lan2";
@@ -10,9 +11,6 @@ in
 {
 
   networking = {
-    nameservers = [
-      "76.76.2.11#p2.freedns.controld.com"
-    ];
     hostId = "90af6e90";
     nat = {
       enable = true;
@@ -85,7 +83,7 @@ in
         networkConfig = {
           IPForward = "yes";
           ConfigureWithoutCarrier = "yes";
-          Address = "${router-ip}/24";
+          Address = "${router-ipv4}/24";
           DHCPServer = "yes";
           IPv6SendRA = "yes";
           DHCPPrefixDelegation = "yes";
@@ -94,13 +92,13 @@ in
           UplinkInterface = "wan";
         };
         dhcpServerConfig = {
-          DNS = router-ip;
+          DNS = router-ipv4;
           PoolOffset = 100;
-          Router = router-ip;
+          Router = router-ipv4;
         };
         ipv6SendRAConfig = {
           EmitDNS = "yes";
-          DNS = "_link_local";
+          DNS = "${router-ipv6}";
         };
         # linkConfig.RequiredForOnline = "no-carrier";
       };
@@ -109,20 +107,51 @@ in
 
   services = {
 
-    resolved = {
+    adguardhome = {
       enable = true;
-      dnssec = "true";
-      llmnr = "false";
-      dnsovertls = "true";
-      fallbackDns = [ "1.0.0.1" "2606:4700:4700::1001" ];
-      extraConfig = "DNSStubListenerExtra=${router-ip}\nDNSStubListenerExtra=fe80::492:b5ff:fe49:7944";
+      mutableSettings = false;
+      settings = {
+        # http.address = "localhost";
+        dns = {
+          bind_hosts = [
+            "${router-ipv4}"
+            "${router-ipv6}"
+          ];
+          port = 53;
+          upstream_dns = [ "quic://p2.freedns.controld.com" ];
+          bootstrap_dns = [
+            "9.9.9.9"
+            "2620:fe::fe"
+          ];
+          bootstrap_prefer_ipv6 = true;
+          fallback_dns = [
+            "9.9.9.9"
+            "2620:fe::fe"
+          ];
+          enable_dnssec = true;
+          serve_http3 = true;
+        };
+        tls = {
+          enabled = true;
+        };
+        filtering.rewrites = [
+          {
+            domain = "*.lan";
+            answer = "${router-ipv4}";
+          }
+          {
+            domain = "*.lan";
+            answer = "${router-ipv6}";
+          }
+        ];
+      };
     };
 
     netdata = {
       enable = true;
       config = {
         web = {
-          "bind to" = "127.0.0.1:19999";
+          "bind to" = "localhost:19999";
         };
       };
     };
@@ -137,15 +166,15 @@ in
       configFile = pkgs.writeText "Caddyfile" ''
         mon.lan {
           tls internal
-          reverse_proxy 127.0.0.1:19999
+          reverse_proxy localhost:19999
         }
         agh.lan {
           tls internal
-          reverse_proxy 127.0.0.1:3000
+          reverse_proxy localhost:3000
         }
         paper.lan {
           tls internal
-          reverse_proxy 127.0.0.1:28981
+          reverse_proxy localhost:28981
         }
       '';
     };
