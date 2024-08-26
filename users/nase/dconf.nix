@@ -31,7 +31,7 @@ with lib.hm.gvariant;
       font-antialiasing = "grayscale";
       font-hinting = "slight";
       gtk-theme = "Adwaita";
-      monospace-font-name = "Iosevka Term 10";
+      monospace-font-name = "Fira Code 11";
     };
 
     "org/gnome/desktop/privacy" = {
@@ -85,6 +85,11 @@ with lib.hm.gvariant;
       workspaces-only-on-primary = true;
     };
 
+    "org/gnome/Ptyxis" = {
+      use-system-font = false;
+      font-name = "Fira Code 10.5 @wght=400";
+    };
+
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-enabled = true;
       night-light-temperature = mkUint32 3200;
@@ -99,7 +104,7 @@ with lib.hm.gvariant;
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       binding = "<Super>Return";
-      command = "footclient";
+      command = "ptyxis --new-window";
       name = "Launch Terminal";
     };
 

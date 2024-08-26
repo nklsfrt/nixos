@@ -6,7 +6,6 @@
     ./dconf.nix
     ./firefox.nix
     ./fish.nix
-    ./foot.nix
     ./git.nix
     ./obsidian.nix
     ./persistence.nix
