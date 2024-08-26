@@ -24,7 +24,7 @@
     gnome-calculator
     loupe
     clapper
-    gnome.gnome-music
+    gnome-music
     nautilus
     simple-scan
     ptyxis
