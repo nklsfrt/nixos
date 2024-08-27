@@ -82,7 +82,7 @@ with lib.hm.gvariant;
       dynamic-workspaces = true;
       edge-tiling = true;
       focus-change-on-pointer-rest = true;
-      workspaces-only-on-primary = true;
+      workspaces-only-on-primary = false;
     };
 
     "org/gnome/Ptyxis" = {
