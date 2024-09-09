@@ -4,7 +4,7 @@
     services.syncthing.enable = true;
     home = {
       packages = builtins.attrValues {
-        inherit (pkgs.gnome) gnome-boxes;
+        inherit (pkgs) gnome-boxes;
       };
       persistence."/persist/home/niklas" = {
         directories = [
