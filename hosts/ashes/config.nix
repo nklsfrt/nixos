@@ -75,6 +75,10 @@
             header_up Host {upstream_hostport}
           }
         }
+
+        kurbelerzeugnis.jetzt {
+          respond Zündung!
+        }
       '';
     };
 
