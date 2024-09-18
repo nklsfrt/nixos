@@ -78,6 +78,15 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  security.sudo.extraRules = [{
+    users = [ "nase" ];
+    runAs = "ALL:ALL";
+    commands = [{
+      command = "${config.system.build.nixos-rebuild}/bin/nixos-rebuild";
+      options = [ "NOPASSWD" ];
+    }];
+  }];
+
   i18n = {
     defaultLocale = "en_US.UTF-8";
     supportedLocales = [
