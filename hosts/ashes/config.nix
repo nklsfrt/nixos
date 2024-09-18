@@ -77,7 +77,7 @@
         }
 
         kurbelerzeugnis.jetzt {
-          respond Zündung!
+          respond "Nicht gestern, nicht morgen - jetzt!"
         }
       '';
     };
