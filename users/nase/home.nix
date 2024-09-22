@@ -8,6 +8,7 @@
     ./fish.nix
     ./git.nix
     ./obsidian.nix
+    ./tmux.nix
     ./persistence.nix
     ./pywal.nix
     ./ssh.nix
