@@ -20,6 +20,10 @@
         description = "Reboot the auto generated Windows boot entry.";
         body = "systemctl reboot --boot-loader-menu=1 --boot-loader-entry=auto-windows";
       };
+      flakify = {
+        description = "Flakify a project. Adds an .envrc and a flake.nix with a devShell.";
+        body = "if test ! -e flake.nix; nix flake new -t github:nix-community/nix-direnv .; else if test ! -e .envrc; echo \"use flake\" > .envrc; direnv allow; end; $EDITOR flake.nix;";
+      };
     };
     plugins = [
       {
