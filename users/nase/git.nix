@@ -12,5 +12,13 @@
       ".envrc"
       ".direnv"
     ];
+    aliases.fpush = "push --force-with-lease";
+    extraConfig = {
+      rerere = {
+        enabled = true;
+        autoUpdate = true;
+      };
+      branch.sort = "-committerdate";
+    };
   };
 }
