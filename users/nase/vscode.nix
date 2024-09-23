@@ -13,7 +13,7 @@
         "editor.formatOnSave" = true;
       };
       "editor.fontSize" = 14;
-      "editor.fontFamily" = "Fira Code";
+      "editor.fontFamily" = "FiraCode Nerd Font";
       "editor.fontLigatures" = "true";
       "flake8.args" = [ "--max-line-length=180" ];
       "git.autofetch" = true;

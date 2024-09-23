@@ -31,7 +31,7 @@ with lib.hm.gvariant;
       font-antialiasing = "grayscale";
       font-hinting = "slight";
       gtk-theme = "Adwaita";
-      monospace-font-name = "Fira Code 11";
+      monospace-font-name = "FiraCode Nerd Font 11";
     };
 
     "org/gnome/desktop/privacy" = {
@@ -87,7 +87,7 @@ with lib.hm.gvariant;
 
     "org/gnome/Ptyxis" = {
       use-system-font = false;
-      font-name = "Fira Code 10.5 @wght=400";
+      font-name = "FiraCode Nerd Font 10.5";
     };
 
     "org/gnome/settings-daemon/plugins/color" = {
