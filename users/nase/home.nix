@@ -4,6 +4,7 @@
     inputs.impermanence.nixosModules.home-manager.impermanence
     inputs.nix-index-database.hmModules.nix-index
     ./dconf.nix
+    ./eza.nix
     ./firefox.nix
     ./fish.nix
     ./git.nix
