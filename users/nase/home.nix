@@ -43,7 +43,6 @@
     pavucontrol
     signal-desktop
     fractal
-    spotify
     tdesktop
   ];
 
