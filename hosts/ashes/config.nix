@@ -94,7 +94,10 @@
       name = "ashes";
       url = "https://codeberg.org";
       tokenFile = config.sops.secrets.forgejo_runner_token.path;
-      labels = [ "native:host" ];
+      labels = [
+        "native:host"
+        "nix-container:docker://nixos/nix:latest"
+      ];
       hostPackages = with pkgs; [
         bash
         coreutils
