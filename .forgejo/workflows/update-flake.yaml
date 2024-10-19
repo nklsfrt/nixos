@@ -29,8 +29,8 @@ jobs:
           "https://codeberg.org/api/v1/repos/nklsfrt/nixos/pulls"
         env:
           RUNNER_PAT: ${{ secrets.RUNNER_PAT }}
-          PR_TITLE: [Scheduled] Updated flake.lock
-          PR_BODY: Lockfile update and flake checked for evaluation.
+          PR_TITLE: "[Scheduled] Updated flake.lock"
+          PR_BODY: "Lockfile update and flake checked for evaluation."
 
       - name: Confirm success
         if: success()
