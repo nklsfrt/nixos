@@ -14,8 +14,8 @@ jobs:
 
       - name: Update flake.lock
         run: |
-          git config user.name Niklas Furtwängler
-          git config user.email nklsfrt@posteo.de
+          git config user.name "Niklas Furtwängler"
+          git config user.email "furtwaengler@posteo.de"
           git checkout -b updated-flake
           nix flake update --commit-lock-file
 
