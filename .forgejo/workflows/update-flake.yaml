@@ -25,12 +25,10 @@ jobs:
       - name: Create a pull request
         run: |
           curl -H "Authorization: token ${RUNNER_PAT}" \
-          --json '{"head": "updated-flake", "base": "main", "title": "${PR_TITLE}", "body": ""}' \
+          --json '{"head": "updated-flake", "base": "main", "title": "[Scheduled] Updated flake.lock"}' \
           "https://codeberg.org/api/v1/repos/nklsfrt/nixos/pulls"
         env:
           RUNNER_PAT: ${{ secrets.RUNNER_PAT }}
-          PR_TITLE: "[Scheduled] Updated flake.lock"
-          PR_BODY: "Lockfile update and flake checked for evaluation."
 
       - name: Confirm success
         if: success()
