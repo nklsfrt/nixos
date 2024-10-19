@@ -26,12 +26,12 @@ jobs:
         run: |
           curl -X POST "https://codeberg.org/api/v1/repos/nklsfrt/nixos/pulls" \
             -H "Authorization: token ${RUNNER_PAT}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "head": "'"updated-flake"'",
-              "base": "'"main"'",
-              "title": "'"Updated flake.lock"'",
-              "body": "'"Test123"'"
+            --json \
+            '{
+              "head": "updated-flake",
+              "base": "main",
+              "title": "Updated flake.lock",
+              "body": "Test123"
             }'
         env:
           RUNNER_PAT: ${{ secrets.RUNNER_PAT }}
