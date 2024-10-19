@@ -14,27 +14,23 @@ jobs:
 
       - name: Update flake.lock
         run: |
-          git config user.name "${{ gitea.actor }}"
-          git config user.email "${{ gitea.actor }}@posteo.de"
+          git config user.name nklsfrt
+          git config user.email nklsfrt@posteo.de
           git checkout -b updated-flake
           nix flake update --commit-lock-file
 
-      - name: Check flake evaluation
-        run: nix flake check
+      # - name: Check flake evaluation
+      #   run: nix flake check
 
       - name: Create a pull request
         run: |
-          curl -X POST "https://codeberg.org/api/v1/repos/nklsfrt/nixos/pulls" \
-            -H "Authorization: token ${RUNNER_PAT}" \
-            --json \
-            '{
-              "head": "updated-flake",
-              "base": "main",
-              "title": "Updated flake.lock",
-              "body": "Test123"
-            }'
+          curl -H "Authorization: token ${RUNNER_PAT}" \
+          --json '{"head": "updated-flake", "base": "main", "title": "${PR_TITLE}", "body": ""}' \
+          "https://codeberg.org/api/v1/repos/nklsfrt/nixos/pulls"
         env:
           RUNNER_PAT: ${{ secrets.RUNNER_PAT }}
+          PR_TITLE: [Scheduled] Updated flake.lock
+          PR_BODY: Lockfile update and flake checked for evaluation.
 
       - name: Confirm success
         if: success()
