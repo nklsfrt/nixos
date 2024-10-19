@@ -25,6 +25,7 @@ jobs:
       - name: Create a pull request
         if: success()
         run: |
+          git push
           curl -H "Authorization: token ${RUNNER_PAT}" \
           --json '{"head": "updated-flake", "base": "main", "title": "[Scheduled] Updated flake.lock"}' \
           "https://codeberg.org/api/v1/repos/nklsfrt/nixos/pulls"
