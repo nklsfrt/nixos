@@ -19,17 +19,14 @@ jobs:
           git checkout -b updated-flake
           nix flake update --commit-lock-file
 
-      # - name: Check flake evaluation
-      #   run: nix flake check
+      - name: Check flake evaluation
+        run: nix flake check
 
       - name: Create a pull request
+        if: success()
         run: |
           curl -H "Authorization: token ${RUNNER_PAT}" \
           --json '{"head": "updated-flake", "base": "main", "title": "[Scheduled] Updated flake.lock"}' \
           "https://codeberg.org/api/v1/repos/nklsfrt/nixos/pulls"
         env:
           RUNNER_PAT: ${{ secrets.RUNNER_PAT }}
-
-      - name: Confirm success
-        if: success()
-        run: echo "Evaluation was successful!"
