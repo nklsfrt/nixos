@@ -71,7 +71,7 @@
     };
     registry.nixpkgs.flake = inputs.nixpkgs;
     settings = {
-      experimental-features = [ "nix-command flakes repl-flake" ];
+      experimental-features = [ "nix-command flakes" ];
       trusted-users = [ "nase" ];
     };
   };
