@@ -53,29 +53,6 @@ with lib.hm.gvariant;
       button-layout = "appmenu:close";
     };
 
-    "org/gnome/evolution/calendar" = {
-      allow-direct-summary-edit = false;
-      confirm-purge = true;
-      time-divisions = 30;
-      use-24hour-format = true;
-      week-start-day-name = "monday";
-      work-day-friday = true;
-      work-day-monday = true;
-      work-day-saturday = false;
-      work-day-sunday = false;
-      work-day-thursday = true;
-      work-day-tuesday = true;
-      work-day-wednesday = true;
-    };
-
-    "org/gnome/evolution/mail" = {
-      browser-close-on-reply-policy = "ask";
-      forward-style-name = "attached";
-      image-loading-policy = "never";
-      prompt-check-if-default-mailer = false;
-      reply-style-name = "quoted";
-    };
-
     "org/gnome/mutter" = {
       attach-modal-dialogs = true;
       center-new-windows = true;
