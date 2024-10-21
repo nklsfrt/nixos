@@ -9,6 +9,7 @@
     ./fish.nix
     ./git.nix
     ./obsidian.nix
+    ./thunderbird.nix
     ./tmux.nix
     ./persistence.nix
     ./pywal.nix
@@ -37,7 +38,6 @@
 
   home.packages = with pkgs; [
     easyeffects
-    evolution
     nix-output-monitor
     onlyoffice-bin
     pavucontrol

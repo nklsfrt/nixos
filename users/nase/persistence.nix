@@ -6,7 +6,6 @@
       ".gnupg"
       "codeberg"
       ".local/share/keyrings"
-      ".config/evolution"
       ".config/gsconnect"
       ".config/Signal"
       ".config/VSCodium"
@@ -14,6 +13,7 @@
       ".local/share/TelegramDesktop"
       ".local/share/PrismLauncher"
       ".local/state/wireplumber"
+      ".thunderbird"
       "Documents"
       "Pictures"
     ];
