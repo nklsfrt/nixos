@@ -23,5 +23,5 @@
     variant = "";
   };
 
-  fonts.packages = with pkgs; [ fira-code-nerdfont ];
+  fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
 }
