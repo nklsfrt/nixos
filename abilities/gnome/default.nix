@@ -2,23 +2,14 @@
 {
   services.xserver = {
     enable = true;
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
+    displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
   };
 
   services.gnome = {
     core-utilities.enable = false;
     gnome-initial-setup.enable = false;
-    gnome-remote-desktop.enable = false;
-    gnome-user-share.enable = false;
-    rygel.enable = false;
-    sushi.enable = true;
   };
-
-  services.geoclue2.enable = false;
 
   environment.systemPackages = with pkgs; [
     gnome-calculator
