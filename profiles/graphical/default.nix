@@ -23,5 +23,8 @@
     variant = "";
   };
 
-  fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    noto-fonts-cjk-sans
+    ];
 }
