@@ -1,8 +1,8 @@
-{ profiles, abilities, ... }:
+{ profiles, ... }:
 {
   imports = [
     profiles.graphical
-    abilities.virtualization
+    # abilities.virtualization
   ];
 
   boot = {
