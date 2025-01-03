@@ -4,11 +4,10 @@
     services.syncthing.enable = true;
     home = {
       packages = builtins.attrValues {
-        inherit (pkgs) gnome-boxes spot helvum;
+        inherit (pkgs) spot helvum;
       };
       persistence."/persist/home/niklas" = {
         directories = [
-          ".local/share/gnome-boxes"
           ".config/libvirt"
           ".local/state/syncthing"
         ];
