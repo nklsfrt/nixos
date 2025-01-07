@@ -27,6 +27,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/interface" = {
+      accent-color = "green";
       color-scheme = "prefer-dark";
       font-antialiasing = "grayscale";
       font-hinting = "slight";
@@ -38,6 +39,10 @@ with lib.hm.gvariant;
       disable-camera = true;
       old-files-age = mkUint32 30;
       recent-files-max-age = -1;
+    };
+
+    "org/gnome/desktop/screensaver" = {
+      picture-uri = "file:///home/niklas/.background-image";
     };
 
     "org/gnome/desktop/session" = {
