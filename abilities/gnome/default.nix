@@ -7,17 +7,11 @@
   };
 
   services.gnome = {
-    core-utilities.enable = false;
     gnome-initial-setup.enable = false;
   };
 
   environment.systemPackages = with pkgs; [
-    gnome-calculator
-    loupe
     clapper
-    gnome-music
-    nautilus
-    simple-scan
     ptyxis
   ];
 
