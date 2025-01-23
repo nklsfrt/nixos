@@ -41,7 +41,7 @@
     easyeffects
     nix-output-monitor
     onlyoffice-bin
-    pavucontrol
+    pwvucontrol
     signal-desktop
     fractal
     tdesktop
