@@ -10,7 +10,6 @@
     ./fish.nix
     ./git.nix
     ./obsidian.nix
-    ./thunderbird.nix
     ./tmux.nix
     ./persistence.nix
     ./pywal.nix
