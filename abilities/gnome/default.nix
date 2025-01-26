@@ -15,6 +15,13 @@
     ptyxis
   ];
 
+  systemd.user.units."org.gnome.Shell@wayland.service".text =
+    ''
+      [Service]
+      ExecStart=
+      ExecStart=${pkgs.gnome-shell.outPath}/bin/gnome-shell --no-x11
+    '';
+
   programs = {
     kdeconnect = {
       enable = true;
