@@ -13,5 +13,8 @@ jobs:
       env:
         NIX_CONFIG: experimental-features = nix-command flakes
     steps:
+      - name: Check out repository
+        uses: https://code.forgejo.org/actions/checkout@v4
+
       - name: Check flake evaluation
         run: nix flake check
