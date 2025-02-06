@@ -26,7 +26,7 @@
       mkhl.direnv
       ms-python.python
       ms-python.black-formatter
-      nvarner.typst-lsp
+      myriad-dreamin.tinymist
     ];
   };
   programs.direnv = {
