@@ -10,6 +10,8 @@ jobs:
     runs-on: codeberg-small
     container:
       image: nixos/nix:2.26.1
+      env:
+        NIX_CONFIG: experimental-features = "nix-command flakes"
     steps:
       - name: Check flake evaluation
         run: nix flake check
