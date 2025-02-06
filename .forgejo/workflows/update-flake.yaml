@@ -19,9 +19,6 @@ jobs:
           git checkout -b updated-flake
           nix flake update --commit-lock-file
 
-      # - name: Check flake evaluation
-      #   run: nix flake check
-
       - name: Create a pull request
         if: success()
         run: |

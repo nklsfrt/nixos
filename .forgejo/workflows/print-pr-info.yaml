@@ -7,11 +7,9 @@ on:
 
 jobs:
   print_pr_info:
-    runs-on: native
+    runs-on: codeberg-small
+    container:
+      image: nixos/nix:2.26.1
     steps:
-      - name: print event info
-        shell: bash
-        env:
-          PR: ${{ toJSON(github.event.pull_request) }}
-        run: |
-          echo $PR
+      - name: Check flake evaluation
+        run: nix flake check
