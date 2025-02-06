@@ -15,5 +15,7 @@ jobs:
     steps:
       - name: Check flake evaluation
         run: |
-          git clone $GITHUB_HEAD_REF .
+          echo $GITHUB_SHA
+          echo ${{ github.event.pull_request.head.clone_url }}
+          git clone ${{ github.event.pull_request.head.clone_url }} .
           nix flake check
