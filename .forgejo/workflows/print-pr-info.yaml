@@ -3,7 +3,8 @@ name: Ensure valid configuration
 on:
   workflow_dispatch:
   pull_request:
-    types: [opened, synchronized]
+    types: [ opened, synchronized ]
+    branches: [ main ]
 
 jobs:
   validate:
@@ -13,9 +14,9 @@ jobs:
       env:
         NIX_CONFIG: experimental-features = nix-command flakes
     steps:
-      - name: Check flake evaluation
+      - name: Checkout repo
         run: |
-          echo $GITHUB_SHA
-          echo ${{ github.event.pull_request.head.clone_url }}
-          git clone ${{ github.event.pull_request.head.clone_url }} .
-          nix flake check
+          git clone https://codeberg.org/nklsfrt/nixos/ .
+          git checkout $GITHUB_SHA
+      - name: Check flake evaluation
+        run: nix flake check
