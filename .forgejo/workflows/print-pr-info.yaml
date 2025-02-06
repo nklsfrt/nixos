@@ -1,4 +1,4 @@
-name: Print information about opened PR
+name: Ensure valid configuration
 
 on:
   workflow_dispatch:
@@ -6,15 +6,14 @@ on:
     types: [opened, synchronized]
 
 jobs:
-  print_pr_info:
+  validate:
     runs-on: codeberg-small
     container:
       image: nixos/nix:2.26.1
       env:
         NIX_CONFIG: experimental-features = nix-command flakes
     steps:
-      - name: Check out repository
-        run: git clone ${{ github.event.repository.clone_url }}
-
       - name: Check flake evaluation
-        run: nix flake check
+        run: |
+          git clone $GITHUB_HEAD_REF .
+          nix flake check
