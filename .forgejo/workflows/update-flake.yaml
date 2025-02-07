@@ -7,7 +7,7 @@ on:
 
 jobs:
   update_flake_lock:
-    runs-on: native
+    runs-on: codeberg-tiny-lazy
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -22,7 +22,7 @@ jobs:
       - name: Create a pull request
         if: success()
         run: |
-          git push --set-upstream origin updated-flake
+          git push --force --set-upstream origin updated-flake
           curl -H "Authorization: token ${RUNNER_PAT}" \
           --json '{"head": "updated-flake", "base": "main", "title": "[Scheduled] Updated flake.lock"}' \
           "https://codeberg.org/api/v1/repos/nklsfrt/nixos/pulls"
