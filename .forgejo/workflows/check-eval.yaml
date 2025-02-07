@@ -1,7 +1,6 @@
 name: Ensure valid configuration
 
 on:
-  workflow_dispatch:
   pull_request:
     types: [ opened, synchronized ]
     branches: [ main ]
