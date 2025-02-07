@@ -2,7 +2,7 @@ name: Ensure valid configuration
 
 on:
   pull_request:
-    types: [ opened, synchronized ]
+    types: [ opened, synchronize ]
     branches: [ main ]
 
 jobs:
