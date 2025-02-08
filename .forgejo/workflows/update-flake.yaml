@@ -29,6 +29,7 @@ jobs:
           apt update && apt upgrade curl -y
           curl -H "Authorization: token ${RUNNER_PAT}" \
           -H "Content-Type: application/json" \
+          -H "Accept: application/json" \
           --data '{"head": "updated-flake", "base": "main", "title": "[Scheduled] Updated flake.lock"}' \
           "https://codeberg.org/api/v1/repos/nklsfrt/nixos/pulls"
         env:
