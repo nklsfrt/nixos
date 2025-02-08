@@ -7,10 +7,13 @@ on:
 
 jobs:
   update_flake_lock:
-    runs-on: native
+    runs-on: codeberg-tiny
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Install nix package manager
+        uses: https://github.com/DeterminateSystems/nix-installer-action@v16
 
       - name: Update flake.lock
         run: |
