@@ -28,7 +28,8 @@ jobs:
           git push --force --set-upstream origin updated-flake
           apt update && apt upgrade curl -y
           curl -H "Authorization: token ${RUNNER_PAT}" \
-          --json '{"head": "updated-flake", "base": "main", "title": "[Scheduled] Updated flake.lock"}' \
+          -H "Content-Type: application/json" \
+          --data '{"head": "updated-flake", "base": "main", "title": "[Scheduled] Updated flake.lock"}' \
           "https://codeberg.org/api/v1/repos/nklsfrt/nixos/pulls"
         env:
           RUNNER_PAT: ${{ secrets.RUNNER_PAT }}
