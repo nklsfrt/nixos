@@ -26,7 +26,7 @@ jobs:
         if: success()
         run: |
           git push --force --set-upstream origin updated-flake
-          curl -H "Authorization: token ${GITHUB_TOKEN}" \
+          curl -H "Authorization: token ${RUNNER_PAT}" \
           -H "Content-Type: application/json" \
           -H "Accept: application/json" \
           --data '{"head": "updated-flake", "base": "main", "title": "[Scheduled] Updated flake.lock"}' \
