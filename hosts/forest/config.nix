@@ -1,12 +1,13 @@
 { config, pkgs, ... }:
 let
   router-ipv4 = "192.168.69.1";
-  router-ipv6 = "2001:9e8:e126:d7ff:492:b5ff:fe49:7944";
+  router-ula = "fd5e:08d3:3e55::1";
   lan-bridge = "bridge1";
   lan1 = "lan1";
   lan2 = "lan2";
   lan3 = "lan3";
   wan-nic = "wan";
+  domain = "home.arpa";
 in
 {
 
@@ -17,7 +18,11 @@ in
       internalInterfaces = [ lan-bridge ];
       externalInterface = wan-nic;
     };
-    firewall.trustedInterfaces = [ lan-bridge ];
+    firewall = {
+      trustedInterfaces = [ lan-bridge ];
+      filterForward = true;
+      # extraForwardRules = "";
+    };
     nftables.enable = true;
     useNetworkd = true;
   };
@@ -28,7 +33,7 @@ in
     links = {
       "10-${wan-nic}" = {
         matchConfig.PermanentMACAddress = "7c:2b:e1:13:88:9f";
-        linkConfig.Name = "${wan-nic}";
+        linkConfig.Name = wan-nic;
       };
       "10-${lan1}" = {
         matchConfig.PermanentMACAddress = "7c:2b:e1:13:88:a0";
@@ -56,9 +61,11 @@ in
         matchConfig.Name = "${wan-nic}";
         networkConfig = {
           DHCP = "yes";
-          IPForward = "yes";
+          IPv4Forwarding = "yes";
+          IPv6Forwarding = "yes";
           IPv6AcceptRA = "yes";
         };
+        ipv6AcceptRAConfig.UseAutonomousPrefix = "no";
         dhcpV6Config = {
           PrefixDelegationHint = "::/64";
         };
@@ -81,9 +88,10 @@ in
       "40-${lan-bridge}" = {
         matchConfig.Name = "${lan-bridge}";
         networkConfig = {
-          IPForward = "yes";
+          IPv4Forwarding = "yes";
+          IPv6Forwarding = "yes";
           ConfigureWithoutCarrier = "yes";
-          Address = "${router-ipv4}/24";
+          LinkLocalAddressing = "ipv6";
           DHCPServer = "yes";
           IPv6SendRA = "yes";
           DHCPPrefixDelegation = "yes";
@@ -98,9 +106,17 @@ in
         };
         ipv6SendRAConfig = {
           EmitDNS = "yes";
-          DNS = "${router-ipv6}";
+          DNS = "${router-ula}";
         };
-        # linkConfig.RequiredForOnline = "no-carrier";
+        ipv6Prefixes = [
+          {
+            Prefix = "fd5e:08d3:3e55::/64";
+          }
+        ];
+        address = [
+          "${router-ipv4}/24"
+          "${router-ula}/64"
+        ];
       };
     };
   };
@@ -111,11 +127,10 @@ in
       enable = true;
       mutableSettings = false;
       settings = {
-        # http.address = "localhost";
         dns = {
           bind_hosts = [
             "${router-ipv4}"
-            "${router-ipv6}"
+            "${router-ula}"
           ];
           port = 53;
           upstream_dns = [ "quic://p2.freedns.controld.com" ];
@@ -136,12 +151,12 @@ in
         };
         filtering.rewrites = [
           {
-            domain = "*.lan";
+            domain = "*.${domain}";
             answer = "${router-ipv4}";
           }
           {
-            domain = "*.lan";
-            answer = "${router-ipv6}";
+            domain = "*.${domain}";
+            answer = "${router-ula}";
           }
         ];
       };
@@ -158,21 +173,25 @@ in
 
     paperless = {
       enable = true;
+      settings = {
+        PAPERLESS_URL = "https://paper.${domain}";
+        PAPERLESS_OCR_LANGUAGE = "deu+eng";
+      };
       passwordFile = config.sops.secrets.paperless_admin_password.path;
     };
 
     caddy = {
       enable = true;
       configFile = pkgs.writeText "Caddyfile" ''
-        mon.lan {
+        mon.${domain} {
           tls internal
           reverse_proxy localhost:19999
         }
-        agh.lan {
+        agh.${domain} {
           tls internal
           reverse_proxy localhost:3000
         }
-        paper.lan {
+        paper.${domain} {
           tls internal
           reverse_proxy localhost:28981
         }
