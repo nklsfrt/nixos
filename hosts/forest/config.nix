@@ -28,7 +28,10 @@ in
   };
 
   systemd.network = {
-    config.networkConfig.IPv6PrivacyExtensions = true;
+    config.networkConfig = {
+      IPv6PrivacyExtensions = true;
+      IPv6Forwarding = "yes";
+    };
     enable = true;
     links = {
       "10-${wan-nic}" = {
@@ -62,7 +65,6 @@ in
         networkConfig = {
           DHCP = "yes";
           IPv4Forwarding = "yes";
-          IPv6Forwarding = "yes";
           IPv6AcceptRA = "yes";
         };
         ipv6AcceptRAConfig.UseAutonomousPrefix = "no";
@@ -89,7 +91,6 @@ in
         matchConfig.Name = "${lan-bridge}";
         networkConfig = {
           IPv4Forwarding = "yes";
-          IPv6Forwarding = "yes";
           ConfigureWithoutCarrier = "yes";
           LinkLocalAddressing = "ipv6";
           DHCPServer = "yes";
