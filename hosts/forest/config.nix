@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
   router-ipv4 = "192.168.69.1";
-  router-ula = "fd5e:08d3:3e55::1";
+  router-ula = "fd5e:08d3:3e55::1"; # first /64 subnet of fd5e:08d3:3e55::/48
   lan-bridge = "bridge1";
   lan1 = "lan1";
   lan2 = "lan2";
@@ -21,7 +21,6 @@ in
     firewall = {
       trustedInterfaces = [ lan-bridge ];
       filterForward = true;
-      # extraForwardRules = "";
     };
     nftables.enable = true;
     useNetworkd = true;
@@ -123,7 +122,6 @@ in
   };
 
   services = {
-
     adguardhome = {
       enable = true;
       mutableSettings = false;
