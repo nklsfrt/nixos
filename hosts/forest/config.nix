@@ -125,6 +125,8 @@ in
     adguardhome = {
       enable = true;
       mutableSettings = false;
+      host = "127.0.0.1";
+      port = 3000;
       settings = {
         dns = {
           bind_hosts = [
