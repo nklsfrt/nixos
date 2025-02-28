@@ -65,6 +65,10 @@ in
           DHCP = "yes";
           IPv4Forwarding = "yes";
           IPv6AcceptRA = "yes";
+          IPv6LinkLocalAddressGenerationMode = "stable-privacy";
+        };
+        ipv6AcceptRAConfig = {
+          Token = "prefixstable";
         };
         ipv6AcceptRAConfig.UseAutonomousPrefix = "no";
         dhcpV6Config = {
@@ -92,12 +96,14 @@ in
           IPv4Forwarding = "yes";
           ConfigureWithoutCarrier = "yes";
           LinkLocalAddressing = "ipv6";
+          IPv6LinkLocalAddressGenerationMode = "stable-privacy";
           DHCPServer = "yes";
           IPv6SendRA = "yes";
           DHCPPrefixDelegation = "yes";
         };
         dhcpPrefixDelegationConfig = {
           UplinkInterface = "wan";
+          Token = "prefixstable";
         };
         dhcpServerConfig = {
           DNS = router-ipv4;
