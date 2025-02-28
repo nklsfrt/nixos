@@ -111,11 +111,12 @@ in
         ipv6Prefixes = [
           {
             Prefix = "fd5e:08d3:3e55::/64";
+            Assign = true;
+            Token = "static:::1";
           }
         ];
         address = [
           "${router-ipv4}/24"
-          "${router-ula}/64"
         ];
       };
     };
