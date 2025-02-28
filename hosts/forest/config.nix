@@ -71,7 +71,6 @@ in
           Token = "prefixstable";
           DHCPv6Client = "always";
         };
-        ipv6AcceptRAConfig.UseAutonomousPrefix = "no";
         dhcpV6Config = {
           UseAddress = "no";
           PrefixDelegationHint = "::/64";
