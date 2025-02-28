@@ -69,9 +69,11 @@ in
         };
         ipv6AcceptRAConfig = {
           Token = "prefixstable";
+          DHCPv6Client = "always";
         };
         ipv6AcceptRAConfig.UseAutonomousPrefix = "no";
         dhcpV6Config = {
+          UseAddress = "no";
           PrefixDelegationHint = "::/64";
         };
       };
@@ -92,6 +94,7 @@ in
       };
       "40-${lan-bridge}" = {
         matchConfig.Name = "${lan-bridge}";
+        linkConfig.RequiredForOnline = "routable";
         networkConfig = {
           IPv4Forwarding = "yes";
           ConfigureWithoutCarrier = "yes";
