@@ -23,14 +23,18 @@ pipe ./. [
           users
           ;
       };
-      modules = [
-        impermanence.nixosModules.impermanence
-        sops-nix.nixosModules.sops
-        { networking.hostName = mkDefault name; }
-        ./${name}/config.nix
-        ./${name}/hardware.nix
-        profiles.common
-      ] ++ optional (builtins.pathExists ./${name}/home.nix) ./${name}/home.nix;
+      modules =
+        [
+          impermanence.nixosModules.impermanence
+          sops-nix.nixosModules.sops
+          disko.nixosModules.disko
+          { networking.hostName = mkDefault name; }
+          ./${name}/config.nix
+          ./${name}/hardware.nix
+          profiles.common
+        ]
+        ++ optional (builtins.pathExists ./${name}/home.nix) ./${name}/home.nix
+        ++ optional (builtins.pathExists ./${name}/disks.nix) ./${name}/disks.nix;
     }
   ))
 ]
