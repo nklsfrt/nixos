@@ -1,6 +1,6 @@
 { ... }:
 {
-  home.persistence."/persist/home/niklas" = {
+  home.persistence."/persist/home/nase" = {
     directories = [
       ".ssh"
       ".gnupg"

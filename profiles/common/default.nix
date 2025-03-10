@@ -8,7 +8,7 @@
 {
   users.users.nase = {
     name = "nase";
-    home = "/home/niklas";
+    home = "/home/nase";
     description = "niklas";
     extraGroups = [
       "wheel"
@@ -40,7 +40,7 @@
   system.stateVersion = "22.05";
 
   boot = {
-    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages;
     loader = {
       systemd-boot = {
         enable = lib.mkDefault true;
