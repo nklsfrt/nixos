@@ -25,8 +25,6 @@
         jnoortheen.nix-ide
         rust-lang.rust-analyzer
         mkhl.direnv
-        ms-python.python
-        ms-python.black-formatter
         myriad-dreamin.tinymist
       ];
     };
@@ -36,7 +34,7 @@
     nix-direnv.enable = true;
   };
   home.packages = [ pkgs.nil ];
-  home.persistence."/persist/home/niklas".directories = [
+  home.persistence."/persist/home/nase".directories = [
     ".config/VSCodium"
     ".local/share/direnv"
   ];

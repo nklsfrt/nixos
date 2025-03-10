@@ -3,6 +3,7 @@
   programs.fuse.userAllowOther = true;
 
   fileSystems."/persist".neededForBoot = true;
+  fileSystems."/persist/home/nase".neededForBoot = true;
 
   environment.persistence."/persist" = {
     hideMounts = true;

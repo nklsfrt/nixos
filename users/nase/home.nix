@@ -19,7 +19,7 @@
 
   home = {
     username = "nase";
-    homeDirectory = "/home/niklas";
+    homeDirectory = "/home/nase";
     stateVersion = "22.05";
     language = {
       base = "en_US.UTF-8";

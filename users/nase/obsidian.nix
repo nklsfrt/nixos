@@ -1,5 +1,5 @@
 { pkgs, ... }:
 {
   home.packages = [ pkgs.obsidian ];
-  home.persistence."/persist/home/niklas".directories = [ "Obsidian" ];
+  home.persistence."/persist/home/nase".directories = [ "Obsidian" ];
 }

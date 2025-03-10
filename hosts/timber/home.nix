@@ -6,7 +6,7 @@
       packages = builtins.attrValues {
         inherit (pkgs) spot helvum;
       };
-      persistence."/persist/home/niklas" = {
+      persistence."/persist/home/nase" = {
         directories = [
           ".config/libvirt"
           ".local/state/syncthing"
