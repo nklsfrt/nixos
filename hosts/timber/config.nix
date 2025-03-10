@@ -5,6 +5,8 @@
     # abilities.virtualization
   ];
 
+  networking.hostId = "c463cfe4";
+
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
     kernelParams = [ "amd_pstate=active" ];
