@@ -11,7 +11,10 @@
       ".config/VSCodium"
       ".local/share/fractal"
       ".local/share/TelegramDesktop"
-      ".local/share/PrismLauncher"
+      {
+        directory = ".local/share/PrismLauncher";
+        method = "symlink";
+      }
       ".local/state/wireplumber"
       ".thunderbird"
       "Documents"
