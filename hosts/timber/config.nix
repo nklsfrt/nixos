@@ -10,7 +10,6 @@
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
     kernelParams = [ "amd_pstate=active" ];
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
     supportedFilesystems = [ "ntfs" ];
   };
 
