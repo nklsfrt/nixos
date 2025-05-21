@@ -4,7 +4,7 @@
     services.syncthing.enable = true;
     home = {
       packages = builtins.attrValues {
-        inherit (pkgs) spot helvum prismlauncher;
+        inherit (pkgs) spot helvum prismlauncher gnome-boxes;
       };
       persistence."/persist/home/nase" = {
         directories = [
