@@ -1,4 +1,4 @@
-{ profiles, ... }:
+{ lib, profiles, ... }:
 {
   imports = [
     profiles.graphical
@@ -8,7 +8,12 @@
   networking.hostId = "c463cfe4";
 
   boot = {
-    initrd.kernelModules = [ "amdgpu" ];
+    initrd = {
+      kernelModules = [ "amdgpu" ];
+      postResumeCommands = lib.mkAfter ''
+        zfs rollback -r zroot/system/root@blank
+      '';
+    };
     kernelParams = [ "amd_pstate=active" ];
     supportedFilesystems = [ "ntfs" ];
   };
