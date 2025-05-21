@@ -67,7 +67,7 @@
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 7d";
+      options = "--delete-older-than 30d";
     };
     registry.nixpkgs.flake = inputs.nixpkgs;
     settings = {
