@@ -39,7 +39,10 @@
   home.packages = with pkgs; [
     easyeffects
     nix-output-monitor
-    onlyoffice-bin
+    libreoffice
+    hunspell
+    hunspellDicts.de_DE
+    hunspellDicts.en_US
     pwvucontrol
     signal-desktop
     fractal
