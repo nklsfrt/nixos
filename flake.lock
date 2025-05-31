@@ -1,5 +1,23 @@
 {
   "nodes": {
+    "devshells": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1748655908,
+        "narHash": "sha256-m76bpgrnHh9EFL/s3tPY+JzKcrDVJDRWgEh15gf742E=",
+        "ref": "refs/heads/main",
+        "rev": "4f746556a7da5554fd28dc05b511f3d018ab8c1a",
+        "revCount": 4,
+        "type": "git",
+        "url": "https://codeberg.org/nklsfrt/devshells"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/nklsfrt/devshells"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -78,6 +96,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1748460289,
+        "narHash": "sha256-7doLyJBzCllvqX4gszYtmZUToxKvMUrg45EUWaUYmBg=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "96ec055edbe5ee227f28cdbc3f1ddf1df5965102",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1748370509,
         "narHash": "sha256-QlL8slIgc16W5UaI3w7xHQEP+Qmv/6vSNTpoZrrSlbk=",
         "owner": "NixOS",
@@ -94,11 +128,12 @@
     },
     "root": {
       "inputs": {
+        "devshells": "devshells",
         "disko": "disko",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nix-index-database": "nix-index-database",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "sops-nix": "sops-nix",
         "website": "website"
       }
