@@ -29,13 +29,6 @@
       ];
     };
   };
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
   home.packages = [ pkgs.nil ];
-  home.persistence."/persist/home/nase".directories = [
-    ".config/VSCodium"
-    ".local/share/direnv"
-  ];
+  home.persistence."/persist/home/nase".directories = [ ".config/VSCodium" ];
 }
