@@ -16,6 +16,7 @@
     ./pywal.nix
     ./ssh.nix
     ./vscode.nix
+    ./zeditor.nix
   ];
 
   home = {
