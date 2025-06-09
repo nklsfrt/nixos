@@ -28,6 +28,10 @@
         directory = "Pictures";
         method = "symlink";
       }
+      {
+        directory = "Videos";
+        method = "symlink";
+      }
     ];
     files = [
       "./.background-image"
