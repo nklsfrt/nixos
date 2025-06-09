@@ -4,7 +4,7 @@
     directories = [
       ".ssh"
       ".gnupg"
-      "codeberg"
+      "code"
       ".local/share/keyrings"
       ".config/gsconnect"
       ".config/Signal"
