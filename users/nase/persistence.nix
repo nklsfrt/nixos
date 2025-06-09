@@ -4,7 +4,6 @@
     directories = [
       ".ssh"
       ".gnupg"
-      "code"
       ".local/share/keyrings"
       ".config/gsconnect"
       ".config/Signal"
@@ -17,8 +16,18 @@
       }
       ".local/state/wireplumber"
       ".thunderbird"
-      "Documents"
-      "Pictures"
+      {
+        directory = "code";
+        method = "symlink";
+      }
+      {
+        directory = "Documents";
+        method = "symlink";
+      }
+      {
+        directory = "Pictures";
+        method = "symlink";
+      }
     ];
     files = [
       "./.background-image"
