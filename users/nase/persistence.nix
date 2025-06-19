@@ -25,6 +25,10 @@
         method = "symlink";
       }
       {
+        directory = "Music";
+        method = "symlink";
+      }
+      {
         directory = "Pictures";
         method = "symlink";
       }
