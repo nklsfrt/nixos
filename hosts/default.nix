@@ -10,7 +10,7 @@ with nixpkgs.lib;
 with builtins;
 pipe ./. [
   readDir
-  (filterAttrs (n: v: v == "directory"))
+  (filterAttrs (_: v: v == "directory"))
   (mapAttrs (
     name: _:
     nixosSystem {
