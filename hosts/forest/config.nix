@@ -197,16 +197,16 @@ in
       enable = true;
       configFile = pkgs.writeText "Caddyfile" ''
         mon.${domain} {
-          tls internal
-          reverse_proxy localhost:19999
+            tls internal
+            reverse_proxy localhost:61208
         }
         agh.${domain} {
-          tls internal
-          reverse_proxy localhost:3000
+            tls internal
+            reverse_proxy localhost:3000
         }
         paper.${domain} {
-          tls internal
-          reverse_proxy localhost:28981
+            tls internal
+            reverse_proxy localhost:28981
         }
       '';
     };
