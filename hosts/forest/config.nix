@@ -1,7 +1,9 @@
 { config, pkgs, ... }:
 let
   router-ipv4 = "192.168.69.1";
-  router-ula = "fd5e:08d3:3e55::1"; # first /64 subnet of fd5e:08d3:3e55::/48
+  ula-network-address = "fd5e:08d3:3e55::"; # first /64 subnet of fd5e:08d3:3e55::/48
+  ula-network-size = "/64";
+  router-ula-address = "${ula-network-address}1";
   lan-bridge = "bridge1";
   lan1 = "lan1";
   lan2 = "lan2";
@@ -114,11 +116,11 @@ in
         };
         ipv6SendRAConfig = {
           EmitDNS = "yes";
-          DNS = "${router-ula}";
+          DNS = "${router-ula-address}";
         };
         ipv6Prefixes = [
           {
-            Prefix = "fd5e:08d3:3e55::/64";
+            Prefix = ula-network-address + ula-network-size;
             Assign = true;
             Token = "static:::1";
           }
@@ -140,7 +142,7 @@ in
         dns = {
           bind_hosts = [
             "${router-ipv4}"
-            "${router-ula}"
+            "${router-ula-address}"
           ];
           port = 53;
           upstream_dns = [
@@ -169,7 +171,7 @@ in
           }
           {
             domain = "*.${domain}";
-            answer = "${router-ula}";
+            answer = "${router-ula-address}";
           }
         ];
       };
