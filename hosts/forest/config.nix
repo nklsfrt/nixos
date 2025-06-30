@@ -175,14 +175,35 @@ in
       };
     };
 
-    netdata = {
-      enable = true;
-      config = {
-        web = {
-          "bind to" = "localhost:19999";
-        };
+    glances =
+      let
+        configFile = pkgs.writeText "glances.conf" ''
+          [percpu]
+          disable=False
+          max_cpu_display=4
+          [gpu]
+          disable=True
+          [ip]
+          public_disabled=False
+          public_api=https://ipv6.ipleak.net/json/
+          public_field=ip
+          public_template={continent_name}/{country_name}/{city_name}
+          [connections]
+          disable=True
+          [irq]
+          disable=True
+        '';
+      in
+      {
+        enable = true;
+        extraArgs = [
+          "--bind"
+          "127.0.0.1"
+          "--webserver"
+          "--config"
+          "${configFile}"
+        ];
       };
-    };
 
     paperless = {
       enable = true;
