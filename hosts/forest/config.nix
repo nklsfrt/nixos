@@ -145,7 +145,7 @@ in
           port = 53;
           upstream_dns = [
             "quic://p2.freedns.controld.com"
-            "quic://dns.de.futuredns.eu.org"
+            "quic://dns0.eu"
           ];
           bootstrap_dns = [
             "9.9.9.9"
