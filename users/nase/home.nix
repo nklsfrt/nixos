@@ -9,6 +9,7 @@
     ./eza.nix
     ./firefox.nix
     ./fish.nix
+    ./gapless.nix
     ./git.nix
     ./obsidian.nix
     ./tmux.nix
