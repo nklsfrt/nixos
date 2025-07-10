@@ -146,6 +146,7 @@ in
           ];
           port = 53;
           upstream_dns = [
+            "quic://unfiltered.adguard-dns.com"
             "quic://p0.freedns.controld.com"
             "quic://dns0.eu"
           ];
