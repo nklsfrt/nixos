@@ -162,9 +162,6 @@ in
           enable_dnssec = true;
           serve_http3 = true;
         };
-        tls = {
-          enabled = true;
-        };
         filtering.rewrites = [
           {
             domain = "*.${domain}";
