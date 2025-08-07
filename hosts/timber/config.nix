@@ -1,4 +1,4 @@
-{ lib, profiles, ... }:
+{ lib, pkgs, profiles, ... }:
 {
   imports = [
     profiles.graphical
@@ -17,6 +17,8 @@
     kernelParams = [ "amd_pstate=active" ];
     supportedFilesystems = [ "ntfs" ];
   };
+
+  environment.systemPackages = [ pkgs.alpaca ];
 
   powerManagement.cpuFreqGovernor = "performance";
 
