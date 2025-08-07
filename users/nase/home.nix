@@ -2,7 +2,6 @@
 {
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
-    inputs.nix-index-database.hmModules.nix-index
     ./dconf.nix
     ./direnv.nix
     ./discord.nix
