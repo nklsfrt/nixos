@@ -16,26 +16,11 @@
       }
       ".local/state/wireplumber"
       ".thunderbird"
-      {
-        directory = "code";
-        method = "symlink";
-      }
-      {
-        directory = "Documents";
-        method = "symlink";
-      }
-      {
-        directory = "Music";
-        method = "symlink";
-      }
-      {
-        directory = "Pictures";
-        method = "symlink";
-      }
-      {
-        directory = "Videos";
-        method = "symlink";
-      }
+      "code"
+      "Documents"
+      "Music"
+      "Pictures"
+      "Videos"
     ];
     files = [
       "./.background-image"
