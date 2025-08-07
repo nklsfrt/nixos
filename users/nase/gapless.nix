@@ -1,4 +1,5 @@
-{ pkgs, ...}:{
+{ pkgs, ... }:
+{
   home.packages = [ pkgs.gapless ];
   dconf.settings = {
     "com/github/neithern/g4music" = {
