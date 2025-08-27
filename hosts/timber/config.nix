@@ -18,7 +18,12 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
-  environment.systemPackages = [ pkgs.alpaca ];
+  environment.systemPackages = 
+    let
+      alpaca-rocm = pkgs.alpaca.override {
+        ollama = pkgs.ollama-rocm;
+      };
+    in [ alpaca-rocm ];
 
   powerManagement.cpuFreqGovernor = "performance";
 
