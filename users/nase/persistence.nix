@@ -8,6 +8,8 @@
       ".config/gsconnect"
       ".config/Signal"
       ".config/VSCodium"
+      ".local/share/com.jeffser.Alpaca"
+      ".local/share/com.jeffser.Alpaca/tmp"
       ".local/share/fractal"
       ".local/share/TelegramDesktop"
       {
