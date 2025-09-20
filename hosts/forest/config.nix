@@ -128,6 +128,20 @@ in
   };
 
   services = {
+
+    caddy = {
+      enable = true;
+      globalConfig = ''
+        admin [::1]:2019
+        default_bind [${router-ula-address}]
+      '';
+      # a hack to force automatically generated servers for http -> https redirection
+      extraConfig = ''
+        http:// {
+        }
+      '';
+    };
+
     adguardhome = {
       enable = true;
       mutableSettings = false;
@@ -174,6 +188,15 @@ in
       };
     };
 
+    caddy.virtualHosts = {
+      "agh.${domain}" = {
+        extraConfig = ''
+          tls internal
+          reverse_proxy [::1]:${toString config.services.adguardhome.port}
+        '';
+      };
+    };
+
     glances =
       let
         configFile = pkgs.writeText "glances.conf" ''
@@ -204,6 +227,14 @@ in
         ];
       };
 
+    caddy.virtualHosts = {
+      "mon.${domain}" = {
+        extraConfig = ''
+          tls internal
+          reverse_proxy [::1]:${toString config.services.glances.port}
+        '';
+      };
+    };
     paperless = {
       enable = true;
       settings = {
@@ -213,22 +244,13 @@ in
       passwordFile = config.sops.secrets.paperless_admin_password.path;
     };
 
-    caddy = {
-      enable = true;
-      configFile = pkgs.writeText "Caddyfile" ''
-        mon.${domain} {
-            tls internal
-            reverse_proxy localhost:61208
-        }
-        agh.${domain} {
-            tls internal
-            reverse_proxy localhost:3000
-        }
-        paper.${domain} {
-            tls internal
-            reverse_proxy localhost:28981
-        }
-      '';
+    caddy.virtualHosts = {
+      "paper.${domain}" = {
+        extraConfig = ''
+          tls internal
+          reverse_proxy [::1]:${toString config.services.paperless.port}
+        '';
+      };
     };
 
     zfs.autoScrub.enable = true;
