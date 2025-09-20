@@ -97,6 +97,7 @@ in
           DHCPServer = "no";
           IPv6SendRA = "yes";
           DHCPPrefixDelegation = "yes";
+          MulticastDNS = "yes";
         };
         dhcpPrefixDelegationConfig = {
           UplinkInterface = "wan";
@@ -115,6 +116,11 @@ in
         ];
       };
     };
+  };
+
+  services.resolved = {
+    llmnr = "false";
+    extraConfig = "[Resolve]\nMulticastDNS=yes";
   };
 
   services = {
