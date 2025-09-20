@@ -253,10 +253,59 @@ in
       };
     };
 
+    firefly-iii = {
+      enable = true;
+      virtualHost = "ff.${domain}";
+      settings = {
+        APP_KEY_FILE = config.sops.secrets.firefly_admin_password.path;
+        TRUSTED_PROXIES = "*";
+      };
+      poolConfig = {
+        "listen.group" = "caddy";
+      };
+    };
+
+    caddy.virtualHosts = {
+      "ff.${domain}" = {
+        extraConfig = ''
+          tls internal
+          php_fastcgi unix//${config.services.phpfpm.pools.firefly-iii.socket}
+          root * ${config.services.firefly-iii.package}/public
+          file_server
+        '';
+      };
+    };
+
+    firefly-iii-data-importer = {
+      enable = true;
+      settings = {
+        FIREFLY_III_URL = "https://ff.${domain}";
+        FIREFLY_III_ACCESS_TOKEN_FILE = config.sops.secrets.firefly_access_token.path;
+      };
+      poolConfig = {
+        "listen.group" = "caddy";
+      };
+    };
+
+    caddy.virtualHosts."ffi.${domain}".extraConfig = ''
+      tls internal
+      php_fastcgi unix//${config.services.phpfpm.pools.firefly-iii-data-importer.socket}
+      root * ${config.services.firefly-iii-data-importer.package}/public
+      file_server
+    '';
+
     zfs.autoScrub.enable = true;
   };
 
   sops.secrets = {
+    firefly_admin_password = {
+      owner = config.services.firefly-iii.user;
+      group = config.services.firefly-iii.group;
+    };
+    firefly_access_token = {
+      owner = config.services.firefly-iii-data-importer.user;
+      group = config.services.firefly-iii-data-importer.group;
+    };
     paperless_admin_password = { };
   };
 }
