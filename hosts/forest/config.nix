@@ -152,6 +152,14 @@ in
             answer = "${router-ula-address}";
           }
         ];
+        filters = [
+          {
+            enabled = true;
+            url = "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/adblock/ultimate.txt";
+            name = "Hagezi Ultimate";
+            id = 1337;
+          }
+        ];
       };
     };
 
