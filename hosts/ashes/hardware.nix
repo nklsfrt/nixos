@@ -16,11 +16,6 @@
     "sr_mod"
   ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/33db59dc-9d31-42cc-be71-9e97a491cf8a";
-    fsType = "ext4";
-  };
-
   swapDevices = [
     {
       device = "/var/lib/swapfile";

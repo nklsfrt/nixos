@@ -1,49 +1,34 @@
-{
-  config,
-  inputs,
-  pkgs,
-  ...
-}:
+{ inputs, ... }:
 {
   boot.loader = {
     systemd-boot.enable = false;
-    grub = {
-      devices = [ "/dev/sda" ];
-      configurationLimit = 16;
-    };
-  };
-
-  sops = {
-    secrets = {
-      forgejo_runner_token = { };
-    };
   };
 
   networking = {
-    interfaces.ens3.ipv6.addresses = [
-      {
-        address = "2a01:4f8:1c1c:4bd6::1";
-        prefixLength = 64;
-      }
-    ];
-    defaultGateway6 = {
-      address = "fe80::1";
-      interface = "ens3";
+    firewall.interfaces."enp1s0" = {
+      allowedTCPPorts = [
+        80
+        443
+      ];
+      allowedUDPPorts = [
+        80
+        443
+      ];
     };
-    nameservers = [
-      "2a01:4ff:ff00::add:1"
-      "2a01:4ff:ff00::add:2"
-    ];
-    firewall = {
-      enable = true;
-      interfaces = {
-        "ens3".allowedTCPPorts = [
-          80
-          443
-          3306
-        ];
-        "ens3".allowedUDPPorts = [ 443 ];
-      };
+    nftables.enable = true;
+    useNetworkd = true;
+  };
+
+  systemd.network = {
+    enable = true;
+    networks."20-enp1s0" = {
+      matchConfig.Name = "enp1s0";
+      address = [ "2a01:4f8:1c1b:bb96::1" ];
+      gateway = [ "fe80::1" ];
+      dns = [
+        "2a01:4ff:ff00::add:1"
+        "2a01:4ff:ff00::add:2"
+      ];
     };
   };
 
@@ -70,38 +55,13 @@
           redir https://keyoxide.org/aspe:keyoxide.org:54UMIULBO36HX33OT5SO77ZF4A
         }
 
-        sync.nklsfrt.de {
-          reverse_proxy http://localhost:8384 {
-            header_up Host {upstream_hostport}
-          }
+        hellodarkness.de {
+          respond hi!
+        }
+
+        www.hellodarkness.de {
+          redir https://hellodarkness.de/
         }
       '';
     };
-
-  services.syncthing = {
-    enable = true;
-    openDefaultPorts = true;
-  };
-
-  services.gitea-actions-runner = {
-    package = pkgs.forgejo-runner;
-    instances.default = {
-      enable = true;
-      name = "ashes";
-      url = "https://codeberg.org";
-      tokenFile = config.sops.secrets.forgejo_runner_token.path;
-      labels = [ "native:host" ];
-      hostPackages = with pkgs; [
-        bash
-        coreutils
-        curl
-        gawk
-        gitMinimal
-        gnused
-        nodejs
-        wget
-        nix
-      ];
-    };
-  };
 }
