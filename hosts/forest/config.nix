@@ -14,6 +14,10 @@ in
 
   networking = {
     hostId = "90af6e90";
+    jool = {
+      enable = true;
+      nat64.default = {};
+    };
     firewall = {
       trustedInterfaces = [ lan-bridge ];
     };
@@ -151,6 +155,7 @@ in
           ];
           enable_dnssec = true;
           serve_http3 = true;
+          use_dns64 = true;
         };
         filtering.rewrites = [
           {
