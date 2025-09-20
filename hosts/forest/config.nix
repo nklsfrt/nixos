@@ -145,7 +145,7 @@ in
     adguardhome = {
       enable = true;
       mutableSettings = false;
-      host = "127.0.0.1";
+      host = "[::1]";
       port = 3000;
       settings = {
         dns = {
@@ -220,7 +220,7 @@ in
         enable = true;
         extraArgs = [
           "--bind"
-          "127.0.0.1"
+          "::1"
           "--webserver"
           "--config"
           "${configFile}"
@@ -301,6 +301,7 @@ in
 
     paperless = {
       enable = true;
+      address = "::1";
       settings = {
         PAPERLESS_URL = "https://paper.${domain}";
         PAPERLESS_OCR_LANGUAGE = "deu+eng";
