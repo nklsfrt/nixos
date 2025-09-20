@@ -294,6 +294,17 @@ in
       file_server
     '';
 
+    immich = {
+      enable = true;
+      machine-learning.enable = false;
+      secretsFile = config.sops.secrets.immich_db_pw.path;
+    };
+    
+    caddy.virtualHosts."im.${domain}".extraConfig = ''
+      tls internal
+      reverse_proxy [::1]:${toString config.services.immich.port}
+    '';
+
     zfs.autoScrub.enable = true;
   };
 
@@ -306,6 +317,7 @@ in
       owner = config.services.firefly-iii-data-importer.user;
       group = config.services.firefly-iii-data-importer.group;
     };
+    immich_db_pw = { };
     paperless_admin_password = { };
   };
 }
