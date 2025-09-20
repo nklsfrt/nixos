@@ -235,6 +235,70 @@ in
         '';
       };
     };
+
+    homer.enable = true;
+    caddy.virtualHosts."dash.${domain}".extraConfig =
+      let
+        homerConfig = builtins.toFile "config.yml" ''
+          ---
+          documentTitle: "DESBORED - ${config.networking.hostName}"
+          header: false
+          footer: ""
+          links: []
+
+          theme: default
+          defaults:
+            layout: columns
+            colorTheme: dark
+          columns: "3"  # must be factor of 12        
+
+          connectivityCheck: true
+
+          services:
+
+            - name: "Administration"
+              icon: "fas fa-arrow-down-up-lock"
+              items:
+
+                - name: "AdGuardHome"
+                  icon: "fas fa-shield-halved"
+                  url: "https://agh.${domain}/"
+
+                - name: "Glances"
+                  icon: "fas fa-chess-knight"
+                  url: "https://mon.${domain}/"
+
+            - name: "Tools"
+              icon: "fas fa-shapes"
+              items:
+
+                - name: "Paperless-ngx"
+                  icon: "fas fa-leaf"
+                  url: "https://paper.${domain}/"
+
+                - name: "Firefly III"
+                  icon: "fas fa-piggy-bank"
+                  url: "https://ff.${domain}/"
+
+                # - name: "Syncthing"
+                #   icon: "fas fa-circle-nodes"
+                #   url: "https://sync.${domain}/"
+
+                - name: "Immich"
+                  icon: "fas fa-panorama"
+                  url: "https://im.${domain}/"
+        '';
+      in
+      ''
+        tls internal
+        root * ${config.services.homer.package}
+        file_server
+        handle_path /assets/config.yml {
+            root * ${homerConfig}
+            file_server
+        }
+      '';
+
     paperless = {
       enable = true;
       settings = {
