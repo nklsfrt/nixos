@@ -122,9 +122,10 @@ in
     };
   };
 
-  services.resolved = {
-    llmnr = "false";
-    extraConfig = "[Resolve]\nMulticastDNS=yes";
+  services.resolved.settings = {
+    Resolve = {
+      MulticastDNS = true;
+    };
   };
 
   services = {
