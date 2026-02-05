@@ -15,7 +15,7 @@ jobs:
           token: ${{ secrets.RUNNER_PAT }}
 
       - name: Install nix package manager
-        uses: https://github.com/DeterminateSystems/nix-installer-action@v16
+        uses: https://github.com/DeterminateSystems/nix-installer-action@v21
 
       - name: Update flake.lock
         run: |

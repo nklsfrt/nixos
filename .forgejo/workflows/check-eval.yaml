@@ -9,7 +9,7 @@ jobs:
   validate:
     runs-on: codeberg-small
     container:
-      image: nixos/nix:2.28.4
+      image: nixos/nix:2.33.2
       env:
         NIX_CONFIG: experimental-features = nix-command flakes
     steps:
