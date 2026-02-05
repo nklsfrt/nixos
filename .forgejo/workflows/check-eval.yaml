@@ -14,4 +14,4 @@ jobs:
         NIX_CONFIG: experimental-features = nix-command flakes
     steps:
       - name: Check flake evaluation
-        run: nix flake check git+${{ github.event.repository.html_url }}?rev=$GITHUB_SHA
+        run: nix flake check git+${{ github.event.repository.html_url }}?rev=$GITHUB_SHA --no-write-lock-file
