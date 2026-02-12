@@ -14,7 +14,6 @@
       "/etc/ssh/ssh_host_rsa_key"
     ];
     directories = [
-      "/etc/NetworkManager/system-connections/"
       "/var/lib/nixos"
     ];
   };
