@@ -95,6 +95,7 @@ in
       "40-${lan-bridge}" = {
         matchConfig.Name = "${lan-bridge}";
         linkConfig.RequiredForOnline = "routable";
+        dns = [ router-ula-address ];
         networkConfig = {
           IPv4Forwarding = "yes";
           ConfigureWithoutCarrier = "yes";
