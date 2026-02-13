@@ -7,6 +7,7 @@
     ./eza.nix
     ./firefox.nix
     ./fish.nix
+    ./foliate.nix
     ./gapless.nix
     ./git.nix
     ./obsidian.nix
