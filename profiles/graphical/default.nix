@@ -28,9 +28,4 @@
     noto-fonts-cjk-sans
     corefonts
   ];
-
-  networking.networkmanager.connectionConfig = {
-    "ipv6.ip6-privacy" = 2;
-    "ipv6.addr-gen-mode" = "stable-privacy";
-  };
 }
