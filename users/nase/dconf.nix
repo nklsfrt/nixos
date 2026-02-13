@@ -3,10 +3,6 @@
 with lib.hm.gvariant;
 {
   dconf.settings = {
-    "apps/seahorse" = {
-      server-publish-to = "hkps://keys.openpgp.org";
-    };
-
     "dev/alextren/Spot" = {
       audio-backend = "pulseaudio";
       player-bitrate = "320";
@@ -65,11 +61,10 @@ with lib.hm.gvariant;
       edge-tiling = true;
       focus-change-on-pointer-rest = true;
       workspaces-only-on-primary = false;
-    };
-
-    "org/gnome/Ptyxis" = {
-      use-system-font = false;
-      font-name = "FiraCode Nerd Font 10.5";
+      experimental-features = [
+        "variable-refresh-rate"
+        "scale-monitor-framebuffer"
+      ];
     };
 
     "org/gnome/settings-daemon/plugins/color" = {
@@ -86,7 +81,7 @@ with lib.hm.gvariant;
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       binding = "<Super>Return";
-      command = "ptyxis --new-window";
+      command = "kgx";
       name = "Launch Terminal";
     };
 
