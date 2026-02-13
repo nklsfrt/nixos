@@ -32,6 +32,17 @@
     };
   };
 
+  services.murmur = {
+    enable = true;
+    openFirewall = true;
+    registerName = "Dings";
+    registerHostname = "talk.nklsfrt.de";
+  };
+
+  environment.persistence."/persist".directories = [
+    "/var/lib/murmur"
+  ];
+
   services.caddy =
     let
       webroot = inputs.website.outPath;
