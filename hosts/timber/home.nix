@@ -9,6 +9,7 @@
           helvum
           prismlauncher
           gnome-boxes
+          pipeline
           ;
       };
       persistence."/persist" = {
