@@ -96,7 +96,11 @@
       alpaca-rocm = pkgs.alpaca.override {
         ollama = pkgs.ollama-rocm;
       };
-    in [ alpaca-rocm ];
+    in
+    [
+      alpaca-rocm
+      pkgs.mbuffer
+    ];
 
   powerManagement.cpuFreqGovernor = "performance";
 
