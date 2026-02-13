@@ -10,8 +10,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    clapper
-    ptyxis
+    gnome-console
   ];
 
   systemd.user.units."org.gnome.Shell@wayland.service".text = ''
