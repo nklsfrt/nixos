@@ -37,6 +37,7 @@
     openFirewall = true;
     registerName = "Dings";
     registerHostname = "talk.nklsfrt.de";
+    welcometext = "Hört, hört!";
   };
 
   environment.persistence."/persist".directories = [
