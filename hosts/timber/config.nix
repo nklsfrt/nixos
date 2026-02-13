@@ -1,8 +1,8 @@
-{ lib, pkgs, profiles, ... }:
+{ lib, pkgs, profiles, abilities, ... }:
 {
   imports = [
     profiles.graphical
-    # abilities.virtualization
+    abilities.virtualization
   ];
 
   networking.hostId = "c463cfe4";
