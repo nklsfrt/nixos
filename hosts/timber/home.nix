@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   home-manager.users.nase = {
-    services.syncthing.enable = true;
     home = {
       packages = builtins.attrValues {
         inherit (pkgs)
@@ -15,7 +14,6 @@
       persistence."/persist" = {
         directories = [
           ".config/libvirt"
-          ".local/state/syncthing"
         ];
       };
     };
