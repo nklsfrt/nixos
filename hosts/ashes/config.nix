@@ -1,10 +1,15 @@
-{ inputs, ... }:
+{ inputs, abilities, ... }:
 {
+  imports = [
+    abilities.persistence
+  ];
+  
   boot.loader = {
     systemd-boot.enable = false;
   };
 
   networking = {
+    hostId = "186284b2";
     firewall.interfaces."enp1s0" = {
       allowedTCPPorts = [
         80
