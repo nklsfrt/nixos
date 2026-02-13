@@ -48,7 +48,7 @@
     pwvucontrol
     signal-desktop
     fractal
-    tdesktop
+    telegram-desktop
   ];
 
   gtk = {
