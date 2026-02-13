@@ -376,7 +376,7 @@ in
       machine-learning.enable = false;
       secretsFile = config.sops.secrets.immich_db_pw.path;
     };
-    
+
     caddy.virtualHosts."im.${domain}".extraConfig = ''
       tls internal
       reverse_proxy [::1]:${toString config.services.immich.port}

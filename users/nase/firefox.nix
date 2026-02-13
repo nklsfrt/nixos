@@ -9,7 +9,7 @@ in
     policies = {
       DisableFirefoxStudies = true;
       DisableFirefoxAccounts = true;
-      DisablePocket = true;  # doesn't exist anymore
+      DisablePocket = true; # doesn't exist anymore
       DisableTelemetry = true;
       EnableTrackingProtection = {
         Value = true;

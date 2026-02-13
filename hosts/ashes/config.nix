@@ -3,7 +3,7 @@
   imports = [
     abilities.persistence
   ];
-  
+
   boot.loader = {
     systemd-boot.enable = false;
   };

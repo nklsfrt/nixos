@@ -1,4 +1,10 @@
-{ lib, pkgs, profiles, abilities, ... }:
+{
+  lib,
+  pkgs,
+  profiles,
+  abilities,
+  ...
+}:
 {
   imports = [
     profiles.graphical
@@ -91,7 +97,7 @@
     };
   };
 
-  environment.systemPackages = 
+  environment.systemPackages =
     let
       alpaca-rocm = pkgs.alpaca.override {
         ollama = pkgs.ollama-rocm;
