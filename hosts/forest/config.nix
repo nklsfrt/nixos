@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 let
+  router-ipv4 = "192.168.0.1";
   ula-network-address = "fd5e:08d3:3e55::"; # first /64 subnet of fd5e:08d3:3e55::/48
   ula-network-size = "/64";
   router-ula-address = "${ula-network-address}1";
@@ -14,9 +15,10 @@ in
 
   networking = {
     hostId = "90af6e90";
-    jool = {
+    nat = {
       enable = true;
-      nat64.default = {};
+      internalInterfaces = [ lan-bridge ];
+      externalInterface = wan-nic;
     };
     firewall = {
       trustedInterfaces = [ lan-bridge ];
@@ -98,7 +100,7 @@ in
           ConfigureWithoutCarrier = "yes";
           LinkLocalAddressing = "ipv6";
           IPv6LinkLocalAddressGenerationMode = "stable-privacy";
-          DHCPServer = "no";
+          DHCPServer = "yes";
           IPv6SendRA = "yes";
           DHCPPrefixDelegation = "yes";
           MulticastDNS = "yes";
@@ -106,6 +108,11 @@ in
         dhcpPrefixDelegationConfig = {
           UplinkInterface = "wan";
           Token = "prefixstable";
+        };
+        dhcpServerConfig = {
+          DNS = router-ipv4;
+          PoolOffset = 100;
+          Router = router-ipv4;
         };
         ipv6SendRAConfig = {
           EmitDNS = "yes";
@@ -117,6 +124,9 @@ in
             Assign = true;
             Token = "static:::1";
           }
+        ];
+        address = [
+          "${router-ipv4}/24"
         ];
       };
     };
@@ -152,6 +162,7 @@ in
         dns = {
           bind_hosts = [
             "${router-ula-address}"
+            "${router-ipv4}"
           ];
           port = 53;
           upstream_dns = [
@@ -170,7 +181,6 @@ in
           ];
           enable_dnssec = true;
           serve_http3 = true;
-          use_dns64 = true;
         };
         filtering.rewrites = [
           {
