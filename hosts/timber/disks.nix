@@ -48,22 +48,18 @@
         datasets = {
           "local/nix" = {
             type = "zfs_fs";
-            options.mountpoint = "/nix";
             mountpoint = "/nix";
           };
           "system/persist" = {
             type = "zfs_fs";
-            options.mountpoint = "/persist";
             mountpoint = "/persist";
           };
           "system/root" = {
             type = "zfs_fs";
-            options.mountpoint = "/";
             mountpoint = "/";
           };
           "user/nase" = {
             type = "zfs_fs";
-            options.mountpoint = "/persist/home/nase";
             mountpoint = "/persist/home/nase";
           };
         };
