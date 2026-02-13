@@ -1,6 +1,6 @@
 { ... }:
 {
-  home.persistence."/persist/home/nase" = {
+  home.persistence."/persist" = {
     directories = [
       ".ssh"
       ".gnupg"
@@ -30,6 +30,5 @@
       ".config/sops/age/keys.txt"
       ".local/share/fish/fish_history"
     ];
-    allowOther = true;
-  };
+      };
 }

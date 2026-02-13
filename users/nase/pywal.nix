@@ -7,5 +7,5 @@
   programs.fish.interactiveShellInit = ''
     cat ~/.cache/wal/sequences
   '';
-  home.persistence."/persist/home/nase".files = [ ".cache/wal/sequences" ];
+  home.persistence."/persist".files = [ ".cache/wal/sequences" ];
 }

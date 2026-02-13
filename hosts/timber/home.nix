@@ -11,7 +11,7 @@
           gnome-boxes
           ;
       };
-      persistence."/persist/home/nase" = {
+      persistence."/persist" = {
         directories = [
           ".config/libvirt"
           ".local/state/syncthing"

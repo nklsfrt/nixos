@@ -1,7 +1,6 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence
     ./dconf.nix
     ./direnv.nix
     ./discord.nix

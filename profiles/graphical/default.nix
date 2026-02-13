@@ -13,6 +13,8 @@
     users.nase
   ];
 
+  fileSystems."/persist/home/nase".neededForBoot = true;
+
   system.autoUpgrade = {
     persistent = true;
     operation = "boot";

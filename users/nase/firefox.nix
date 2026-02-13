@@ -136,7 +136,7 @@ in
       };
     };
   };
-  home.persistence."/persist/home/nase" = {
+  home.persistence."/persist" = {
     directories = [ ".mozilla/firefox/${profilePath}" ];
   };
 }

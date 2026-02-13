@@ -29,5 +29,5 @@
       ];
     };
   };
-  home.persistence."/persist/home/nase".directories = [ ".config/VSCodium" ];
+  home.persistence."/persist".directories = [ ".config/VSCodium" ];
 }
