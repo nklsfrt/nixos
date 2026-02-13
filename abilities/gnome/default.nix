@@ -33,8 +33,6 @@
       enable = true;
       package = pkgs.gnomeExtensions.gsconnect;
     };
-    seahorse.enable = true;
-    file-roller.enable = true;
   };
 
   security.pam.services.login.enableGnomeKeyring = true;
