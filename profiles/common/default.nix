@@ -81,7 +81,6 @@
   security.sudo.extraRules = [
     {
       users = [ "nase" ];
-      runAs = "ALL:ALL";
       commands = [
         {
           command = "${config.system.build.nixos-rebuild}/bin/nixos-rebuild";
