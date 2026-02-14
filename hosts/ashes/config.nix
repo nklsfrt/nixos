@@ -1,4 +1,9 @@
-{ inputs, abilities, ... }:
+{
+  config,
+  inputs,
+  abilities,
+  ...
+}:
 {
   imports = [
     abilities.persistence
@@ -37,16 +42,36 @@
     };
   };
 
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "nklsfrt@posteo.de";
+    certs = {
+      "talk.nklsfrt.de" = {
+        group = "murmur";
+        dnsProvider = "inwx";
+        credentialFiles = {
+          "INWX_USERNAME_FILE" = config.sops.secrets.inwx_username.path;
+          "INWX_PASSWORD_FILE" = config.sops.secrets.inwx_password.path;
+        };
+      };
+    };
+  };
+
   services.murmur = {
     enable = true;
+    bandwidth = 256000;
     openFirewall = true;
-    registerName = "Dings";
+    registerName = "Die Talghöhle";
     registerHostname = "talk.nklsfrt.de";
+    sslCert = "/var/lib/acme/talk.nklsfrt.de/fullchain.pem";
+    sslKey = "/var/lib/acme/talk.nklsfrt.de/key.pem";
     welcometext = "Hört, hört!";
+    extraConfig = "sslCiphers=EECDH+AESGCM:EDH+aRSA+AESGCM";
   };
 
   environment.persistence."/persist".directories = [
     "/var/lib/murmur"
+    "/var/lib/acme"
   ];
 
   services.caddy =
@@ -81,4 +106,10 @@
         }
       '';
     };
+
+  sops.secrets = {
+    inwx_username = { };
+    inwx_password = { };
+  };
+
 }
