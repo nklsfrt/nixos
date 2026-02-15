@@ -135,6 +135,7 @@ in
 
   services.resolved.settings = {
     Resolve = {
+      LLMNR = false;
       MulticastDNS = true;
     };
   };
@@ -169,7 +170,6 @@ in
           upstream_dns = [
             "quic://unfiltered.adguard-dns.com"
             "quic://p0.freedns.controld.com"
-            "quic://dns0.eu"
           ];
           bootstrap_dns = [
             "9.9.9.9"
@@ -187,6 +187,7 @@ in
           {
             domain = "*.${domain}";
             answer = "${router-ula-address}";
+            enabled = true;
           }
         ];
         filters = [
