@@ -140,6 +140,22 @@ in
     };
   };
 
+  security.pki.certificates = [
+    ''
+      -----BEGIN CERTIFICATE-----
+      MIIBpTCCAUqgAwIBAgIRAOE56IY5hlx35SWsM+KrBSQwCgYIKoZIzj0EAwIwMDEu
+      MCwGA1UEAxMlQ2FkZHkgTG9jYWwgQXV0aG9yaXR5IC0gMjAyNCBFQ0MgUm9vdDAe
+      Fw0yNDA3MjIwNTU1NTNaFw0zNDA1MzEwNTU1NTNaMDAxLjAsBgNVBAMTJUNhZGR5
+      IExvY2FsIEF1dGhvcml0eSAtIDIwMjQgRUNDIFJvb3QwWTATBgcqhkjOPQIBBggq
+      hkjOPQMBBwNCAAQoFG7fZCe//RdxdLNXVMjktOaOfxR45Ix++hORzyULu03HcsoZ
+      1j4DBWPWlpsEUlfPCzogEeqtQ7KSoAV77bNAo0UwQzAOBgNVHQ8BAf8EBAMCAQYw
+      EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQUn29J/2X5xdctzZaiYlyL2/wG
+      UtgwCgYIKoZIzj0EAwIDSQAwRgIhAKxq5Zr/m01f5/0dfJIs8a+mh2g3MczYssCn
+      6lff9FKYAiEA8Dn0T0lxTnxhbWksaOA6W0e3oacLSmCR+6efj9R+hL4=
+      -----END CERTIFICATE-----
+    ''
+  ];
+
   services = {
 
     caddy = {
