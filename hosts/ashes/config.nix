@@ -33,11 +33,25 @@
     enable = true;
     networks."20-enp1s0" = {
       matchConfig.Name = "enp1s0";
-      address = [ "2a01:4f8:1c1b:bb96::1" ];
-      gateway = [ "fe80::1" ];
+      address = [
+        "2a01:4f8:1c1b:bb96::1/64"
+        "46.225.115.93/32"
+      ];
+      gateway = [
+        "fe80::1"
+        "172.31.1.1"
+      ];
+      routes = [
+        {
+          Destination = "172.31.1.1/32";
+          Scope = "link";
+        }
+      ];
       dns = [
         "2a01:4ff:ff00::add:1"
         "2a01:4ff:ff00::add:2"
+        "185.12.64.1"
+        "185.12.64.2"
       ];
     };
   };
