@@ -71,7 +71,7 @@
       obfuscate=true
       rememberchannel=true
       rememberchannelduration=300
-sslCiphers=EECDH+AESGCM:EDH+aRSA+AESGCM
+      sslCiphers=EECDH+AESGCM:EDH+aRSA+AESGCM
     '';
   };
 
@@ -101,6 +101,22 @@ sslCiphers=EECDH+AESGCM:EDH+aRSA+AESGCM
 
         proof.nklsfrt.de {
           redir https://keyoxide.org/aspe:keyoxide.org:54UMIULBO36HX33OT5SO77ZF4A
+        }
+
+        talk.nklsfrt.de {
+          header Content-Type text/html
+          respond <<HTML
+            <html>
+              <head><title>Mumble Server</title></head>
+              <body style="margin:0;display:flex;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;">
+                <div>
+                  <h1>This is a Mumble voice server!</h1>
+                  <p>An associated website doesn't exist.</p>
+                  <p>Were you looking for <a href="mumble://talk.nklsfrt.de:64738/?title=Reptiloiden%20in%20der%20EU%20e.V.&url=talk.nklsfrt.de">this</a>?</p>
+                </div>
+              </body>
+            </html>
+            HTML 200
         }
 
         hellodarkness.de {
