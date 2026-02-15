@@ -61,12 +61,18 @@
     enable = true;
     bandwidth = 256000;
     openFirewall = true;
-    registerName = "Die Talghöhle";
+    registerName = "Reptiloiden in der EU e.V.";
     registerHostname = "talk.nklsfrt.de";
     sslCert = "/var/lib/acme/talk.nklsfrt.de/fullchain.pem";
     sslKey = "/var/lib/acme/talk.nklsfrt.de/key.pem";
     welcometext = "Hört, hört!";
-    extraConfig = "sslCiphers=EECDH+AESGCM:EDH+aRSA+AESGCM";
+    extraConfig = ''
+      defaultchannel=4
+      obfuscate=true
+      rememberchannel=true
+      rememberchannelduration=300
+sslCiphers=EECDH+AESGCM:EDH+aRSA+AESGCM
+    '';
   };
 
   environment.persistence."/persist".directories = [
