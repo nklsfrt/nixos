@@ -186,16 +186,18 @@ in
           upstream_dns = [
             "quic://unfiltered.adguard-dns.com"
             "quic://p0.freedns.controld.com"
+            "quic://dns.nextdns.io"
           ];
           bootstrap_dns = [
-            "9.9.9.9"
             "2620:fe::fe"
+            "9.9.9.9"
           ];
           bootstrap_prefer_ipv6 = true;
           fallback_dns = [
-            "9.9.9.9"
-            "2620:fe::fe"
+            "tls://dns.mullvad.net"
+            "tls://dns.quad9.net"
           ];
+          use_private_ptr_resolvers = false;
           enable_dnssec = true;
           serve_http3 = true;
         };
@@ -279,7 +281,7 @@ in
           defaults:
             layout: columns
             colorTheme: dark
-          columns: "3"  # must be factor of 12        
+          columns: "3"  # must be factor of 12
 
           connectivityCheck: true
 
